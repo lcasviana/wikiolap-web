@@ -1,0 +1,11 @@
+/* Main elements */
+html, head, body, #root { height: 100%; width: 100%; }
+body { background: #009688; min-width: 1200px; }
+
+/* Sizes */
+.card-200 { height: 200px; width: 200px; }
+.card-200-image { height: 145px; width: 200px; }
+.nav-logo { height: 42px; }
+
+/* Little alterations */
+.button { margin: .25rem !important; width: 120px; }
