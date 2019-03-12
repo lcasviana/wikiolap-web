@@ -24,8 +24,13 @@ const visualization = {
 }
 
 const page = {
-    list: [],
+    search: "",
+    pages: [],
+    page: {},
+    datasets: [],
+    dataset: [],
     title: "",
+    share: { link: "", open: false, },
     visualizations: [visualization,],
 }
 
@@ -40,22 +45,35 @@ export default function reducer(state = page, action) {
                 ...state,
             }
 
+        case "GET_PAGE":
+            return {
+                ...state,
+                page: Object.assign(action.page, JSON.parse(action.page.json), { json: "", }),
+            }
+
         case "GET_PAGE_LIST":
             return {
                 ...state,
-                list: action.list,
+                pages: action.pages.map((v, i) => Object.assign(v, JSON.parse(v.json), { json: "", })),
             }
 
         case "DELETE_PAGE":
             return {
                 ...state,
-                list: state.list.filter((v, i) => v.id !== action.id)
+                pages: state.pages.filter((v, i) => v.id !== action.id)
+            }
+
+        case "GET_DATASET":
+            return {
+                ...state,
+                dataset: action.dataset,
             }
 
         case "GET_DATASET_LIST":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasetsList: action.datasets, } : v),
+                visualizations: action.index !== null ? state.visualizations.map((v, i) => i === action.index ? { ...v, datasetsList: action.datasets, } : v) : state.visualizations,
+                datasets: action.index !== null ? state.datasets : action.datasets,
             }
 
         case "GET_SERIES_LABEL":
@@ -71,6 +89,31 @@ export default function reducer(state = page, action) {
             }
 
         /* SYNC CASES */
+
+        case "PAGE_SEARCH":
+            return {
+                ...state,
+                search: action.text,
+            }
+
+        case "PAGE_SHARE":
+            return {
+                ...state,
+                share: { link: action.link, open: true, },
+            }
+
+        case "PAGE_SHARE_CLOSE":
+            return {
+                ...state,
+                share: { link: "", open: false, },
+            }
+
+        case "PAGE_EDIT":
+            return {
+                ...action.page,
+                visualizations: action.page.visualizations.map((v, i) => { return { ...v, step: 0, datasetsSearch: "", selectedSearch: "", } }),
+                update: true,
+            }
 
         case "PAGE_TITLE":
             return {

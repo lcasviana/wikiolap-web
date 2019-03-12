@@ -41,8 +41,13 @@ class Draw extends React.Component {
                             path="/page/new/"
                             text="Criar" />
                         <DrawItem
-                            icon="list"
+                            icon="view_module"
                             path="/page/list/"
+                            text="Listar" />
+                        <ListSubheader>Datasets</ListSubheader>
+                        <DrawItem
+                            icon="view_headline"
+                            path="/data/list/"
                             text="Listar" />
                     </List>
                 </Drawer>

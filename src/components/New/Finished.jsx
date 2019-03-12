@@ -2,8 +2,9 @@ import React from "react"
 
 import { connect } from "react-redux"
 
-import Graph from "components/Graph"
 import { Card } from "@material-ui/core"
+
+import Graph from "components/Graph"
 
 class Finished extends React.Component {
 

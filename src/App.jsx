@@ -9,9 +9,13 @@ import Teal from "@material-ui/core/colors/teal"
 import Draw from "components/Draw"
 import Nav from "components/Nav"
 import Home from "screens/Home"
-import PageEdit from "screens/page/Edit"
 import PageList from "screens/page/List"
 import PageNew from "screens/page/New"
+import PageView from "screens/page/View"
+import DataList from "screens/data/List"
+import DataView from "screens/data/View"
+import UserSignIn from "screens/user/SignIn"
+import UserSignUp from "screens/user/SignUp"
 
 const theme = createMuiTheme({
     palette: {
@@ -34,10 +38,15 @@ export default class App extends React.Component {
                 <div className="overflow-auto">
                     <BrowserRouter>
                         <Switch>
-                            <Route path="/" exact component={Home}></Route>
-                            <Route path="/page/edit/" component={PageEdit}></Route>
-                            <Route path="/page/list/" component={PageList}></Route>
-                            <Route path="/page/new/" component={PageNew}></Route>
+                            <Route path="/" exact component={Home} />
+                            <Route path="/page/edit/" component={PageNew} />
+                            <Route path="/page/list/" component={PageList} />
+                            <Route path="/page/new/" component={PageNew} />
+                            <Route path="/page/view/" component={PageView} />
+                            <Route path="/data/list/" component={DataList} />
+                            <Route path="/data/view/" component={DataView} />
+                            <Route path="/user/signin/" component={UserSignIn} />
+                            <Route path="/user/signup/" component={UserSignUp} />
                         </Switch>
                     </BrowserRouter>
                 </div>

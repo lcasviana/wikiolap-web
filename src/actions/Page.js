@@ -4,7 +4,7 @@ const baseUrl = "http://localhost:8000"
 
 export function savePage(page) {
     return function (dispatch) {
-        axios.post(baseUrl + "/visualizations/page-list/", page)
+        axios.post(baseUrl + "/visualizations/page-list/", { title: "title", visualizations: [], json: JSON.stringify(page), })
             .then((response) => {
                 dispatch({ type: "SAVE_PAGE", response, })
             })
@@ -14,11 +14,35 @@ export function savePage(page) {
     }
 }
 
+export function updatePage(page) {
+    return function (dispatch) {
+        axios.put(baseUrl + "/visualizations/page-detail/" + page.id + "/", { title: "title", visualizations: [], json: JSON.stringify(page), })
+            .then((response) => {
+                dispatch({ type: "UPDATE_PAGE", response, })
+            })
+            .catch((error) => {
+                dispatch({ type: "UPDATE_PAGE_ERR", error, })
+            })
+    }
+}
+
+export function getPage(id) {
+    return function (dispatch) {
+        axios.get(baseUrl + "/visualizations/page-detail/" + id + "/")
+            .then((response) => {
+                dispatch({ type: "GET_PAGE", page: response.data, })
+            })
+            .catch((error) => {
+                dispatch({ type: "GET_PAGE_ERR", error, })
+            })
+    }
+}
+
 export function getPageList() {
     return function (dispatch) {
         axios.get(baseUrl + "/visualizations/page-list/")
             .then((response) => {
-                dispatch({ type: "GET_PAGE_LIST", list: response.data, })
+                dispatch({ type: "GET_PAGE_LIST", pages: response.data, })
             })
             .catch((error) => {
                 dispatch({ type: "GET_PAGE_LIST_ERR", error, })
@@ -34,6 +58,18 @@ export function deletePage(id) {
             })
             .catch((error) => {
                 dispatch({ type: "DELETE_PAGE_ERR", error, })
+            })
+    }
+}
+
+export function getDataset(id, length) {
+    return function (dispatch) {
+        axios.get(baseUrl + "/base/api/getdata/" + id + "/" + length + "/")
+            .then((response) => {
+                dispatch({ type: "GET_DATASET", dataset: response.data, })
+            })
+            .catch((error) => {
+                dispatch({ type: "GET_DATASET_ERR", error, })
             })
     }
 }
