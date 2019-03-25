@@ -6,7 +6,7 @@ const titles = [
     "Tipos",
     "Dados",
     "Séries",
-    "Layout",
+    "Descrição",
 ]
 
 export default class Steps extends React.Component {

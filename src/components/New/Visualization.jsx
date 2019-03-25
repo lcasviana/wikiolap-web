@@ -6,7 +6,7 @@ import { Card, Button } from "@material-ui/core"
 
 import Data from "components/New/Data"
 import Finished from "components/New/Finished"
-import Layout from "components/New/Layout"
+import Layout from "components/New/Description"
 import Series from "components/New/Series"
 import Steps from "components/New/Steps"
 import Types from "components/New/Types"

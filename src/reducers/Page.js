@@ -63,7 +63,7 @@ export default function reducer(state = page, action) {
                 pages: state.pages.filter((v, i) => v.id !== action.id)
             }
 
-        case "GET_DATASET":
+        case "GET_DATASET TO DELETE":
             return {
                 ...state,
                 dataset: action.dataset,

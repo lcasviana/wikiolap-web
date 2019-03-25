@@ -35,6 +35,15 @@ class Draw extends React.Component {
                             icon="home"
                             path="/"
                             text="Início" />
+                        <ListSubheader>Usuário</ListSubheader>
+                        <DrawItem
+                            icon="account_circle"
+                            path="/user/signin/"
+                            text="Login" />
+                        <DrawItem
+                            icon="assignment_ind"
+                            path="/user/signup/"
+                            text="Cadastro" />
                         <ListSubheader>Visualizações</ListSubheader>
                         <DrawItem
                             icon="add"

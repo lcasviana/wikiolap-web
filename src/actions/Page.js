@@ -62,18 +62,6 @@ export function deletePage(id) {
     }
 }
 
-export function getDataset(id, length) {
-    return function (dispatch) {
-        axios.get(baseUrl + "/base/api/getdata/" + id + "/" + length + "/")
-            .then((response) => {
-                dispatch({ type: "GET_DATASET", dataset: response.data, })
-            })
-            .catch((error) => {
-                dispatch({ type: "GET_DATASET_ERR", error, })
-            })
-    }
-}
-
 export function getDatasets(index, text) {
     return function (dispatch) {
         axios.get(baseUrl + "/visualizations/metadata-list/?page=1&text=" + text)

@@ -3,7 +3,8 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Typography, Card } from "@material-ui/core"
+import { Typography, Card, Grid, Button } from "@material-ui/core"
+import { Link } from "react-router-dom"
 
 import Graph from "components/Graph"
 
@@ -23,21 +24,63 @@ class View extends React.Component {
         return (
             <div className="flex mb5 mt5">
                 {page &&
-                    <Card className="ma3">
-                        <Typography variant="h3">{page.title}</Typography>
+                    <Card className="ma3 pa3 w-100">
+                        <div className="flex justify-between">
+                            <Typography
+                                variant="h3">
+                                {page.title}
+                            </Typography>
+                            <div>
+                                <Link
+                                    className="link"
+                                    to={{ pathname: "/page/edit/", state: page, }}>
+                                    <Button
+                                        className="button"
+                                        variant="outlined">
+                                        Editar
+                                    </Button>
+                                </Link>
+                                <Link
+                                    className="link"
+                                    to="/">
+                                    <Button
+                                        className="button"
+                                        onClick={() => this.props.deletePage(page.id)}
+                                        variant="outlined">
+                                        Excluir
+                                </Button>
+                                </Link>
+                            </div>
+                        </div>
                         {page.visualizations && page.visualizations.map((v, i) =>
                             <Card
-                                className="ma3"
-                                key={i}>
-                                <Graph
-                                    index={i}
-                                    labels={v.seriesLabel}
-                                    series={v.series}
-                                    title={v.title}
-                                    type={v.graphType.type} />
-                                <Typography>
-                                    {v.description}
-                                </Typography>
+                                className="flex mb4 mt4"
+                                key={i}
+                                style={{ height: 420, }}>
+                                <Grid
+                                    container
+                                    style={{ height: 420, }}>
+                                    <Grid
+                                        item
+                                        style={{ height: 420, }}
+                                        xs={8}>
+                                        <Graph
+                                            index={i}
+                                            labels={v.seriesLabel}
+                                            series={v.series}
+                                            title={v.title}
+                                            type={v.graphType.type} />
+                                    </Grid>
+                                    <Grid
+                                        className="overflow-container pa3"
+                                        item
+                                        style={{ height: 420, }}
+                                        xs={4}>
+                                        <Typography variant="h6">{v.title}</Typography>
+                                        <Typography>{v.description}</Typography>
+                                        {JSON.stringify(v)}
+                                    </Grid>
+                                </Grid>
                             </Card>
                         )}
                     </Card>
@@ -56,6 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getPage: (id) => { dispatch(Actions.getPage(id)) },
+        deletePage: (id) => { dispatch(Actions.deletePage(id)) },
     }
 }
 

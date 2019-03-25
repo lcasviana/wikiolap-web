@@ -59,7 +59,7 @@ class New extends React.Component {
                                     variant="outlined">
                                     <Icon>done</Icon>
                                     Finalizar
-                            </Button>
+                                </Button>
                             </Link>
                         </div>
                     </Toolbar>

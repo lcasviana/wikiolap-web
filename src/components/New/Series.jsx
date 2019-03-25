@@ -38,7 +38,6 @@ class Series extends React.Component {
                 <Grid
                     className="h-100 pa2"
                     item
-                    sm={4}
                     xs={6}>
                     <Card className="h-100">
                         <Graph
@@ -52,7 +51,6 @@ class Series extends React.Component {
                 <Grid
                     className="h-100 pa2"
                     item
-                    sm={8}
                     xs={6}>
                     <Card
                         className="pa3 h-100"
