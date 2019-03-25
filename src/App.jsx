@@ -1,7 +1,10 @@
 import React from "react"
 
+import { connect } from "react-redux"
+import * as Actions from "actions/User"
+
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import Pink from "@material-ui/core/colors/pink"
 import Red from "@material-ui/core/colors/red"
 import Teal from "@material-ui/core/colors/teal"
@@ -28,9 +31,19 @@ const theme = createMuiTheme({
     }
 })
 
-export default class App extends React.Component {
+const PrivateRoute = ({ component: Componet, ...rest, }) => (
+    <Route {...rest} render={(props) => (
+        rest.auth
+            ? <Componet {...props} />
+            : <Redirect to="/user/signin/" />
+    )} />
+)
+
+class App extends React.Component {
 
     render() {
+        const auth = this.props.user.isAuthenticated
+
         return (
             <MuiThemeProvider theme={theme}>
                 <Nav />
@@ -38,19 +51,33 @@ export default class App extends React.Component {
                 <div className="overflow-auto">
                     <BrowserRouter>
                         <Switch>
-                            <Route path="/" exact component={Home} />
-                            <Route path="/page/edit/" component={PageNew} />
-                            <Route path="/page/list/" component={PageList} />
-                            <Route path="/page/new/" component={PageNew} />
-                            <Route path="/page/view/" component={PageView} />
-                            <Route path="/data/list/" component={DataList} />
-                            <Route path="/data/view/" component={DataView} />
+                            <PrivateRoute auth={auth} path="/" exact component={Home} />
+                            <PrivateRoute auth={auth} path="/page/edit/" component={PageNew} />
+                            <PrivateRoute auth={auth} path="/page/list/" component={PageList} />
+                            <PrivateRoute auth={auth} path="/page/new/" component={PageNew} />
+                            <PrivateRoute auth={auth} path="/page/view/" component={PageView} />
+                            <PrivateRoute auth={auth} path="/data/list/" component={DataList} />
+                            <PrivateRoute auth={auth} path="/data/view/" component={DataView} />
                             <Route path="/user/signin/" component={UserSignIn} />
                             <Route path="/user/signup/" component={UserSignUp} />
                         </Switch>
                     </BrowserRouter>
                 </div>
-            </MuiThemeProvider >
+            </MuiThemeProvider>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.User
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        signIn: (user) => { dispatch(Actions.signIn(user)) },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
