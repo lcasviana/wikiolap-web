@@ -9,3 +9,6 @@ body { background: #009688; min-width: 1200px; }
 
 /* Little alterations */
 .button { margin: .25rem !important; width: 120px; }
+
+/* Problem with tachyons */
+input[type="password"] { padding: 28px 14px; }
