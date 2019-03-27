@@ -2,9 +2,40 @@ import axios from "axios"
 
 const baseUrl = "http://localhost:8000"
 
+function pageShrink(page) {
+    return {
+        title: page.title,
+        visualizations: page.visualizations.map(v => ({
+            datasetsList: [],
+            datasetsSelected: v.datasetsSelected.map(d => ({
+                aliasColumns: d.aliasColumns,
+                description: d.description,
+                id: d.id,
+                originalColumns: d.originalColumns,
+                title: d.title,
+            })),
+            description: v.description,
+            graphType: { type: v.graphType.type, },
+            series: v.series.map(s => ({
+                color: s.color,
+                columnAlias: s.columnAlias,
+                columnOriginal: s.columnOriginal,
+                datasetTitle: s.datasetTitle,
+                label: s.label,
+                tableId: s.tableId,
+                values: s.values,
+            })),
+            seriesIndex: v.seriesIndex,
+            seriesLabel: { values: v.seriesLabel.values, },
+            seriesLabelIndex: v.seriesLabelIndex,
+            title: v.title,
+        }))
+    }
+}
+
 export function savePage(page) {
     return function (dispatch) {
-        axios.post(baseUrl + "/visualizations/page-list/", { title: "title", visualizations: [], json: JSON.stringify(page), })
+        axios.post(baseUrl + "/visualizations/page-list/", { title: JSON.stringify(pageShrink(page)), visualizations: [], })
             .then((response) => {
                 dispatch({ type: "SAVE_PAGE", response, })
             })
@@ -16,7 +47,7 @@ export function savePage(page) {
 
 export function updatePage(page) {
     return function (dispatch) {
-        axios.put(baseUrl + "/visualizations/page-detail/" + page.id + "/", { title: "title", visualizations: [], json: JSON.stringify(page), })
+        axios.put(baseUrl + "/visualizations/page-detail/" + page.id + "/", { title: JSON.stringify(pageShrink(page)), visualizations: [], })
             .then((response) => {
                 dispatch({ type: "UPDATE_PAGE", response, })
             })

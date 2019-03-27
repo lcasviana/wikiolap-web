@@ -34,6 +34,18 @@ const page = {
     visualizations: [visualization,],
 }
 
+function pageExpand(page) {
+    const p = Object.assign(page, JSON.parse(page.title))
+    return {
+        ...p,
+        title: p.title,
+        visualizations: p.visualizations.map(v => ({
+            ...visualization,
+            ...v,
+        }))
+    }
+}
+
 export default function reducer(state = page, action) {
 
     switch (action.type) {
@@ -48,13 +60,13 @@ export default function reducer(state = page, action) {
         case "GET_PAGE":
             return {
                 ...state,
-                page: Object.assign(action.page, JSON.parse(action.page.json), { json: "", }),
+                page: pageExpand(action.page),
             }
 
         case "GET_PAGE_LIST":
             return {
                 ...state,
-                pages: action.pages.map((v, i) => Object.assign(v, JSON.parse(v.json), { json: "", })),
+                pages: action.pages.map((v, i) => Object.assign({}, v, JSON.parse(v.title))),
             }
 
         case "DELETE_PAGE":
@@ -159,7 +171,7 @@ export default function reducer(state = page, action) {
             } else {
                 return {
                     ...state,
-                    visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasetsSelected: [...new Set([...v.datasetsSelected, action.dataset,])], } : v),
+                    visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasetsSelected: [...v.datasetsSelected, action.dataset,], } : v),
                 }
             }
 

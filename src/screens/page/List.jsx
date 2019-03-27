@@ -36,10 +36,10 @@ class List extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <div className="justify-center flex flex-row flex-wrap mt5 pa3 w-100">
-                    {this.props.page.pages.filter(page => page.title.toLowerCase().trim().indexOf(this.props.page.search.toLowerCase().trim()) !== -1).map((page) =>
+                    {this.props.page.pages.filter(page => page.title.toLowerCase().trim().indexOf(this.props.page.search.toLowerCase().trim()) !== -1).map((page, index) =>
                         <Card
                             className="ma3 pa2"
-                            key={page.id}
+                            key={index}
                             style={{ width: 200, }}>
                             <CardActionArea>
                                 <Link
