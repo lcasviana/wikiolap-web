@@ -8,6 +8,18 @@ import { Link } from "react-router-dom"
 
 class SignUp extends React.Component {
 
+    verify() {
+        const { username, email, password_1, password_2 } = this.props.user
+
+        if (username === "") return new Error("Usuário é requerido")
+        if (email === "") return new Error("Email é requerido")
+        if (password_1 === "") return new Error("Senha é requerida")
+        if (password_2 === "") return new Error("Confirme a senha")
+        if (password_1 !== password_2) return new Error("Senha confirmada incorretamente")
+
+        this.props.signUp({ username, email, password: password_1 })
+    }
+
     render() {
         const { username, email, password_1, password_2 } = this.props.user
 
@@ -55,7 +67,7 @@ class SignUp extends React.Component {
                             <Button
                                 className="button"
                                 color="primary"
-                                onClick={() => this.props.signUp({})}
+                                onClick={() => this.verify({})}
                                 variant="contained">
                                 Cadastrar
                             </Button>
