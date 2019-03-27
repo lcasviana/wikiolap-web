@@ -63,7 +63,7 @@ class SignUp extends React.Component {
                             <Button
                                 className="button"
                                 color="primary"
-                                onClick={() => this.verify({})}
+                                onClick={() => this.verify()}
                                 variant="contained">
                                 Cadastrar
                             </Button>
