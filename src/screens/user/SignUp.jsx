@@ -36,21 +36,18 @@ class SignUp extends React.Component {
                         <TextField
                             label="Nome"
                             onChange={(event) => this.props.changeUsername(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             value={username}
                             variant="outlined" />
                         <TextField
                             label="Email"
                             onChange={(event) => this.props.changeEmail(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             value={email}
                             variant="outlined" />
                         <TextField
                             label="Senha"
                             onChange={(event) => this.props.changePassword1(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             type="password"
                             value={password_1}
@@ -58,7 +55,6 @@ class SignUp extends React.Component {
                         <TextField
                             label="Confirmar senha"
                             onChange={(event) => this.props.changePassword2(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             type="password"
                             value={password_2}

@@ -24,14 +24,12 @@ class SignIn extends React.Component {
                         <TextField
                             label="Email"
                             onChange={(event) => this.props.changeEmail(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             value={email}
                             variant="outlined" />
                         <TextField
                             label="Senha"
                             onChange={(event) => this.props.changePassword1(event.target.value)}
-                            required
                             style={{ margin: "0.5rem", }}
                             type="password"
                             value={password_1}
