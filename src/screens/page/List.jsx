@@ -6,6 +6,7 @@ import * as Actions from "actions/Page"
 import { Card, CardActions, Icon, IconButton, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
+import DeleteDialog from "components/DeleteDialog"
 import * as Calendar from "services/Calendar"
 
 class List extends React.Component {
@@ -41,6 +42,10 @@ class List extends React.Component {
                             className="ma3 pa2"
                             key={index}
                             style={{ width: 200, }}>
+                            <DeleteDialog
+                                id={page.id}
+                                open={this.props.page.delete}
+                                redirect={false} />
                             <CardActionArea>
                                 <Link
                                     className="link"
@@ -69,7 +74,7 @@ class List extends React.Component {
                                         <Icon color="primary">edit</Icon>
                                     </IconButton>
                                 </Link>
-                                <IconButton onClick={() => this.props.deletePage(page.id)}>
+                                <IconButton onClick={() => this.props.deleteDialogOpen()}>
                                     <Icon>delete</Icon>
                                 </IconButton>
                             </CardActions>
@@ -97,7 +102,7 @@ function mapDispatchToProps(dispatch) {
     return {
         getPageList: () => { dispatch(Actions.getPageList()) },
         searchPage: (text) => { dispatch({ type: "PAGE_SEARCH", text, }) },
-        deletePage: (id) => { dispatch(Actions.deletePage(id)) },
+        deleteDialogOpen: () => { dispatch({ type: "DELETE_DIALOG_OPEN" }) },
         sharePage: (link) => { dispatch({ type: "PAGE_SHARE", link, }) },
         sharePageClose: () => { dispatch({ type: "PAGE_SHARE_CLOSE", }) },
     }

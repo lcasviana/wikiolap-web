@@ -30,6 +30,7 @@ const page = {
     datasets: [],
     dataset: [],
     title: "",
+    delete: false,
     share: { link: "", open: false, },
     visualizations: [visualization,],
 }
@@ -246,6 +247,18 @@ export default function reducer(state = page, action) {
             return {
                 ...state,
                 visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, description: action.text, } : v),
+            }
+
+        case "DELETE_DIALOG_OPEN":
+            return {
+                ...state,
+                delete: true,
+            }
+
+        case "DELETE_DIALOG_CLOSE":
+            return {
+                ...state,
+                delete: false,
             }
 
         default:

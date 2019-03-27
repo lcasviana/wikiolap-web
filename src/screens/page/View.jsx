@@ -6,6 +6,7 @@ import * as Actions from "actions/Page"
 import { Typography, Card, Grid, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
+import DeleteDialog from "components/DeleteDialog"
 import Graph from "components/Graph"
 
 class View extends React.Component {
@@ -19,12 +20,16 @@ class View extends React.Component {
     }
 
     render() {
-        const page = this.props.page
+        const { dialog, page } = this.props
 
         return (
             <div className="flex mb5 mt5">
                 {page &&
                     <Card className="ma3 pa3 w-100">
+                        <DeleteDialog
+                            id={page.id}
+                            open={dialog}
+                            redirect={true} />
                         <div className="flex justify-between">
                             <Typography
                                 variant="h3">
@@ -40,18 +45,15 @@ class View extends React.Component {
                                         Editar
                                     </Button>
                                 </Link>
-                                <Link
-                                    className="link"
-                                    to="/">
-                                    <Button
-                                        className="button"
-                                        onClick={() => this.props.deletePage(page.id)}
-                                        variant="outlined">
-                                        Excluir
+                                <Button
+                                    className="button"
+                                    onClick={() => this.props.deleteDialogOpen()}
+                                    variant="outlined">
+                                    Excluir
                                 </Button>
-                                </Link>
                             </div>
                         </div>
+                        {JSON.stringify(page)}
                         {page.visualizations && page.visualizations.map((v, i) =>
                             <Card
                                 className="flex mb4 mt4"
@@ -78,7 +80,6 @@ class View extends React.Component {
                                         xs={4}>
                                         <Typography variant="h6">{v.title}</Typography>
                                         <Typography>{v.description}</Typography>
-                                        {JSON.stringify(v)}
                                     </Grid>
                                 </Grid>
                             </Card>
@@ -93,13 +94,14 @@ class View extends React.Component {
 function mapStateToProps(state) {
     return {
         page: state.Page.page,
+        dialog: state.Page.delete,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getPage: (id) => { dispatch(Actions.getPage(id)) },
-        deletePage: (id) => { dispatch(Actions.deletePage(id)) },
+        deleteDialogOpen: () => { dispatch({ type: "DELETE_DIALOG_OPEN" }) },
     }
 }
 
