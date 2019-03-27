@@ -37,13 +37,21 @@ class Draw extends React.Component {
                             text="Início" />
                         <ListSubheader>Usuário</ListSubheader>
                         <DrawItem
-                            icon="account_circle"
+                            icon="person"
                             path="/user/signin/"
                             text="Login" />
                         <DrawItem
-                            icon="assignment_ind"
+                            icon="person_add"
                             path="/user/signup/"
                             text="Cadastro" />
+                        <a
+                            className="link"
+                            href="http://localhost:8000/authentication/register">
+                            <ListItem button>
+                                <ListItemIcon><Icon color="primary">person_outline</Icon></ListItemIcon>
+                                <ListItemText>Antigo</ListItemText>
+                            </ListItem>
+                        </a>
                         <ListSubheader>Visualizações</ListSubheader>
                         <DrawItem
                             icon="add"
@@ -54,6 +62,14 @@ class Draw extends React.Component {
                             path="/page/list/"
                             text="Listar" />
                         <ListSubheader>Datasets</ListSubheader>
+                        <a
+                            className="link"
+                            href="http://localhost:8000/base/upload_file/">
+                            <ListItem button>
+                                <ListItemIcon><Icon color="primary">cloud_upload</Icon></ListItemIcon>
+                                <ListItemText>Upload</ListItemText>
+                            </ListItem>
+                        </a>
                         <DrawItem
                             icon="view_headline"
                             path="/data/list/"
