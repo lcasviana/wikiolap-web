@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Typography, Card, Grid, Button } from "@material-ui/core"
+import { Typography, Card, Grid, Button, AppBar, Toolbar, Icon } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import DeleteDialog from "components/DeleteDialog"
@@ -24,68 +24,85 @@ class View extends React.Component {
 
         return (
             <div className="flex mb5 mt5">
-                {page &&
-                    <Card className="ma3 pa3 w-100">
-                        <DeleteDialog
-                            id={page.id}
-                            open={dialog}
-                            redirect={true} />
-                        <div className="flex justify-between">
-                            <Typography
-                                variant="h3">
-                                {page.title}
-                            </Typography>
-                            <div>
-                                <Link
-                                    className="link"
-                                    to={{ pathname: "/page/edit/", state: page, }}>
+                <AppBar
+                    color="default"
+                    style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
+                    <Toolbar>
+                        <Link
+                            className="link"
+                            to="/page/list/">
+                            <Button
+                                variant="outlined">
+                                <Icon>arrow_back</Icon>
+                                Voltar
+                            </Button>
+                        </Link>
+                    </Toolbar>
+                </AppBar>
+                <div className="flex mb5 mt5">
+                    {page &&
+                        <Card className="ma3 pa3 w-100">
+                            <DeleteDialog
+                                id={page.id}
+                                open={dialog}
+                                redirect={true} />
+                            <div className="flex justify-between">
+                                <Typography
+                                    variant="h3">
+                                    {page.title}
+                                </Typography>
+                                <div>
+                                    <Link
+                                        className="link"
+                                        to={{ pathname: "/page/edit/", state: page, }}>
+                                        <Button
+                                            className="button"
+                                            variant="outlined">
+                                            Editar
+                                    </Button>
+                                    </Link>
                                     <Button
                                         className="button"
+                                        onClick={() => this.props.deleteDialogOpen()}
                                         variant="outlined">
-                                        Editar
-                                    </Button>
-                                </Link>
-                                <Button
-                                    className="button"
-                                    onClick={() => this.props.deleteDialogOpen()}
-                                    variant="outlined">
-                                    Excluir
+                                        Excluir
                                 </Button>
+                                </div>
                             </div>
-                        </div>
-                        {JSON.stringify(page)}
-                        {page.visualizations && page.visualizations.map((v, i) =>
-                            <Card
-                                className="flex mb4 mt4"
-                                key={i}
-                                style={{ height: 420, }}>
-                                <Grid
-                                    container
+                            {JSON.stringify(page)}
+                            {page.visualizations && page.visualizations.map((v, i) =>
+                                <Card
+                                    className="flex mb4 mt4"
+                                    key={i}
                                     style={{ height: 420, }}>
                                     <Grid
-                                        item
-                                        style={{ height: 420, }}
-                                        xs={8}>
-                                        <Graph
-                                            index={i}
-                                            labels={v.seriesLabel}
-                                            series={v.series}
-                                            title={v.title}
-                                            type={v.graphType.type} />
+                                        container
+                                        style={{ height: 420, }}>
+                                        <Grid
+                                            item
+                                            style={{ height: 420, }}
+                                            xs={8}>
+                                            <Graph
+                                                index={i}
+                                                labels={v.seriesLabel}
+                                                series={v.series}
+                                                title={v.title}
+                                                type={v.graphType.type} />
+                                        </Grid>
+                                        <Grid
+                                            className="overflow-container pa3"
+                                            item
+                                            style={{ height: 420, }}
+                                            xs={4}>
+                                            <Typography variant="h6">{v.title}</Typography>
+                                            <Typography>{v.description}</Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid
-                                        className="overflow-container pa3"
-                                        item
-                                        style={{ height: 420, }}
-                                        xs={4}>
-                                        <Typography variant="h6">{v.title}</Typography>
-                                        <Typography>{v.description}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Card>
-                        )}
-                    </Card>
-                }
+                                </Card>
+                            )}
+                        </Card>
+                    }
+                </div>
             </div>
         )
     }
