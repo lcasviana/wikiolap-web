@@ -9,6 +9,8 @@ import { Link } from "react-router-dom"
 import DeleteDialog from "components/DeleteDialog"
 import Graph from "components/Graph"
 
+import * as Calendar from "services/Calendar"
+
 class View extends React.Component {
 
     componentDidMount() {
@@ -39,7 +41,7 @@ class View extends React.Component {
                         </Link>
                     </Toolbar>
                 </AppBar>
-                <div className="flex mb5 mt5">
+                <div className="flex mb5 mt5 w-100">
                     {page &&
                         <Card className="ma3 pa3 w-100">
                             <DeleteDialog
@@ -69,7 +71,9 @@ class View extends React.Component {
                                 </Button>
                                 </div>
                             </div>
-                            {JSON.stringify(page)}
+                            <Typography><strong>Usuário</strong>: {page.user}</Typography>
+                            <Typography><strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}</Typography>
+                            <Typography><strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}</Typography>
                             {page.visualizations && page.visualizations.map((v, i) =>
                                 <Card
                                     className="flex mb4 mt4"
@@ -81,7 +85,7 @@ class View extends React.Component {
                                         <Grid
                                             item
                                             style={{ height: 420, }}
-                                            xs={8}>
+                                            xs={9}>
                                             <Graph
                                                 index={i}
                                                 labels={v.seriesLabel}
@@ -93,7 +97,7 @@ class View extends React.Component {
                                             className="overflow-container pa3"
                                             item
                                             style={{ height: 420, }}
-                                            xs={4}>
+                                            xs={3}>
                                             <Typography variant="h6">{v.title}</Typography>
                                             <Typography>{v.description}</Typography>
                                         </Grid>
