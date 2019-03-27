@@ -87,38 +87,52 @@ class Series extends React.Component {
                                 className="flex flex-column"
                                 key={index}>
                                 <Divider style={{ marginTop: "1rem", }} />
-                                <div className="mt2 flex items-end w-100">
-                                    <FormControl
-                                        style={{ flexGrow: 1, margin: "0.5rem 0", }}>
-                                        <InputLabel>Série {index + 1}</InputLabel>
-                                        <Select
-                                            onChange={(event) => {
-                                                this.props.selectSeries(mainIndex, index, columns[event.target.value], event.target.value)
-                                                this.props.getSeries(mainIndex, index, columns[event.target.value].tableId, columns[event.target.value].columnOriginal, 100)
-                                            }}
-                                            value={serie}>
-                                            {columns.map((column, index) =>
-                                                <MenuItem
-                                                    key={index}
-                                                    value={index}>
-                                                    {column.columnAlias} (<em>{column.datasetTitle}</em>)
-                                        </MenuItem>
-                                            )}
-                                        </Select>
-                                    </FormControl>
+                                <div className="mb3 mt3 flex items-end w-100">
+                                    <Grid
+                                        className="flex"
+                                        container>
+                                        <Grid
+                                            className="flex items-end pl2 pr2"
+                                            item
+                                            xs={6}>
+                                            <FormControl
+                                                fullWidth
+                                                style={{ margin: "0", }}>
+                                                <InputLabel>Série {index + 1}</InputLabel>
+                                                <Select
+                                                    onChange={(event) => {
+                                                        this.props.selectSeries(mainIndex, index, columns[event.target.value], event.target.value)
+                                                        this.props.getSeries(mainIndex, index, columns[event.target.value].tableId, columns[event.target.value].columnOriginal, 100)
+                                                    }}
+                                                    value={serie}>
+                                                    {columns.map((column, index) =>
+                                                        <MenuItem
+                                                            key={index}
+                                                            value={index}>
+                                                            {column.columnAlias} (<em>{column.datasetTitle}</em>)
+                                                        </MenuItem>
+                                                    )}
+                                                </Select>
+                                            </FormControl>
+                                        </Grid>
+                                        <Grid
+                                            className="flex items-end pl2 pr2"
+                                            item
+                                            xs={6}>
+                                            <TextField
+                                                fullWidth
+                                                onChange={(event) => this.props.changeLabel(mainIndex, index, event.target.value)}
+                                                placeholder={"Nome da série " + (index + 1)}
+                                                style={{ flexGrow: 1, }}
+                                                value={series[index].label} />
+                                        </Grid>
+                                    </Grid>
                                     <input
                                         className="ma2"
                                         onChange={(event) => this.props.changeColor(mainIndex, index, event.target.value)}
                                         style={{ width: 26, }}
                                         type="color"
                                         value={series[index].color} />
-                                </div>
-                                <div className="flex items-end w-100">
-                                    <TextField
-                                        fullWidth
-                                        onChange={(event) => this.props.changeLabel(mainIndex, index, event.target.value)}
-                                        placeholder={"Nome da série " + (index + 1)}
-                                        value={series[index].label} />
                                     <IconButton
                                         disabled={series.length === 1}
                                         onClick={() => this.props.removeSeries(mainIndex, index)}>
@@ -127,6 +141,7 @@ class Series extends React.Component {
                                 </div>
                             </div>
                         )}
+                        <Divider />
                         <div className="flex justify-center ma3">
                             <Button
                                 onClick={() => this.props.insertSeries(mainIndex)}
