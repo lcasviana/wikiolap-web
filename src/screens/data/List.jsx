@@ -64,21 +64,21 @@ class List extends React.Component {
                                 </div>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails className="flex flex-column">
-                                <Typography className="overflow-hidden">Descrição: {dataset.description}</Typography>
+                                <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Origem: {dataset.source}</Typography>
+                                <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Colunas: {dataset.originalColumns.toString()}</Typography>
+                                <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Tags: {dataset.tags.toString()}</Typography>
+                                <Typography className="overflow-hidden"><strong>Tags</strong>: {dataset.tags.join(", ")}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Hierarquias: {dataset.hierarchies.toString()}</Typography>
+                                <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {dataset.hierarchies.join(", ")}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Email: {dataset.email}</Typography>
+                                <Typography className="overflow-hidden"><strong>Email</strong>: {dataset.email}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Data de criação: {Calendar.TimestampToString(dataset.created_at)}</Typography>
+                                <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}</Typography>
                                 <Divider style={{ margin: "0.5rem 0" }} />
-                                <Typography className="overflow-hidden">Última atualização: {Calendar.TimestampToString(dataset.updated_at)}</Typography>
+                                <Typography className="overflow-hidden"><strong>Última atualização</strong>: {Calendar.TimestampToString(dataset.updated_at)}</Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>)
                     }
