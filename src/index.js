@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 import App from "App"
 import Reducers from "reducers"
 
-import "css/Style.css"
+import "css/styles.css"
 import "tachyons"
 
 const store = createStore(Reducers, applyMiddleware(Thunk))
