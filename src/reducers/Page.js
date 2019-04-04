@@ -103,6 +103,9 @@ export default function reducer(state = page, action) {
 
         /* SYNC CASES */
 
+        case "PAGE_CLEAR":
+            return page
+
         case "PAGE_SEARCH":
             return {
                 ...state,

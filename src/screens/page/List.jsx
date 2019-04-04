@@ -15,6 +15,7 @@ import * as Calendar from "services/Calendar"
 class List extends React.Component {
 
     componentDidMount() {
+        this.props.clear()
         this.props.getPageList()
     }
 
@@ -43,7 +44,7 @@ class List extends React.Component {
                         </Toolbar>
                     </AppBar>
                     <div className="justify-center flex flex-row flex-wrap mt5 w-100">
-                        {this.props.page.pages.filter(page => page.title.toLowerCase().trim().indexOf(this.props.page.search.toLowerCase().trim()) !== -1).map((page, index) =>
+                        {this.props.page.pages && this.props.page.pages.filter(page => page.title.toLowerCase().trim().indexOf(this.props.page.search.toLowerCase().trim()) !== -1).map((page, index) =>
                             <Card
                                 className="ma3 pa2"
                                 key={index}
@@ -89,9 +90,9 @@ class List extends React.Component {
                     </div>
                     <Dialog
                         onClose={() => this.props.sharePageClose()}
-                        open={this.props.page.share.open}>
+                        open={this.props.page.share ? this.props.page.share.open : false}>
                         <Typography
-                            variant="h6">{this.props.page.share.link}</Typography>
+                            variant="h6">{this.props.page.share ? this.props.page.share.link : ""}</Typography>
                     </Dialog>
                 </div>
             </div>
@@ -107,6 +108,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clear: () => { dispatch({ type: "PAGE_CLEAR" }) },
         getPageList: () => { dispatch(Actions.getPageList()) },
         searchPage: (text) => { dispatch({ type: "PAGE_SEARCH", text, }) },
         deleteDialogOpen: () => { dispatch({ type: "DELETE_DIALOG_OPEN" }) },

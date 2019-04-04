@@ -17,6 +17,7 @@ import * as Calendar from "services/Calendar"
 class View extends React.Component {
 
     componentDidMount() {
+        this.props.clear()
         if (/^\/page\/view\/[a-zA-Z0-9]+$/.test(this.props.location.pathname)) {
             this.props.getPage(this.props.location.pathname.substring(11))
         } else {
@@ -128,6 +129,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clear: () => { dispatch({ type: "PAGE_CLEAR" }) },
         getPage: (id) => { dispatch(Actions.getPage(id)) },
         deleteDialogOpen: () => { dispatch({ type: "DELETE_DIALOG_OPEN" }) },
     }

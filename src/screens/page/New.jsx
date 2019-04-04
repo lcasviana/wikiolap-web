@@ -16,6 +16,8 @@ class New extends React.Component {
     componentDidMount() {
         if (this.props.location.state) {
             this.props.editPage(this.props.location.state)
+        } else {
+            this.props.clear()
         }
     }
 
@@ -93,6 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clear: () => { dispatch({ type: "PAGE_CLEAR" }) },
         editPage: (page) => { dispatch({ type: "PAGE_EDIT", page, }) },
         changeTitle: (text) => { dispatch({ type: "PAGE_TITLE", text, }) },
         insertVisualization: () => { dispatch({ type: "VISUALIZATION_INSERT", }) },
