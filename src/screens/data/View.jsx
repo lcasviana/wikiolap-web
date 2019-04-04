@@ -6,6 +6,9 @@ import * as Actions from "actions/Data"
 import { Card, Table, TableHead, TableBody, TableRow, TableCell, CircularProgress, AppBar, Toolbar, Icon, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
+import Draw from "components/Draw"
+import Nav from "components/Nav"
+
 class View extends React.Component {
 
     componentDidMount() {
@@ -44,35 +47,39 @@ class View extends React.Component {
         const { dataset, status } = this.props.data
 
         return (
-            <div className="flex mb5 mt5">
-                <AppBar
-                    color="default"
-                    style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
-                    <Toolbar>
-                        <Link
-                            className="link"
-                            to="/data/list/">
-                            <Button
-                                variant="outlined">
-                                <Icon>arrow_back</Icon>
-                                Voltar
+            <div>
+                <Nav />
+                <Draw />
+                <div className="flex mb5 mt5">
+                    <AppBar
+                        color="default"
+                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
+                        <Toolbar>
+                            <Link
+                                className="link"
+                                to="/data/list/">
+                                <Button
+                                    variant="outlined">
+                                    <Icon>arrow_back</Icon>
+                                    Voltar
                             </Button>
-                        </Link>
-                    </Toolbar>
-                </AppBar>
-                <div className="flex justify-center mb5 mt5 w-100">
-                    <CircularProgress
-                        className="ma5"
-                        color="secondary"
-                        size={100}
-                        style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
-                    {dataset.length !== 0 &&
-                        <Card
-                            className="ma3"
-                            style={{ overflowX: "scroll" }}>
-                            {this.mountTable(dataset)}
-                        </Card>
-                    }
+                            </Link>
+                        </Toolbar>
+                    </AppBar>
+                    <div className="flex justify-center mb5 mt5 w-100">
+                        <CircularProgress
+                            className="ma5"
+                            color="secondary"
+                            size={100}
+                            style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
+                        {dataset.length !== 0 &&
+                            <Card
+                                className="ma3"
+                                style={{ overflowX: "scroll" }}>
+                                {this.mountTable(dataset)}
+                            </Card>
+                        }
+                    </div>
                 </div>
             </div>
         )

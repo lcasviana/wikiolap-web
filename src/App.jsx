@@ -9,8 +9,6 @@ import Pink from "@material-ui/core/colors/pink"
 import Red from "@material-ui/core/colors/red"
 import Teal from "@material-ui/core/colors/teal"
 
-import Draw from "components/Draw"
-import Nav from "components/Nav"
 import Home from "screens/Home"
 import PageList from "screens/page/List"
 import PageNew from "screens/page/New"
@@ -46,8 +44,6 @@ class App extends React.Component {
 
         return (
             <MuiThemeProvider theme={theme}>
-                <Nav />
-                <Draw />
                 <div className="overflow-auto">
                     <BrowserRouter>
                         <Switch>
