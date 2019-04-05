@@ -98,7 +98,7 @@ export default function reducer(state = page, action) {
         case "GET_SERIES":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...v, values: action.values.map(v => v[action.column]), } : { ...v, }), } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, seriesLabel: v.seriesLabel.values.length !== action.values.length ? { ...v, values: Array.apply(null, { length: action.values.length }).map(Number.call, Number), } : v.seriesLabel, series: v.series.map((v, i) => i === action.serie ? { ...v, values: action.values.map(v => v[action.column]), } : { ...v, }), } : v),
             }
 
         /* SYNC CASES */
@@ -213,7 +213,7 @@ export default function reducer(state = page, action) {
         case "SERIES_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? action.data : v), seriesIndex: v.seriesIndex.map((v, i) => i === action.serie ? action.value : v), } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...action.data, ...v, } : v), seriesIndex: v.seriesIndex.map((v, i) => i === action.serie ? action.value : v), } : v),
             }
 
         case "SERIES_INSERT":
