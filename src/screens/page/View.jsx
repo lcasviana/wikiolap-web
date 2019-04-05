@@ -57,6 +57,7 @@ class View extends React.Component {
                                     redirect={true} />
                                 <div className="flex justify-between">
                                     <Typography
+                                        color="primary"
                                         variant="h3">
                                         {page.title}
                                     </Typography>

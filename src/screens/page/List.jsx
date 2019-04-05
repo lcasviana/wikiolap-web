@@ -48,7 +48,7 @@ class List extends React.Component {
                             <Card
                                 className="ma3 pa2"
                                 key={index}
-                                style={{ width: 200, }}>
+                                style={{ width: 300, }}>
                                 <DeleteDialog
                                     id={page.id}
                                     open={this.props.page.delete}
@@ -59,17 +59,25 @@ class List extends React.Component {
                                         to={"/page/view/" + page.id}>
                                         <Typography
                                             color="primary"
-                                            variant="subtitle1">
+                                            variant="h4">
                                             {page.title}
                                         </Typography>
                                         <Typography
                                             variant="body2">
-                                            {Calendar.TimestampToString(page.updated_at)}
+                                            <strong>Usuário</strong>: {page.user}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
                                         </Typography>
                                     </Link>
                                 </CardActionArea>
                                 <CardActions
-                                    className="justify-center flex"
+                                    className="justify-end flex"
                                     disableActionSpacing>
                                     <IconButton onClick={() => this.props.sharePage("http://localhost:3000/page/view/" + page.id)}>
                                         <Icon color="primary">share</Icon>
