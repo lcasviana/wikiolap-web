@@ -21,6 +21,7 @@ class DeleteDialog extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        className="button"
                         color="default"
                         onClick={() => this.props.deleteDialogClose()}
                         variant="outlined">
@@ -31,6 +32,7 @@ class DeleteDialog extends React.Component {
                             className="link"
                             to="/">
                             <Button
+                                className="button"
                                 color="primary"
                                 onClick={() => {
                                     this.props.deletePage(id)
@@ -43,6 +45,7 @@ class DeleteDialog extends React.Component {
                     }
                     {!redirect &&
                         <Button
+                            className="button"
                             color="primary"
                             onClick={() => {
                                 this.props.deletePage(id)
