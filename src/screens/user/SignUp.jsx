@@ -37,7 +37,7 @@ class SignUp extends React.Component {
                             style={{ marginBottom: "1rem", }}
                             variant="h6">
                             Cadastro
-                    </Typography>
+                        </Typography>
                         <div className="flex flex-column">
                             <TextField
                                 label="Nome"
@@ -72,7 +72,7 @@ class SignUp extends React.Component {
                                     onClick={() => this.verify()}
                                     variant="contained">
                                     Cadastrar
-                            </Button>
+                                </Button>
                             </div>
                         </div>
                         <Divider style={{ margin: "1rem 0 1rem 0", }} />
@@ -83,7 +83,7 @@ class SignUp extends React.Component {
                                 className="tc"
                                 color="primary">
                                 Logar!
-                    </Typography>
+                            </Typography>
                         </Link>
                     </Card>
                 </div>
