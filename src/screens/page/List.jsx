@@ -3,7 +3,8 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Card, CardActions, Icon, IconButton, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
+import { Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -99,8 +100,31 @@ class List extends React.Component {
                     <Dialog
                         onClose={() => this.props.sharePageClose()}
                         open={this.props.page.share ? this.props.page.share.open : false}>
-                        <Typography
-                            variant="h6">{this.props.page.share ? this.props.page.share.link : ""}</Typography>
+                        <div
+                            className="flex ma4"
+                            style={{ width: 500 }}>
+                            <Typography
+                                className="overflow-auto"
+                                style={{ marginRight: "1rem" }}
+                                variant="h6">{this.props.page.share ? this.props.page.share.link : ""}
+                            </Typography>
+                            <CopyToClipboard
+                                className="button"
+                                text={this.props.page.share ? this.props.page.share.link : ""}>
+                                <Button
+                                    color="primary"
+                                    variant="outlined">
+                                    Copiar
+                                </Button>
+                            </CopyToClipboard>
+                            <Button
+                                className="button"
+                                color="default"
+                                onClick={() => this.props.sharePageClose()}
+                                variant="outlined">
+                                Fechar
+                            </Button>
+                        </div>
                     </Dialog>
                 </div>
             </div>
