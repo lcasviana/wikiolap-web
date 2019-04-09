@@ -3,13 +3,17 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/User"
 
-import { Card, TextField, Typography, Divider, Button } from "@material-ui/core"
-import { Link } from "react-router-dom"
+/* import { Card, TextField, Typography, Divider, Button } from "@material-ui/core"
+import { Link } from "react-router-dom" */
 
 import Draw from "components/Draw"
 import Nav from "components/Nav"
 
 class SignUp extends React.Component {
+
+    componentDidMount() {
+        window.location.href = "http://localhost:8000/authentication/register"
+    }
 
     verify() {
         const { username, email, password_1, password_2 } = this.props.user
@@ -24,14 +28,14 @@ class SignUp extends React.Component {
     }
 
     render() {
-        const { username, email, password_1, password_2 } = this.props.user
+        /* const { username, email, password_1, password_2 } = this.props.user */
 
         return (
             <div>
                 <Nav />
                 <Draw />
                 <div className="flex justify-center align-center mb5 mt5">
-                    <Card className="flex flex-column ma5 pa3">
+                    {/* <Card className="flex flex-column ma5 pa3">
                         <Typography
                             className="tc"
                             style={{ marginBottom: "1rem", }}
@@ -85,7 +89,7 @@ class SignUp extends React.Component {
                                 Logar!
                             </Typography>
                         </Link>
-                    </Card>
+                    </Card> */}
                 </div>
             </div>
         )

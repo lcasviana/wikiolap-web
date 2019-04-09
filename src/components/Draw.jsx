@@ -34,7 +34,7 @@ class Draw extends React.Component {
                         icon="home"
                         path="/"
                         text="Início" />
-                    <ListSubheader>Usuário</ListSubheader>
+                    {/* <ListSubheader>Usuário</ListSubheader>
                     <DrawItem
                         icon="person"
                         path="/user/signin/"
@@ -50,7 +50,7 @@ class Draw extends React.Component {
                             <ListItemIcon><Icon color="primary">person_outline</Icon></ListItemIcon>
                             <ListItemText>Antigo</ListItemText>
                         </ListItem>
-                    </a>
+                    </a> */}
                     <ListSubheader>Visualizações</ListSubheader>
                     <DrawItem
                         icon="add"
