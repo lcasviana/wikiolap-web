@@ -33,7 +33,7 @@ class Draw extends React.Component {
                     <DrawItem
                         icon="home"
                         path="/"
-                        text="Início" />
+                        text="Página inicial" />
                     {/* <ListSubheader>Usuário</ListSubheader>
                     <DrawItem
                         icon="person"
@@ -55,24 +55,24 @@ class Draw extends React.Component {
                     <DrawItem
                         icon="add"
                         path="/page/new/"
-                        text="Criar" />
+                        text="Criar visualização" />
                     <DrawItem
                         icon="view_module"
                         path="/page/list/"
-                        text="Listar" />
-                    <ListSubheader>Datasets</ListSubheader>
+                        text="Listar visualizações" />
+                    <ListSubheader>Coleções de dados</ListSubheader>
                     <a
                         className="link"
                         href="http://localhost:8000/base/upload_file/">
                         <ListItem button>
                             <ListItemIcon><Icon color="primary">cloud_upload</Icon></ListItemIcon>
-                            <ListItemText>Upload</ListItemText>
+                            <ListItemText>Carregar coleções de dados</ListItemText>
                         </ListItem>
                     </a>
                     <DrawItem
                         icon="view_headline"
                         path="/data/list/"
-                        text="Listar" />
+                        text="Listar coleções de dados" />
                 </List>
             </Drawer>
         )
