@@ -19,11 +19,14 @@ class List extends React.Component {
         const { search } = this.props
         const { datasets, status } = this.props.data
 
-        const lastFive = datasets.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+        const data = search === ""
+            ? datasets.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+            : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
             <div>
-                {lastFive.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((dataset, index) =>
+                {search === "" && <h3>Últimos 5</h3>}
+                {data.map((dataset, index) =>
                     <ExpansionPanel key={index}>
                         <ExpansionPanelSummary style={{ paddingRight: 0, }}>
                             <div className="flex justify-between w-100 items-center">

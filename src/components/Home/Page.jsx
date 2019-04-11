@@ -20,11 +20,14 @@ class List extends React.Component {
         const { search } = this.props
         const { pages } = this.props.page
 
-        const lastFive = pages.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+        const page = search === ""
+            ? pages.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+            : pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
             <div>
-                {lastFive.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
+                {search === "" && <h3>Últimos 5</h3>}
+                {page.map((page, index) =>
                     <Card
                         className="ma3 pa2"
                         key={index}
