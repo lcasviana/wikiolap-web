@@ -26,7 +26,7 @@ class View extends React.Component {
     }
 
     render() {
-        const { dialog, page } = this.props
+        const { deleteDialog, page } = this.props
 
         return (
             <div>
@@ -53,7 +53,7 @@ class View extends React.Component {
                             <Card className="ma3 pa3 w-100">
                                 <DeleteDialog
                                     id={page.id}
-                                    open={dialog}
+                                    open={deleteDialog}
                                     redirect={true} />
                                 <div className="flex justify-between">
                                     <Typography
@@ -124,7 +124,7 @@ class View extends React.Component {
 function mapStateToProps(state) {
     return {
         page: state.Page.page,
-        dialog: state.Page.delete,
+        deleteDialog: state.Page.deleteDialog,
     }
 }
 
