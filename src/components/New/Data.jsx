@@ -54,39 +54,39 @@ class Data extends React.Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {datasetsList.map((dataset, index) =>
-                                    <TableRow key={index}>
-                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
-                                            <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
-                                            <div>
-                                                <Tooltip
-                                                    disableFocusListener
-                                                    disableTouchListener
-                                                    placement="left"
-                                                    title={
-                                                        <React.Fragment>
-                                                            <Typography style={{ color: "white" }}>{dataset.title}</Typography>
-                                                            <Divider style={{ background: "white" }} />
-                                                            <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
-                                                        </React.Fragment>
-                                                    }>
-                                                    <div className="dib">
-                                                        <IconButton
-                                                            className="pa0"
-                                                            disabled>
-                                                            <Icon>error_outline</Icon>
-                                                        </IconButton>
-                                                    </div>
-                                                </Tooltip>
-                                                <IconButton
-                                                    className="pa0"
-                                                    onClick={() => this.props.selectDataset(mainIndex, dataset)}>
-                                                    <Icon color="primary">add</Icon>
-                                                </IconButton>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                )}
+                                {datasetsList
+                                    .filter(dataset => !datasetsSelected.find(d => d.id === dataset.id))
+                                    .map((dataset, index) =>
+                                        <TableRow key={index}>
+                                            <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
+                                                <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
+                                                <div>
+                                                    <Tooltip
+                                                        placement="left"
+                                                        title={
+                                                            <React.Fragment>
+                                                                <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                                                <Divider style={{ background: "white" }} />
+                                                                <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
+                                                            </React.Fragment>
+                                                        }>
+                                                        <div className="dib">
+                                                            <IconButton
+                                                                className="pa0"
+                                                                disabled>
+                                                                <Icon>error_outline</Icon>
+                                                            </IconButton>
+                                                        </div>
+                                                    </Tooltip>
+                                                    <IconButton
+                                                        className="pa0"
+                                                        onClick={() => this.props.selectDataset(mainIndex, dataset)}>
+                                                        <Icon color="primary">arrow_forward</Icon>
+                                                    </IconButton>
+                                                </div>
+                                            </TableCell>
+                                        </TableRow>
+                                    )}
                                 {!datasetsList.length &&
                                     <TableRow>
                                         <TableCell>
@@ -134,8 +134,6 @@ class Data extends React.Component {
                                                 <Typography>{dataset.title}</Typography>
                                                 <div>
                                                     <Tooltip
-                                                        disableFocusListener
-                                                        disableTouchListener
                                                         placement="left"
                                                         title={
                                                             <React.Fragment>
@@ -153,7 +151,7 @@ class Data extends React.Component {
                                                         </div>
                                                     </Tooltip>
                                                     <IconButton onClick={() => this.props.removeDataset(mainIndex, index)}>
-                                                        <Icon color="error">remove</Icon>
+                                                        <Icon color="error">arrow_back</Icon>
                                                     </IconButton>
                                                 </div>
                                             </TableCell>
