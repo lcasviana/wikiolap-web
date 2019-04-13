@@ -3,11 +3,12 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
+import { CircularProgress, Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
+import Graph from "components/Graph"
 import Nav from "components/Nav"
 
 import DeleteDialog from "components/DeleteDialog"
@@ -21,11 +22,13 @@ class List extends React.Component {
     }
 
     render() {
+        const { deleteDialog, pages, search, share, status } = this.props.page
+
         return (
             <div>
                 <Nav />
                 <Draw />
-                <div className="flex mb5 mt5">
+                <div className="flex flex-column mb5 mt5">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
@@ -44,15 +47,22 @@ class List extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
+                    <div className="flex justify-center mt5">
+                        <CircularProgress
+                            className="ma5"
+                            color="secondary"
+                            size={100}
+                            style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
+                    </div>
                     <div className="justify-center flex flex-row flex-wrap mt5 w-100">
-                        {this.props.page.pages && this.props.page.pages.filter(page => page.title.toLowerCase().trim().indexOf(this.props.page.search.toLowerCase().trim()) !== -1).map((page, index) =>
+                        {pages && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
                             <Card
                                 className="ma3 pa2"
                                 key={index}
                                 style={{ width: 300, }}>
                                 <DeleteDialog
                                     id={page.id}
-                                    open={this.props.page.delete}
+                                    open={deleteDialog}
                                     redirect={false} />
                                 <CardActionArea>
                                     <Link
@@ -63,6 +73,13 @@ class List extends React.Component {
                                             variant="h4">
                                             {page.title}
                                         </Typography>
+                                        {JSON.stringify(page)}
+                                        {page.title && <Graph
+                                            index={index}
+                                            labels={page.seriesLabel ? page.seriesLabel : []}
+                                            series={page.series ? page.series : []}
+                                            title={page.title ? page.title : ""}
+                                            type={page.graphType ? page.graphType.type : ""} />}
                                         <Typography
                                             variant="body2">
                                             <strong>Usuário</strong>: {page.user}
@@ -99,18 +116,18 @@ class List extends React.Component {
                     </div>
                     <Dialog
                         onClose={() => this.props.sharePageClose()}
-                        open={this.props.page.share ? this.props.page.share.open : false}>
+                        open={share ? share.open : false}>
                         <div
                             className="flex ma4"
                             style={{ width: 500 }}>
                             <Typography
                                 className="overflow-auto"
                                 style={{ marginRight: "1rem" }}
-                                variant="h6">{this.props.page.share ? this.props.page.share.link : ""}
+                                variant="h6">{share ? share.link : ""}
                             </Typography>
                             <CopyToClipboard
                                 className="button"
-                                text={this.props.page.share ? this.props.page.share.link : ""}>
+                                text={share ? share.link : ""}>
                                 <Button
                                     color="primary"
                                     variant="outlined">
