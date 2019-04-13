@@ -9,8 +9,6 @@ import { Link } from "react-router-dom"
 import Draw from "components/Draw"
 import Nav from "components/Nav"
 
-import * as Calendar from "services/Calendar"
-
 class View extends React.Component {
 
     componentDidMount() {
