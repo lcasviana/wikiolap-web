@@ -43,8 +43,9 @@ class List extends React.Component {
                             <CardActionArea>
                                 <Link
                                     className="link"
-                                    to={"/data/view/" + dataset.tableId}>
+                                    to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
                                     <Typography
+                                        className="pb2"
                                         color="primary"
                                         style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                                         variant="h4">

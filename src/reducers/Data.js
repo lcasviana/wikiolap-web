@@ -1,4 +1,5 @@
 const data = {
+    metadata: {},
     dataset: [],
     datasets: [],
     status: "",
@@ -12,6 +13,12 @@ export default function reducer(state = data, action) {
             return {
                 ...state,
                 dataset: action.dataset,
+            }
+
+        case "GET_METADATA":
+            return {
+                ...state,
+                metadata: action.metadata,
             }
 
         case "GET_DATASETS":

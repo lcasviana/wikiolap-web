@@ -63,7 +63,7 @@ class List extends React.Component {
                                             </Typography>
                                             <Link
                                                 className="link"
-                                                to={"/data/view/" + dataset.tableId}>
+                                                to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
                                                 <Button
                                                     className="button mt5 mb1"
                                                     color="primary"
@@ -75,7 +75,7 @@ class List extends React.Component {
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails
                                         className="flex flex-column"
-                                        style={{ background: "#f3fff9" }}>
+                                        style={{ background: "#fafafa" }}>
                                         <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
                                         <Divider style={{ margin: "0.5rem 0" }} />
                                         <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>

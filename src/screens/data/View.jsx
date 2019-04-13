@@ -3,20 +3,23 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { Card, Table, TableHead, TableBody, TableRow, TableCell, CircularProgress, AppBar, Toolbar, Icon, Button } from "@material-ui/core"
+import { Card, Table, TableHead, TableBody, TableRow, TableCell, CircularProgress, AppBar, Toolbar, Icon, Button, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
 import Nav from "components/Nav"
 
+import * as Calendar from "services/Calendar"
+
 class View extends React.Component {
 
     componentDidMount() {
         this.props.clear()
-        if (/^\/data\/view\/[_a-zA-Z0-9]+$/.test(this.props.location.pathname)) {
-            this.props.getDataset(this.props.location.pathname.substring(11))
+        if (/^\/data\/view\/[_a-zA-Z0-9]+@[_a-zA-Z0-9]+$/.test(this.props.location.pathname)) {
+            const args = this.props.location.pathname.substring(11).split("@")
+            this.props.getDataset(args[0], args[1])
         } else {
-            // Bad URL
+            throw new Error('Bad URL')
         }
     }
 
@@ -44,8 +47,8 @@ class View extends React.Component {
     }
 
     render() {
-        const { dataset, status } = this.props.data
-
+        const { metadata, dataset, status } = this.props.data
+        console.log(this.props.data)
         return (
             <div>
                 <Nav />
@@ -72,12 +75,30 @@ class View extends React.Component {
                             color="secondary"
                             size={100}
                             style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
-                        {dataset.length !== 0 &&
-                            <Card
-                                className="ma3"
-                                style={{ overflowX: "scroll" }}>
-                                {this.mountTable(dataset)}
-                            </Card>
+                        {status === "DONE" &&
+                            <div className="flex w-100">
+                                <Card
+                                    className="ma3 pa2 w-30"
+                                    style={{ overflowY: "auto" }}>
+                                    <Typography
+                                        className="pb2"
+                                        color="primary"
+                                        variant="h4">
+                                        {metadata.title}
+                                    </Typography>
+                                    <Typography className="overflow-hidden"><strong>Descrição</strong>: {metadata.description}</Typography>
+                                    <Typography className="overflow-hidden"><strong>Origem</strong>: {metadata.source}</Typography>
+                                    <Typography className="overflow-hidden"><strong>Colunas</strong>: {metadata.aliasColumns ? metadata.aliasColumns.join(", ") : []}</Typography>
+                                    <Typography className="overflow-hidden"><strong>Tags</strong>: {metadata.tags ? metadata.tags.join(", ") : []}</Typography>
+                                    <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {metadata.hierarchies ? metadata.hierarchies.join(", ") : []}</Typography>
+                                    <Typography className="overflow-hidden"><strong>Email</strong>: {metadata.email}</Typography>
+                                </Card>
+                                <Card
+                                    className="ma3 pa2 w-70"
+                                    style={{ overflowX: "scroll" }}>
+                                    {dataset && dataset.length && this.mountTable(dataset)}
+                                </Card>
+                            </div>
                         }
                     </div>
                 </div>
@@ -94,7 +115,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDataset: (id) => { dispatch(Actions.getDataset(id, 10)) },
+        getDataset: (id, table) => { dispatch(Actions.getDataset(id, table, 10)) },
         clear: () => { dispatch({ type: "DATASET_CLEAR" }) },
     }
 }

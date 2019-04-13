@@ -47,6 +47,7 @@ class List extends React.Component {
                                     className="link"
                                     to={"/page/view/" + page.id}>
                                     <Typography
+                                        className="pb2"
                                         color="primary"
                                         style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                                         variant="h4">

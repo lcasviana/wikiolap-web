@@ -8,7 +8,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
-import Graph from "components/Graph"
+// import Graph from "components/Graph"
 import Nav from "components/Nav"
 
 import DeleteDialog from "components/DeleteDialog"
@@ -70,6 +70,7 @@ class List extends React.Component {
                                         className="link"
                                         to={"/page/view/" + page.id}>
                                         <Typography
+                                            className="pb2"
                                             color="primary"
                                             variant="h4">
                                             {page.title}
