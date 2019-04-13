@@ -50,8 +50,8 @@ class Home extends React.Component {
                                 <Tab label="Visualizações" />
                                 <Tab label="Coleções de lados" />
                             </Tabs>
-                            {(tab === 0 || tab === 1) && <Page search={search} />}
-                            {(tab === 0 || tab === 2) && <Data search={search} />}
+                            {(tab === 0 || tab === 1) && <Page search={search} tab={tab} />}
+                            {(tab === 0 || tab === 2) && <Data search={search} tab={tab} />}
                         </Paper>
                     </div>
                 </div>

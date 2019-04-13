@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { CircularProgress, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Divider } from "@material-ui/core"
+import { CircularProgress, Typography, Card, CardActionArea } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import * as Calendar from "services/Calendar"
@@ -16,7 +16,7 @@ class List extends React.Component {
     }
 
     render() {
-        const { search } = this.props
+        const { search, tab } = this.props
         const { datasets, status } = this.props.data
 
         const data = search === ""
@@ -24,46 +24,50 @@ class List extends React.Component {
             : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
-            <div>
-                {search === "" && <h3>Últimos 5</h3>}
-                {data.map((dataset, index) =>
-                    <ExpansionPanel key={index}>
-                        <ExpansionPanelSummary style={{ paddingRight: 0, }}>
-                            <div className="flex justify-between w-100 items-center">
-                                <Typography>
-                                    {dataset.title}
-                                </Typography>
+            <div className="flex flex-column items-center pa2">
+                <div className="w-100">
+                    {search === "" && <Typography variant="h5">Últimas 5 bases de dados criadas</Typography>}
+                    {search !== "" && tab === 0 && <Typography variant="h5">Bases de dados</Typography>}
+                </div>
+                <CircularProgress
+                    className="ma5"
+                    color="secondary"
+                    size={50}
+                    style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
+                <div className="flex flex-row flex-wrap justify-center">
+                    {data.map((dataset, index) =>
+                        <Card
+                            className="ma3 pa2"
+                            key={index}
+                            style={{ height: "fit-content", width: 420, }}>
+                            <CardActionArea>
                                 <Link
                                     className="link"
                                     to={"/data/view/" + dataset.tableId}>
-                                    <Button
-                                        className="button mt5 mb1"
+                                    <Typography
                                         color="primary"
-                                        variant="outlined">
-                                        Ver dados
-                                        </Button>
+                                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                        variant="h4">
+                                        {dataset.title}
+                                    </Typography>
+                                    <Typography
+                                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                        variant="body2">
+                                        <strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">
+                                        <strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2">
+                                        <strong>Última modificação</strong>: {Calendar.TimestampToString(dataset.updated_at)}
+                                    </Typography>
                                 </Link>
-                            </div>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails className="flex flex-column">
-                            <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Tags</strong>: {dataset.tags.join(", ")}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {dataset.hierarchies.join(", ")}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Email</strong>: {dataset.email}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}</Typography>
-                            <Divider style={{ margin: "0.5rem 0" }} />
-                            <Typography className="overflow-hidden"><strong>Última atualização</strong>: {Calendar.TimestampToString(dataset.updated_at)}</Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>)
-                }
+                            </CardActionArea>
+                        </Card>
+                    )}
+                </div>
             </div>
         )
     }
