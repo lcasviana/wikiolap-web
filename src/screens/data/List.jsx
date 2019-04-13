@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { CircularProgress, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TextField, AppBar, Toolbar, InputAdornment, Icon, Button, Divider } from "@material-ui/core"
+import { CircularProgress, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TextField, AppBar, Toolbar, InputAdornment, Icon, Button, Divider, Card } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -26,11 +26,6 @@ class List extends React.Component {
                 <Nav />
                 <Draw />
                 <div className="flex mb5 mt5">
-                    <CircularProgress
-                        className="ma5"
-                        color="secondary"
-                        size={100}
-                        style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
@@ -49,45 +44,57 @@ class List extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
-                    <div className="mt5 pa3 w-100">
-                        {datasets.map((dataset, index) =>
-                            <ExpansionPanel key={index}>
-                                <ExpansionPanelSummary style={{ paddingRight: 0, }}>
-                                    <div className="flex justify-between w-100 items-center">
-                                        <Typography>
-                                            {dataset.title}
-                                        </Typography>
-                                        <Link
-                                            className="link"
-                                            to={"/data/view/" + dataset.tableId}>
-                                            <Button
-                                                className="button mt5 mb1"
-                                                color="primary"
-                                                variant="outlined">
-                                                Ver dados
+                    <div className="flex flex-column items-center mt5 pa3 w-100">
+                        <CircularProgress
+                            className="ma5"
+                            color="secondary"
+                            size={100}
+                            style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
+                        <Card>
+                            {datasets.map((dataset, index) =>
+                                <ExpansionPanel
+                                    className="w-100"
+                                    key={index}
+                                    style={{ margin: 0 }}>
+                                    <ExpansionPanelSummary style={{ paddingRight: 0, }}>
+                                        <div className="flex justify-between w-100 items-center">
+                                            <Typography>
+                                                {dataset.title}
+                                            </Typography>
+                                            <Link
+                                                className="link"
+                                                to={"/data/view/" + dataset.tableId}>
+                                                <Button
+                                                    className="button mt5 mb1"
+                                                    color="primary"
+                                                    variant="outlined">
+                                                    Ver dados
                                         </Button>
-                                        </Link>
-                                    </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails className="flex flex-column">
-                                    <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Tags</strong>: {dataset.tags.join(", ")}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {dataset.hierarchies.join(", ")}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Email</strong>: {dataset.email}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}</Typography>
-                                    <Divider style={{ margin: "0.5rem 0" }} />
-                                    <Typography className="overflow-hidden"><strong>Última atualização</strong>: {Calendar.TimestampToString(dataset.updated_at)}</Typography>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>)
-                        }
+                                            </Link>
+                                        </div>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails
+                                        className="flex flex-column"
+                                        style={{ background: "#f3fff9" }}>
+                                        <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Tags</strong>: {dataset.tags.join(", ")}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {dataset.hierarchies.join(", ")}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Email</strong>: {dataset.email}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}</Typography>
+                                        <Divider style={{ margin: "0.5rem 0" }} />
+                                        <Typography className="overflow-hidden"><strong>Última atualização</strong>: {Calendar.TimestampToString(dataset.updated_at)}</Typography>
+                                    </ExpansionPanelDetails>
+                                </ExpansionPanel>
+                            )}
+                        </Card>
                     </div>
                 </div>
             </div>
