@@ -21,6 +21,7 @@ const visualization = {
     series: [serie,],
     title: "",
     description: "",
+    tags: [],
 }
 
 const page = {
@@ -30,7 +31,8 @@ const page = {
     datasets: [],
     dataset: [],
     title: "",
-    delete: false,
+    deleteDialog: false,
+    status: "",
     share: { link: "", open: false, },
     visualizations: [visualization,],
 }
@@ -76,12 +78,6 @@ export default function reducer(state = page, action) {
                 pages: state.pages.filter((v, i) => v.id !== action.id)
             }
 
-        case "GET_DATASET TO DELETE":
-            return {
-                ...state,
-                dataset: action.dataset,
-            }
-
         case "GET_DATASET_LIST":
             return {
                 ...state,
@@ -102,6 +98,24 @@ export default function reducer(state = page, action) {
             }
 
         /* SYNC CASES */
+
+        case "GET_PAGE_DONE":
+            return {
+                ...state,
+                status: "DONE",
+            }
+
+        case "GET_PAGE_LOADING":
+            return {
+                ...state,
+                status: "LOADING",
+            }
+
+        case "GET_PAGE_ERROR":
+            return {
+                ...state,
+                status: "ERROR",
+            }
 
         case "PAGE_CLEAR":
             return page
@@ -255,13 +269,13 @@ export default function reducer(state = page, action) {
         case "DELETE_DIALOG_OPEN":
             return {
                 ...state,
-                delete: true,
+                deleteDialog: true,
             }
 
         case "DELETE_DIALOG_CLOSE":
             return {
                 ...state,
-                delete: false,
+                deleteDialog: false,
             }
 
         default:

@@ -56,7 +56,7 @@ class List extends React.Component {
                             size={100} />
                     </div>
                     <div className="justify-center flex flex-row flex-wrap mt5 w-100">
-                        {pages && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
+                        {status === "DONE" && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
                             <Card
                                 className="ma3 pa2"
                                 key={index}
@@ -74,13 +74,12 @@ class List extends React.Component {
                                             variant="h4">
                                             {page.title}
                                         </Typography>
-                                        {JSON.stringify(page)}
-                                        {page.title && <Graph
+                                        {/* <Graph
                                             index={index}
-                                            labels={page.seriesLabel ? page.seriesLabel : []}
-                                            series={page.series ? page.series : []}
-                                            title={page.title ? page.title : ""}
-                                            type={page.graphType ? page.graphType.type : ""} />}
+                                            labels={page.seriesLabel}
+                                            series={page.series}
+                                            title={page.title}
+                                            type={page.graphType.type} /> */}
                                         <Typography
                                             variant="body2">
                                             <strong>Usuário</strong>: {page.user}
