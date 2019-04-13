@@ -47,12 +47,13 @@ class List extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
-                    <div className="flex justify-center mt5">
+                    <div
+                        className="justify-center mt5"
+                        style={{ display: status !== "LOADING" ? "none" : "flex" }} >
                         <CircularProgress
                             className="ma5"
                             color="secondary"
-                            size={100}
-                            style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
+                            size={100} />
                     </div>
                     <div className="justify-center flex flex-row flex-wrap mt5 w-100">
                         {pages && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
