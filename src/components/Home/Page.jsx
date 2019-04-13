@@ -19,9 +19,11 @@ class List extends React.Component {
         const { search, tab } = this.props
         const { pages, status } = this.props.page
 
-        const page = search === ""
-            ? pages.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
-            : pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+        const page = pages
+            ? search === ""
+                ? pages.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+                : pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+            : []
 
         return (
             <div className="flex flex-column items-center pa2">
