@@ -59,24 +59,28 @@ export function updatePage(page) {
 
 export function getPage(id) {
     return function (dispatch) {
+        dispatch({ type: "GET_PAGE_LOADING" })
         axios.get(baseUrl + "/visualizations/page-detail/" + id + "/")
             .then((response) => {
                 dispatch({ type: "GET_PAGE", page: response.data, })
+                dispatch({ type: "GET_PAGE_DONE" })
             })
             .catch((error) => {
-                dispatch({ type: "GET_PAGE_ERR", error, })
+                dispatch({ type: "GET_PAGE_ERROR", error })
             })
     }
 }
 
 export function getPageList() {
     return function (dispatch) {
+        dispatch({ type: "GET_PAGE_LOADING" })
         axios.get(baseUrl + "/visualizations/page-list/")
             .then((response) => {
                 dispatch({ type: "GET_PAGE_LIST", pages: response.data, })
+                dispatch({ type: "GET_PAGE_DONE" })
             })
             .catch((error) => {
-                dispatch({ type: "GET_PAGE_LIST_ERR", error, })
+                dispatch({ type: "GET_PAGE_ERROR", error })
             })
     }
 }
