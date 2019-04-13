@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Typography, Grid, TextField, IconButton, Icon, Card, Table, TableBody, TableRow, TableCell, TableHead } from "@material-ui/core"
+import { Tooltip, Typography, Grid, TextField, IconButton, Icon, Card, Table, TableBody, TableRow, TableCell, TableHead, Divider } from "@material-ui/core"
 
 class Data extends React.Component {
 
@@ -59,9 +59,25 @@ class Data extends React.Component {
                                         <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
                                             <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
                                             <div>
-                                                <IconButton className="pa0">
-                                                    <Icon>info</Icon>
-                                                </IconButton>
+                                                <Tooltip
+                                                    disableFocusListener
+                                                    disableTouchListener
+                                                    placement="left"
+                                                    title={
+                                                        <React.Fragment>
+                                                            <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                                            <Divider style={{ background: "white" }} />
+                                                            <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
+                                                        </React.Fragment>
+                                                    }>
+                                                    <div className="dib">
+                                                        <IconButton
+                                                            className="pa0"
+                                                            disabled>
+                                                            <Icon>error_outline</Icon>
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
                                                 <IconButton
                                                     className="pa0"
                                                     onClick={() => this.props.selectDataset(mainIndex, dataset)}>
@@ -117,9 +133,25 @@ class Data extends React.Component {
                                             <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
                                                 <Typography>{dataset.title}</Typography>
                                                 <div>
-                                                    <IconButton className="pa0">
-                                                        <Icon>info</Icon>
-                                                    </IconButton>
+                                                    <Tooltip
+                                                        disableFocusListener
+                                                        disableTouchListener
+                                                        placement="left"
+                                                        title={
+                                                            <React.Fragment>
+                                                                <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                                                <Divider style={{ background: "white" }} />
+                                                                <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
+                                                            </React.Fragment>
+                                                        }>
+                                                        <div className="dib">
+                                                            <IconButton
+                                                                className="pa0"
+                                                                disabled>
+                                                                <Icon>error_outline</Icon>
+                                                            </IconButton>
+                                                        </div>
+                                                    </Tooltip>
                                                     <IconButton onClick={() => this.props.removeDataset(mainIndex, index)}>
                                                         <Icon color="error">remove</Icon>
                                                     </IconButton>
