@@ -11,6 +11,10 @@ import Page from "components/Home/Page"
 
 class Home extends React.Component {
 
+    componentDidMount() {
+        this.props.setTab(0)
+    }
+
     render() {
         const { search, tab } = this.props.home
 
