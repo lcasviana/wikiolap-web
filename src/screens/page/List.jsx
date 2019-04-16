@@ -29,7 +29,7 @@ class List extends React.Component {
             <div>
                 <Nav />
                 <Draw />
-                <div className="flex flex-column mb5 mt5">
+                <div className="flex flex-column mb5 mt5 pa3">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
@@ -56,7 +56,9 @@ class List extends React.Component {
                             color="secondary"
                             size={100} />
                     </div>
-                    <div className="justify-center flex flex-row flex-wrap mt5 w-100">
+                    <Card
+                        className="justify-center flex flex-row flex-wrap mt5 w-100"
+                        style={{ background: "#fafafa" }}>
                         {status === "DONE" && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
                             <Card
                                 className="ma3 pa2"
@@ -119,7 +121,7 @@ class List extends React.Component {
                                 </CardActions>
                             </Card>
                         )}
-                    </div>
+                    </Card>
                     <Dialog
                         onClose={() => this.props.sharePageClose()}
                         open={share ? share.open : false}>

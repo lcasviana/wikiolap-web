@@ -26,7 +26,9 @@ class List extends React.Component {
             : []
 
         return (
-            <div className="flex flex-column items-center pa2">
+            <div
+                className="flex flex-column items-center pa2"
+                style={{ background: "#fafafa" }}>
                 <div className="w-100">
                     {search === "" && <Typography variant="h5">Últimas 5 visualizações criadas</Typography>}
                     {search !== "" && tab === 0 && <Typography variant="h5">Visualizações</Typography>}

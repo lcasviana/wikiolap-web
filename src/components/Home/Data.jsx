@@ -24,7 +24,9 @@ class List extends React.Component {
             : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
-            <div className="flex flex-column items-center pa2">
+            <div
+                className="flex flex-column items-center pa2"
+                style={{ background: "#fafafa" }}>
                 <div className="w-100">
                     {search === "" && <Typography variant="h5">Últimas 5 bases de dados criadas</Typography>}
                     {search !== "" && tab === 0 && <Typography variant="h5">Bases de dados</Typography>}

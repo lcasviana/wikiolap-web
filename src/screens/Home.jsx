@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Action from "actions/User"
 
-import { AppBar, Toolbar, TextField, InputAdornment, Icon, Paper, Tabs, Tab } from "@material-ui/core"
+import { AppBar, Toolbar, Card, TextField, InputAdornment, Icon, Paper, Tabs, Tab } from "@material-ui/core"
 
 import Data from "components/Home/Data"
 import Draw from "components/Draw"
@@ -25,7 +25,7 @@ class Home extends React.Component {
             <div className="h-100 w-100">
                 <Nav />
                 <Draw />
-                <div className="flex justify-center h-100 mb5 mt5 w-100">
+                <div className="flex flex-column justify-center h-100 mb5 mt5 w-100">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
@@ -44,22 +44,24 @@ class Home extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
-                    <div className="justify-center flex flex-row flex-wrap mt5 pa3 h-100 w-100">
-                        <Paper
+                    <Paper square>
+                        <Tabs
+                            className="flex mt5 w-100"
+                            indicatorColor="primary"
+                            onChange={(event, value) => this.props.setTab(value)}
+                            textColor="primary"
+                            value={tab}>
+                            <Tab label="Tudo" />
+                            <Tab label="Visualizações" />
+                            <Tab label="Coleções de lados" />
+                        </Tabs>
+                    </Paper>
+                    <div className="justify-center flex flex-row flex-wrap pa3 h-100 w-100">
+                        <Card
                             className="h-100 w-100">
-                            <Tabs
-                                value={tab}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                onChange={(event, value) => this.props.setTab(value)}
-                            >
-                                <Tab label="Tudo" />
-                                <Tab label="Visualizações" />
-                                <Tab label="Coleções de lados" />
-                            </Tabs>
                             {(tab === 0 || tab === 1) && <Page search={search} tab={tab} />}
                             {(tab === 0 || tab === 2) && <Data search={search} tab={tab} />}
-                        </Paper>
+                        </Card>
                     </div>
                 </div>
             </div>
