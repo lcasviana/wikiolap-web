@@ -55,7 +55,7 @@ class List extends React.Component {
                                     </Typography>
                                     <Typography
                                         variant="body2">
-                                        <strong>Usuário</strong>: {page.user}
+                                        <strong>Usuário</strong>: {page.username}
                                     </Typography>
                                     <Typography
                                         variant="body2">

@@ -45,7 +45,8 @@ function pageExpand(page) {
         visualizations: p.visualizations.map(v => ({
             ...visualization,
             ...v,
-        }))
+        })),
+        username: p.username,
     }
 }
 

@@ -12,6 +12,7 @@ import Nav from "components/Nav"
 class SignUp extends React.Component {
 
     componentDidMount() {
+        this.props.clear()
         window.location.href = "http://localhost:8000/authentication/register"
     }
 
@@ -104,6 +105,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clear: () => { dispatch({ type: "USER_CLEAR" }) },
         signUp: (user) => { dispatch(Actions.signUp(user)) },
         changeUsername: (text) => { dispatch({ type: "USER_NAME", text, }) },
         changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text, }) },

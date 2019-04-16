@@ -26,7 +26,7 @@ class View extends React.Component {
     }
 
     render() {
-        const { deleteDialog, page } = this.props
+        const { deleteDialog, page, username } = this.props
 
         return (
             <div>
@@ -61,25 +61,27 @@ class View extends React.Component {
                                         variant="h3">
                                         {page.title}
                                     </Typography>
-                                    <div>
-                                        <Link
-                                            className="link"
-                                            to={{ pathname: "/page/edit/", state: page, }}>
+                                    {page.username === username &&
+                                        <div>
+                                            <Link
+                                                className="link"
+                                                to={{ pathname: "/page/edit/", state: page, }}>
+                                                <Button
+                                                    className="button"
+                                                    variant="outlined">
+                                                    Editar
+                                            </Button>
+                                            </Link>
                                             <Button
                                                 className="button"
+                                                onClick={() => this.props.deleteDialogOpen()}
                                                 variant="outlined">
-                                                Editar
-                                    </Button>
-                                        </Link>
-                                        <Button
-                                            className="button"
-                                            onClick={() => this.props.deleteDialogOpen()}
-                                            variant="outlined">
-                                            Excluir
-                                </Button>
-                                    </div>
+                                                Excluir
+                                        </Button>
+                                        </div>
+                                    }
                                 </div>
-                                <Typography><strong>Usuário</strong>: {page.user}</Typography>
+                                <Typography><strong>Usuário</strong>: {page.username}</Typography>
                                 <Typography><strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}</Typography>
                                 <Typography><strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}</Typography>
                                 {page.visualizations && page.visualizations.map((v, i) =>
@@ -125,6 +127,7 @@ function mapStateToProps(state) {
     return {
         page: state.Page.page,
         deleteDialog: state.Page.deleteDialog,
+        username: state.User.username,
     }
 }
 

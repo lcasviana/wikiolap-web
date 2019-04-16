@@ -26,6 +26,7 @@ class New extends React.Component {
         const title = this.props.page.title
         const visualizations = this.props.page.visualizations
         const done = this.props.page.visualizations.every(v => v.step === 4)
+        const { username } = this.props.user
 
         return (
             <div>
@@ -62,7 +63,11 @@ class New extends React.Component {
                                     <Button
                                         disabled={!done || title === ""}
                                         color="primary"
-                                        onClick={() => this.props.page.update ? this.props.updatePage(page) : this.props.savePage(page)}
+                                        onClick={() => {
+                                            this.props.page.update
+                                                ? this.props.updatePage({ ...page, username })
+                                                : this.props.savePage({ ...page, username })
+                                        }}
                                         size="large"
                                         variant="outlined">
                                         <Icon>done</Icon>
@@ -90,6 +95,7 @@ class New extends React.Component {
 function mapStateToProps(state) {
     return {
         page: state.Page,
+        user: state.User,
     }
 }
 

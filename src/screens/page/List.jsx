@@ -23,6 +23,7 @@ class List extends React.Component {
 
     render() {
         const { deleteDialog, pages, search, share, status } = this.props.page
+        const { username } = this.props
 
         return (
             <div>
@@ -83,7 +84,7 @@ class List extends React.Component {
                                             type={page.graphType.type} /> */}
                                         <Typography
                                             variant="body2">
-                                            <strong>Usuário</strong>: {page.user}
+                                            <strong>Usuário</strong>: {page.username}
                                         </Typography>
                                         <Typography
                                             variant="body2">
@@ -101,16 +102,20 @@ class List extends React.Component {
                                     <IconButton onClick={() => this.props.sharePage("http://localhost:3000/page/view/" + page.id)}>
                                         <Icon color="primary">share</Icon>
                                     </IconButton>
-                                    <Link
-                                        className="link"
-                                        to={{ pathname: "/page/edit/", state: page, }}>
-                                        <IconButton>
-                                            <Icon color="primary">edit</Icon>
-                                        </IconButton>
-                                    </Link>
-                                    <IconButton onClick={() => this.props.deleteDialogOpen()}>
-                                        <Icon>delete</Icon>
-                                    </IconButton>
+                                    {page.username === username &&
+                                        <div>
+                                            <Link
+                                                className="link"
+                                                to={{ pathname: "/page/edit/", state: page, }}>
+                                                <IconButton>
+                                                    <Icon color="primary">edit</Icon>
+                                                </IconButton>
+                                            </Link>
+                                            <IconButton onClick={() => this.props.deleteDialogOpen()}>
+                                                <Icon>delete</Icon>
+                                            </IconButton>
+                                        </div>
+                                    }
                                 </CardActions>
                             </Card>
                         )}
@@ -153,6 +158,7 @@ class List extends React.Component {
 function mapStateToProps(state) {
     return {
         page: state.Page,
+        username: state.User.username,
     }
 }
 

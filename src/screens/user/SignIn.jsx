@@ -11,6 +11,10 @@ import Nav from "components/Nav"
 
 class SignIn extends React.Component {
 
+    componentDidMount() {
+        this.props.clear()
+    }
+
     render() {
         const { email, password_1 } = this.props.user
 
@@ -75,6 +79,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        clear: () => { dispatch({ type: "USER_CLEAR" }) },
         signIn: (user) => { dispatch(Actions.signIn(user)) },
         changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text, }) },
         changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text, }) },

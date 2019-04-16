@@ -19,6 +19,10 @@ export default function reducer(state = user, action) {
             localStorage.setItem("password", action.user.password)
             return {
                 ...state,
+                username: action.response.data.username,
+                email: action.response.data.email,
+                password_1: action.user.password,
+                password_2: "",
                 isAuthenticated: true,
             }
 
@@ -53,6 +57,11 @@ export default function reducer(state = user, action) {
                 ...state,
                 password_2: action.text,
             }
+
+        case "USER_CLEAR":
+            localStorage.removeItem("email")
+            localStorage.removeItem("password")
+            return user
 
         default:
             return {

@@ -21,7 +21,7 @@ export function signIn(user) {
                 dispatch({ type: "USER_LOGIN", response, user, })
             })
             .catch((error) => {
-                dispatch({ type: "USER_LOGIN_ERR", error, })
+                dispatch({ type: "USER_LOGOUT", error, })
             })
     }
 }

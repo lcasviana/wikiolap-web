@@ -1,6 +1,7 @@
 import React from "react"
 
 import { connect } from "react-redux"
+import * as Action from "actions/User"
 
 import { AppBar, Toolbar, TextField, InputAdornment, Icon, Paper, Tabs, Tab } from "@material-ui/core"
 
@@ -12,7 +13,9 @@ import Page from "components/Home/Page"
 class Home extends React.Component {
 
     componentDidMount() {
+        this.props.search("")
         this.props.setTab(0)
+        this.props.signIn({ email: localStorage.getItem("email"), password: localStorage.getItem("password") })
     }
 
     render() {
@@ -72,6 +75,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        signIn: (user) => { dispatch(Action.signIn(user)) },
         search: (text) => { dispatch({ type: "HOME_SEARCH", text }) },
         setTab: (tab) => { dispatch({ type: "HOME_TAB", tab }) }
     }
