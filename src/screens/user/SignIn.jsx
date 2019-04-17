@@ -16,7 +16,10 @@ class SignIn extends React.Component {
     }
 
     render() {
-        const { email, password_1 } = this.props.user
+        const { username, email, password_1 } = this.props.user
+        if (username) {
+            window.location.href = "http://localhost:3000"
+        }
 
         return (
             <div>
