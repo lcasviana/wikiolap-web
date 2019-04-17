@@ -55,7 +55,7 @@ class New extends React.Component {
                                     variant="outlined">
                                     <Icon>add</Icon>
                                     Adicionar visualização
-                            </Button>
+                                </Button>
                                 <Link
                                     className="link pl2 pr2"
                                     onClick={(event) => { if (!done || title === "") { event.preventDefault() } }}

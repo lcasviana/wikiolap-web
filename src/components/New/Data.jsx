@@ -41,11 +41,11 @@ class Data extends React.Component {
                                         <Typography
                                             style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
                                             variant="h5">
-                                            Datasets
+                                            Bases de dados cadastradas
                                         </Typography>
                                         <TextField
                                             className="w-100"
-                                            label="Pesquisar datasets..."
+                                            label="Pesquisar bases de dados..."
                                             margin="normal"
                                             onChange={(event) => this.handleInputSearch(mainIndex, event.target.value)}
                                             style={{ marginTop: 0, }}
@@ -91,7 +91,7 @@ class Data extends React.Component {
                                     <TableRow>
                                         <TableCell>
                                             <Typography color="error">
-                                                Nenhum dataset encontrado.
+                                                Nenhuma base de dados encontrada.
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
@@ -114,11 +114,11 @@ class Data extends React.Component {
                                         <Typography
                                             style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
                                             variant="h5">
-                                            Selecionados
+                                            Bases de dados selecionadas
                                         </Typography>
                                         <TextField
                                             className="w-100"
-                                            label="Pesquisar selecionados..."
+                                            label="Pesquisar selecionadas..."
                                             margin="normal"
                                             onChange={(event) => this.props.filterSelected(mainIndex, event.target.value)}
                                             style={{ marginTop: 0, }}
