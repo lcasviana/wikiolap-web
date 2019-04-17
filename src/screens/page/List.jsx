@@ -57,11 +57,19 @@ class List extends React.Component {
                             size={100} />
                     </div>
                     <Card
-                        className="justify-center flex flex-row flex-wrap mt5 w-100"
+                        className="pa2 justify-center flex flex-row flex-wrap mt5 w-100"
                         style={{ background: "#fafafa" }}>
+                        <div className="w-100">
+                            <Typography
+                                className="pb2"
+                                color="primary"
+                                variant="h5">
+                                Visualizações
+                            </Typography>
+                        </div>
                         {status === "DONE" && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
                             <Card
-                                className="ma3 pa2"
+                                className="ma1 pa2"
                                 key={index}
                                 style={{ width: 300, }}>
                                 <DeleteDialog

@@ -29,9 +29,9 @@ class List extends React.Component {
             <div
                 className="flex flex-column items-center pa2"
                 style={{ background: "#fafafa" }}>
-                <div className="w-100">
-                    {search === "" && <Typography variant="h5">Últimas 5 visualizações criadas</Typography>}
-                    {search !== "" && tab === 0 && <Typography variant="h5">Visualizações</Typography>}
+                <div className="pb2 w-100">
+                    {search === "" && <Typography color="primary" variant="h5">Últimas 5 visualizações criadas</Typography>}
+                    {search !== "" && tab === 0 && <Typography color="primary" variant="h5">Visualizações</Typography>}
                 </div>
                 <CircularProgress
                     className="ma5"
@@ -41,7 +41,7 @@ class List extends React.Component {
                 <div className="flex flex-row flex-wrap justify-center">
                     {page.map((page, index) =>
                         <Card
-                            className="ma3 pa2"
+                            className="ma1 pa2"
                             key={index}
                             style={{ height: "fit-content", width: 420, }}>
                             <CardActionArea>

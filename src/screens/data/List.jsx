@@ -39,7 +39,7 @@ class List extends React.Component {
                                         </InputAdornment>
                                     ),
                                 }}
-                                placeholder="Pesquisar datasets"
+                                placeholder="Pesquisar bases de dados"
                                 onChange={(event) => this.props.getDatasets(event.target.value)}
                                 variant="outlined" />
                         </Toolbar>
@@ -50,7 +50,17 @@ class List extends React.Component {
                             color="secondary"
                             size={100}
                             style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
-                        <Card>
+                        <Card
+                            className="pa2"
+                            style={{ background: "#fafafa" }}>
+                            <div className="w-100">
+                                <Typography
+                                    className="pb2"
+                                    color="primary"
+                                    variant="h5">
+                                    Bases de dados
+                                    </Typography>
+                            </div>
                             {datasets.map((dataset, index) =>
                                 <ExpansionPanel
                                     className="w-100"
