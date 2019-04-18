@@ -5,6 +5,7 @@ const user = {
     password_2: "",
     isAuthenticated: localStorage.getItem("email") && localStorage.getItem("password"),
     menu: null,
+    popup: false,
 }
 
 export default function reducer(state = user, action) {
@@ -26,6 +27,13 @@ export default function reducer(state = user, action) {
                 password_2: "",
                 isAuthenticated: true,
                 menu: false,
+                popup: false,
+            }
+
+        case "USER_LOGIN_ERROR":
+            return {
+                ...state,
+                popup: !Boolean(action.from),
             }
 
         case "USER_LOGOUT":
@@ -75,6 +83,12 @@ export default function reducer(state = user, action) {
             return {
                 ...state,
                 menu: null,
+            }
+
+        case "USER_POPUP_CLOSE":
+            return {
+                ...state,
+                popup: false,
             }
 
         default:

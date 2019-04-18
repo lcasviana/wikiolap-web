@@ -55,7 +55,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        signIn: (user) => { dispatch(Action.signIn(user)) },
+        signIn: (user) => { dispatch(Action.signIn(user, true)) },
         userLogout: () => { dispatch({ type: "USER_LOGOUT" }) },
         userMenuOpen: (target) => { dispatch({ type: "USER_MENU_OPEN", target }) },
         userMenuClose: () => { dispatch({ type: "USER_MENU_CLOSE" }) },

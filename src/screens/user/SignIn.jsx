@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/User"
 
-import { Card, TextField, Typography, Divider, Button } from "@material-ui/core"
+import { Card, TextField, Typography, Divider, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -16,7 +16,7 @@ class SignIn extends React.Component {
     }
 
     render() {
-        const { username, email, password_1 } = this.props.user
+        const { username, email, password_1, popup } = this.props.user
         if (username) {
             window.location.href = "http://localhost:3000"
         }
@@ -32,7 +32,7 @@ class SignIn extends React.Component {
                             style={{ marginBottom: "1rem", }}
                             variant="h6">
                             Login
-                    </Typography>
+                        </Typography>
                         <div className="flex flex-column">
                             <TextField
                                 label="Email"
@@ -54,7 +54,7 @@ class SignIn extends React.Component {
                                     onClick={() => this.props.signIn({ email, password: password_1 })}
                                     variant="contained">
                                     Login
-                            </Button>
+                                </Button>
                             </div>
                         </div>
                         <Divider style={{ margin: "1rem 0 1rem 0", }} />
@@ -65,10 +65,29 @@ class SignIn extends React.Component {
                                 className="tc"
                                 color="primary">
                                 Cadastre-se!
-                    </Typography>
+                            </Typography>
                         </Link>
                     </Card>
                 </div>
+                <Dialog
+                    open={popup}
+                    onClose={() => this.props.closeDialog()}>
+                    <DialogTitle>
+                        Não foi possível realizar o login
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Usuário ou senha inválidos.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
+                            color="primary"
+                            onClick={() => this.props.closeDialog()}>
+                            Fechar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
@@ -86,6 +105,7 @@ function mapDispatchToProps(dispatch) {
         signIn: (user) => { dispatch(Actions.signIn(user)) },
         changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text, }) },
         changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text, }) },
+        closeDialog: () => { dispatch({ type: "USER_POPUP_CLOSE" }) }
     }
 }
 

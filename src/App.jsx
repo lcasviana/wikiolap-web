@@ -1,7 +1,6 @@
 import React from "react"
 
 import { connect } from "react-redux"
-import * as Actions from "actions/User"
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
@@ -70,10 +69,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        signIn: (user) => { dispatch(Actions.signIn(user)) },
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, null)(App)
