@@ -43,13 +43,13 @@ class New extends React.Component {
                                 className="flex"
                                 placeholder="Título da página"
                                 onChange={(event) => this.props.changeTitle(event.target.value)}
-                                style={{ flexGrow: 1, margin: "0 1rem", maxWidth: 500, }}
+                                style={{ flexGrow: 1, maxWidth: 500, }}
                                 value={title}
                                 variant="outlined" />
                             <div>
                                 <Button
                                     color="primary"
-                                    className="pl2 pr2"
+                                    className="pr2"
                                     onClick={() => this.props.insertVisualization()}
                                     size="large"
                                     variant="outlined">
@@ -57,7 +57,7 @@ class New extends React.Component {
                                     Adicionar visualização
                                 </Button>
                                 <Link
-                                    className="link pl2 pr2"
+                                    className="link pl2"
                                     onClick={(event) => { if (!done || title === "") { event.preventDefault() } }}
                                     to="/">
                                     <Button
