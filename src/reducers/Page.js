@@ -95,7 +95,7 @@ export default function reducer(state = page, action) {
         case "GET_SERIES":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, seriesLabel: v.seriesLabel.values.length !== action.values.length ? { ...v, values: Array.apply(null, { length: action.values.length }).map(Number.call, Number), } : v.seriesLabel, series: v.series.map((v, i) => i === action.serie ? { ...v, values: action.values.map(v => Number(v[action.column.toLowerCase()].replace(",", "."))), } : { ...v, }), } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, seriesLabel: v.seriesLabel.values.length !== action.values.length ? { ...v, values: Array.apply(null, { length: action.values.length }).map(Number.call, Number), } : v.seriesLabel, series: v.series.map((v, i) => i === action.serie ? { ...v, values: action.values.map(v => Number(v[action.column.toLowerCase()].toString().replace(",", "."))), } : { ...v, }), } : v),
             }
 
         /* SYNC CASES */
