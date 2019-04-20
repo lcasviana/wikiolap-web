@@ -46,7 +46,7 @@ class View extends React.Component {
 
     render() {
         const { metadata, dataset, status } = this.props.data
-        console.log(this.props.data)
+
         return (
             <div>
                 <Nav />

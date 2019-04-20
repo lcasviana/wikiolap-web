@@ -112,7 +112,7 @@ export function getDatasets(index, text) {
 
 export function getSeries(index, serie, table, column, length) {
     return function (dispatch) {
-        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column + "/" + length + "/")
+        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column.toLowerCase() + "/" + length + "/")
             .then((response) => {
                 dispatch({ type: "GET_SERIES", index, serie, column, values: response.data, })
             })
@@ -124,7 +124,7 @@ export function getSeries(index, serie, table, column, length) {
 
 export function getLabels(index, table, column, length) {
     return function (dispatch) {
-        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column + "/" + length + "/")
+        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column.toLowerCase() + "/" + length + "/")
             .then((response) => {
                 dispatch({ type: "GET_SERIES_LABEL", index, column, values: response.data, })
             })
