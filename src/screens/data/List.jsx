@@ -25,7 +25,7 @@ class List extends React.Component {
             <div>
                 <Nav />
                 <Draw />
-                <div className="flex mb5 mt5">
+                <div className="flex mb5 mt5 w-100">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
@@ -51,7 +51,7 @@ class List extends React.Component {
                             size={100}
                             style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
                         <Card
-                            className="pa2"
+                            className="pa2 w-100"
                             style={{ background: "#fafafa" }}>
                             <div className="w-100">
                                 <Typography
