@@ -15,8 +15,8 @@ class SignIn extends React.Component {
         this.props.clear()
     }
 
-    verifyFields(user) {
-        if (user.email && user.password) {
+    verifyFields(event, user) {
+        if (event.key === 'Enter' && user.email && user.password) {
             this.props.signIn(user)
         }
     }
@@ -43,14 +43,14 @@ class SignIn extends React.Component {
                             <TextField
                                 label="Email"
                                 onChange={(event) => this.props.changeEmail(event.target.value)}
-                                onKeyDown={() => this.verifyFields({ email, password: password_1 })}
+                                onKeyDown={(event) => this.verifyFields(event, { email, password: password_1 })}
                                 style={{ margin: "0.5rem", }}
                                 value={email}
                                 variant="outlined" />
                             <TextField
                                 label="Senha"
                                 onChange={(event) => this.props.changePassword1(event.target.value)}
-                                onKeyDown={() => this.verifyFields({ email, password: password_1 })}
+                                onKeyDown={(event) => this.verifyFields(event, { email, password: password_1 })}
                                 style={{ margin: "0.5rem", }}
                                 type="password"
                                 value={password_1}
