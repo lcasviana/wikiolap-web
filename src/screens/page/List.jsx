@@ -91,6 +91,7 @@ class List extends React.Component {
                                                 <Graph
                                                     clean={true}
                                                     index={i}
+                                                    key={i}
                                                     labels={v.seriesLabel}
                                                     series={v.series}
                                                     title={v.title}
