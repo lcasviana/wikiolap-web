@@ -15,6 +15,12 @@ class SignIn extends React.Component {
         this.props.clear()
     }
 
+    verifyFields(user) {
+        if (user.email && user.password) {
+            this.props.signIn(user)
+        }
+    }
+
     render() {
         const { username, email, password_1, popup } = this.props.user
         if (username) {
@@ -37,12 +43,14 @@ class SignIn extends React.Component {
                             <TextField
                                 label="Email"
                                 onChange={(event) => this.props.changeEmail(event.target.value)}
+                                onKeyDown={() => this.verifyFields({ email, password: password_1 })}
                                 style={{ margin: "0.5rem", }}
                                 value={email}
                                 variant="outlined" />
                             <TextField
                                 label="Senha"
                                 onChange={(event) => this.props.changePassword1(event.target.value)}
+                                onKeyDown={() => this.verifyFields({ email, password: password_1 })}
                                 style={{ margin: "0.5rem", }}
                                 type="password"
                                 value={password_1}
@@ -51,7 +59,7 @@ class SignIn extends React.Component {
                                 <Button
                                     className="button"
                                     color="primary"
-                                    onClick={() => this.props.signIn({ email, password: password_1 })}
+                                    onClick={() => this.verifyFields({ email, password: password_1 })}
                                     variant="contained">
                                     Login
                                 </Button>
