@@ -8,7 +8,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
-// import Graph from "components/Graph"
+import Graph from "components/Graph"
 import Nav from "components/Nav"
 
 import DeleteDialog from "components/DeleteDialog"
@@ -86,12 +86,17 @@ class List extends React.Component {
                                             variant="h4">
                                             {page.title}
                                         </Typography>
-                                        {/* <Graph
-                                            index={index}
-                                            labels={page.seriesLabel}
-                                            series={page.series}
-                                            title={page.title}
-                                            type={page.graphType.type} /> */}
+                                        <div>
+                                            {page.visualizations && page.visualizations.map((v, i) =>
+                                                <Graph
+                                                    clean={true}
+                                                    index={i}
+                                                    labels={v.seriesLabel}
+                                                    series={v.series}
+                                                    title={v.title}
+                                                    type={v.graphType.type} />
+                                            )}
+                                        </div>
                                         <Typography
                                             variant="body2">
                                             <strong>Usuário</strong>: {page.username}

@@ -8,18 +8,21 @@ export default class Draw extends React.Component {
 
     render() {
         const data = {}
-        const type = this.props.type
+        const { clean, index, labels, series, title, type } = this.props
         const options = {
+            legend: {
+                display: !Boolean(clean)
+            },
             maintainAspectRatio: false,
             title: {
-                display: true,
-                text: this.props.title ? this.props.title : "Visualização " + (this.props.index + 1),
-            }
+                display: !Boolean(clean),
+                text: title ? title : "Visualização " + (index + 1),
+            },
         }
 
-        if (this.props.series.length) {
-            data.labels = this.props.labels ? this.props.labels.values : []
-            data.datasets = this.props.series.filter(s => s.label).map((serie) => {
+        if (series.length) {
+            data.labels = labels ? labels.values : []
+            data.datasets = series.filter(s => s.label).map((serie) => {
                 return {
                     label: serie.label,
                     data: serie.values,
