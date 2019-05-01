@@ -47,23 +47,24 @@ class Home extends React.Component {
                         </Toolbar>
                     </AppBar>
                     <div className="mt5 w-100"></div>
-                    <Paper
-                        square
-                        style={{ display: search === "" ? "none" : "inline-flex" }}>
-                        <Tabs
-                            className="flex w-100"
-                            indicatorColor="primary"
-                            onChange={(event, value) => this.props.setTab(value)}
-                            textColor="primary"
-                            value={tab}>
-                            <Tab label="Tudo" />
-                            <Tab label="Visualizações" />
-                            <Tab label="Coleções de lados" />
-                        </Tabs>
-                    </Paper>
+
                     <div className="justify-center flex flex-row flex-wrap pa3 h-100 w-100">
-                        <Card
-                            className="h-100 w-100">
+                        <Card className="h-100 w-100">
+                            <Paper
+                                className="w-100"
+                                square
+                                style={{ display: search === "" ? "none" : "inline-flex" }}>
+                                <Tabs
+                                    className="flex w-100"
+                                    indicatorColor="primary"
+                                    onChange={(event, value) => this.props.setTab(value)}
+                                    textColor="primary"
+                                    value={tab}>
+                                    <Tab label="Tudo" />
+                                    <Tab label="Visualizações" />
+                                    <Tab label="Coleções de lados" />
+                                </Tabs>
+                            </Paper>
                             {(tab === 0 || tab === 1) && <Page search={search} tab={tab} />}
                             {(tab === 0 || tab === 2) && <Data search={search} tab={tab} />}
                         </Card>
