@@ -26,8 +26,8 @@ class Home extends React.Component {
                 <div className="flex flex-column justify-center h-100 mb5 mt5 w-100">
                     <AppBar
                         color="default"
-                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
-                        <Toolbar>
+                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
+                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
                             <TextField
                                 fullWidth
                                 InputProps={{

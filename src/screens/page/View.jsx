@@ -35,8 +35,8 @@ class View extends React.Component {
                 <div className="flex mb5 mt5">
                     <AppBar
                         color="default"
-                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
-                        <Toolbar>
+                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
+                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
                             <Link
                                 className="link"
                                 to="/page/list/">

@@ -32,8 +32,8 @@ class List extends React.Component {
                 <div className="flex flex-column mb5 mt5 pa3">
                     <AppBar
                         color="default"
-                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
-                        <Toolbar>
+                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
+                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
                             <TextField
                                 fullWidth
                                 InputProps={{
