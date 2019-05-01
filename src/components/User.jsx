@@ -3,7 +3,11 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Action from "actions/User"
 
-import { Avatar, Typography, Icon, Menu, MenuItem, IconButton } from "@material-ui/core"
+import { Avatar, Typography, Icon, Menu, MenuItem, IconButton, Tooltip } from "@material-ui/core"
+import { Link } from "react-router-dom"
+
+import iconData from "images/data.png"
+import iconPage from "images/page.png"
 
 class User extends React.Component {
 
@@ -16,7 +20,43 @@ class User extends React.Component {
 
         return (
             username
-                ? <div>
+                ? <div className="flex items-center">
+                    <Tooltip
+                        placement="bottom"
+                        title={
+                            <React.Fragment>
+                                <Typography style={{ color: "white" }}>Criar visualizações</Typography>
+                            </React.Fragment>
+                        }>
+                        <Link
+                            className="link"
+                            to="/page/new/">
+                            <IconButton>
+                                <img
+                                    alt="Visualizações"
+                                    src={iconPage}
+                                    style={{ height: 32 }} />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
+                    <Tooltip
+                        placement="bottom"
+                        title={
+                            <React.Fragment>
+                                <Typography style={{ color: "white" }}>Carregar coleções de dados</Typography>
+                            </React.Fragment>
+                        }>
+                        <a
+                            className="link"
+                            href="http://localhost:8000/base/upload_file/">
+                            <IconButton>
+                                <img
+                                    alt="Coleções de dados"
+                                    src={iconData}
+                                    style={{ height: 32 }} />
+                            </IconButton>
+                        </a>
+                    </Tooltip>
                     <div
                         className="flex items-center"
                         onClick={(event) => {
