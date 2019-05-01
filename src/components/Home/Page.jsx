@@ -16,7 +16,7 @@ class List extends React.Component {
     }
 
     render() {
-        const { search, tab } = this.props
+        const { search } = this.props
         const { pages, status } = this.props.page
 
         const page = pages

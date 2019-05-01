@@ -22,13 +22,11 @@ export default class Draw extends React.Component {
 
         if (series.length) {
             data.labels = labels ? labels.values : []
-            data.datasets = series.filter(s => s.label).map((serie) => {
-                return {
-                    label: serie.label,
-                    data: serie.values,
-                    backgroundColor: Color.hexToRgbA(serie.color),
-                }
-            })
+            data.datasets = series.filter(s => s.label).map((serie) => ({
+                label: serie.label,
+                data: serie.values,
+                backgroundColor: Color.hexToRgbA(serie.color),
+            }))
         }
 
         return (
