@@ -29,7 +29,12 @@ class List extends React.Component {
                 style={{ background: "#fafafa" }}>
                 <div className="pb2 w-100">
                     {search === "" && <Typography color="primary" variant="h5">Últimas 5 bases de dados criadas</Typography>}
-                    {search !== "" && tab === 0 && <Typography color="primary" variant="h5">Bases de dados</Typography>}
+                    {search !== "" && <Typography color="primary" variant="h5">Bases de dados</Typography>}
+                    {!data.length &&
+                        <Typography color="error">
+                            Nenhuma base de dados encontrada.
+                        </Typography>
+                    }
                 </div>
                 <CircularProgress
                     className="ma5"

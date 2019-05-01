@@ -31,7 +31,12 @@ class List extends React.Component {
                 style={{ background: "#fafafa" }}>
                 <div className="pb2 w-100">
                     {search === "" && <Typography color="primary" variant="h5">Últimas 5 visualizações criadas</Typography>}
-                    {search !== "" && tab === 0 && <Typography color="primary" variant="h5">Visualizações</Typography>}
+                    {search !== "" && <Typography color="primary" variant="h5">Visualizações</Typography>}
+                    {!page.length &&
+                        <Typography color="error">
+                            Nenhuma visualização encontrada.
+                        </Typography>
+                    }
                 </div>
                 <CircularProgress
                     className="ma5"

@@ -42,9 +42,12 @@ class Home extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
-                    <Paper square>
+                    <div className="mt5 w-100"></div>
+                    <Paper
+                        square
+                        style={{ display: search === "" ? "none" : "inline-flex" }}>
                         <Tabs
-                            className="flex mt5 w-100"
+                            className="flex w-100"
                             indicatorColor="primary"
                             onChange={(event, value) => this.props.setTab(value)}
                             textColor="primary"
