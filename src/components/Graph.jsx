@@ -21,10 +21,10 @@ export default class Draw extends React.Component {
         }
 
         if (series.length) {
-            data.labels = labels ? labels.values : []
+            data.labels = labels ? clean ? labels.values.slice(0, 10) : labels.values : []
             data.datasets = series.filter(s => s.label).map((serie) => ({
                 label: serie.label,
-                data: serie.values,
+                data: clean ? serie.values.slice(0, 10) : serie.values,
                 backgroundColor: Color.hexToRgbA(serie.color),
             }))
         }

@@ -81,7 +81,7 @@ class View extends React.Component {
                                     <Typography
                                         className="pb2"
                                         color="primary"
-                                        variant="h4">
+                                        variant="h5">
                                         {metadata.title}
                                     </Typography>
                                     <Typography className="overflow-hidden"><strong>Descrição</strong>: {metadata.description}</Typography>

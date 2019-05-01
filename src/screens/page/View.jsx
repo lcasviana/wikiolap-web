@@ -58,7 +58,7 @@ class View extends React.Component {
                                 <div className="flex justify-between">
                                     <Typography
                                         color="primary"
-                                        variant="h3">
+                                        variant="h5">
                                         {page.title}
                                     </Typography>
                                     {page.username === username &&

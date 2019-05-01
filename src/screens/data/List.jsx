@@ -59,7 +59,7 @@ class List extends React.Component {
                                     color="primary"
                                     variant="h5">
                                     Bases de dados
-                                    </Typography>
+                                </Typography>
                             </div>
                             {datasets.map((dataset, index) =>
                                 <ExpansionPanel
@@ -68,7 +68,9 @@ class List extends React.Component {
                                     style={{ margin: 0 }}>
                                     <ExpansionPanelSummary style={{ paddingRight: 0, }}>
                                         <div className="flex justify-between w-100 items-center">
-                                            <Typography>
+                                            <Typography
+                                                color="primary"
+                                                style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
                                                 {dataset.title}
                                             </Typography>
                                             <Link

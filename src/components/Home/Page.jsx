@@ -3,8 +3,10 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Card, Typography, CardActionArea, CircularProgress } from "@material-ui/core"
+import { Card, Typography, CardActionArea, CircularProgress, Tooltip } from "@material-ui/core"
 import { Link } from "react-router-dom"
+
+import Graph from "components/Graph"
 
 import * as Calendar from "services/Calendar"
 
@@ -50,30 +52,52 @@ class List extends React.Component {
                             key={index}
                             style={{ height: "fit-content", width: 420, }}>
                             <CardActionArea>
-                                <Link
-                                    className="link"
-                                    to={"/page/view/" + page.id}>
-                                    <Typography
-                                        className="pb2"
-                                        color="primary"
-                                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                                        variant="h4">
-                                        {page.title}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2">
-                                        <strong>Usuário</strong>: {page.username}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2">
-                                        <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2">
-                                        <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
-                                    </Typography>
-                                </Link>
+                                <Tooltip
+                                    placement="top"
+                                    title={
+                                        <React.Fragment>
+                                            <Typography style={{ color: "white" }}>{page.title}</Typography>
+                                        </React.Fragment>
+                                    }>
+                                    <Link
+                                        className="link"
+                                        to={"/page/view/" + page.id}>
+                                        <Typography
+                                            className="pb2"
+                                            color="primary"
+                                            style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                            variant="h6">
+                                            {page.title}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Usuário</strong>: {page.username}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
+                                        </Typography>
+                                    </Link>
+                                </Tooltip>
                             </CardActionArea>
+                            <div
+                                className="flex mt3"
+                                style={{ overflowX: "auto" }}>
+                                {page.visualizations && page.visualizations.map((v, i) =>
+                                    <Graph
+                                        clean={true}
+                                        index={i}
+                                        key={i}
+                                        labels={v.seriesLabel}
+                                        series={v.series}
+                                        title={v.title}
+                                        type={v.graphType.type} />
+                                )}
+                            </div>
                         </Card>
                     )}
                 </div>

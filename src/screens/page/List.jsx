@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { CircularProgress, Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog } from "@material-ui/core"
+import { CircularProgress, Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog, Tooltip } from "@material-ui/core"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
@@ -71,47 +71,58 @@ class List extends React.Component {
                             <Card
                                 className="ma1 pa2"
                                 key={index}
-                                style={{ width: 300, }}>
+                                style={{ width: 420, }}>
                                 <DeleteDialog
                                     id={page.id}
                                     open={deleteDialog}
                                     redirect={false} />
                                 <CardActionArea>
-                                    <Link
-                                        className="link"
-                                        to={"/page/view/" + page.id}>
-                                        <Typography
-                                            className="pb2"
-                                            color="primary"
-                                            variant="h4">
-                                            {page.title}
-                                        </Typography>
-                                        <div>
-                                            {page.visualizations && page.visualizations.map((v, i) =>
-                                                <Graph
-                                                    clean={true}
-                                                    index={i}
-                                                    key={i}
-                                                    labels={v.seriesLabel}
-                                                    series={v.series}
-                                                    title={v.title}
-                                                    type={v.graphType.type} />
-                                            )}
-                                        </div>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Usuário</strong>: {page.username}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
-                                        </Typography>
-                                    </Link>
+                                    <Tooltip
+                                        placement="top"
+                                        title={
+                                            <React.Fragment>
+                                                <Typography style={{ color: "white" }}>{page.title}</Typography>
+                                            </React.Fragment>
+                                        }>
+                                        <Link
+                                            className="link"
+                                            to={"/page/view/" + page.id}>
+                                            <Typography
+                                                className="pb2"
+                                                color="primary"
+                                                style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                                variant="h6">
+                                                {page.title}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Usuário</strong>: {page.username}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
+                                            </Typography>
+                                        </Link>
+                                    </Tooltip>
                                 </CardActionArea>
+                                <div
+                                    className="flex mt3"
+                                    style={{ overflowX: "auto" }}>
+                                    {page.visualizations && page.visualizations.map((v, i) =>
+                                        <Graph
+                                            clean={true}
+                                            index={i}
+                                            key={i}
+                                            labels={v.seriesLabel}
+                                            series={v.series}
+                                            title={v.title}
+                                            type={v.graphType.type} />
+                                    )}
+                                </div>
                                 <CardActions
                                     className="justify-end flex"
                                     disableActionSpacing>

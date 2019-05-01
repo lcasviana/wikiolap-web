@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { CircularProgress, Typography, Card, CardActionArea } from "@material-ui/core"
+import { CircularProgress, Typography, Card, CardActionArea, Tooltip } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import * as Calendar from "services/Calendar"
@@ -48,30 +48,38 @@ class List extends React.Component {
                             key={index}
                             style={{ height: "fit-content", width: 420, }}>
                             <CardActionArea>
-                                <Link
-                                    className="link"
-                                    to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
-                                    <Typography
-                                        className="pb2"
-                                        color="primary"
-                                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                                        variant="h4">
-                                        {dataset.title}
-                                    </Typography>
-                                    <Typography
-                                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                                        variant="body2">
-                                        <strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2">
-                                        <strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2">
-                                        <strong>Última modificação</strong>: {Calendar.TimestampToString(dataset.updated_at)}
-                                    </Typography>
-                                </Link>
+                                <Tooltip
+                                    placement="top"
+                                    title={
+                                        <React.Fragment>
+                                            <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                        </React.Fragment>
+                                    }>
+                                    <Link
+                                        className="link"
+                                        to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
+                                        <Typography
+                                            className="pb2"
+                                            color="primary"
+                                            style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                            variant="h6">
+                                            {dataset.title}
+                                        </Typography>
+                                        <Typography
+                                            style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                            variant="body2">
+                                            <strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2">
+                                            <strong>Última modificação</strong>: {Calendar.TimestampToString(dataset.updated_at)}
+                                        </Typography>
+                                    </Link>
+                                </Tooltip>
                             </CardActionArea>
                         </Card>
                     )}
