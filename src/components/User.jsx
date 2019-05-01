@@ -16,20 +16,23 @@ class User extends React.Component {
 
         return (
             username
-                ? <div className="flex items-center">
-                    <Typography>
-                        {username.trim().toUpperCase()}
-                    </Typography>
-                    <Avatar
-                        className="ml3 mr2"
+                ? <div>
+                    <div
+                        className="flex items-center"
                         onClick={(event) => {
                             this.props.userMenuOpen(event.currentTarget)
-                        }}
-                        style={{ background: "#009688" }}>
-                        <IconButton>
-                            <Icon style={{ color: "white" }}>face</Icon>
-                        </IconButton>
-                    </Avatar>
+                        }}>
+                        <Avatar
+                            className="ml3 mr2"
+                            style={{ background: "#009688" }}>
+                            <IconButton>
+                                <Icon style={{ color: "white" }}>face</Icon>
+                            </IconButton>
+                        </Avatar>
+                        <Typography>
+                            {username.trim().toUpperCase()}
+                        </Typography>
+                    </div>
                     <Menu
                         anchorEl={menu ? menu : this}
                         open={Boolean(menu)}
@@ -39,7 +42,7 @@ class User extends React.Component {
                             this.props.userLogout()
                         }}>
                             Logout
-                    </MenuItem>
+                        </MenuItem>
                     </Menu>
                 </div>
                 : <span />

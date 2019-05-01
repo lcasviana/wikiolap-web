@@ -10,6 +10,8 @@ import Logo from "images/wikiolap.png"
 class Nav extends React.Component {
 
     render() {
+        const { username } = this.props.user
+
         return (
             <AppBar
                 color="default"
@@ -20,7 +22,9 @@ class Nav extends React.Component {
                     style={{ height: "4rem", }}
                     variant="regular">
                     <div className="flex items-center">
-                        <IconButton onClick={() => this.props.drawerOpen()}>
+                        <IconButton
+                            onClick={() => this.props.drawerOpen()}
+                            style={{ display: username ? "inline-flex" : "none" }}>
                             <Icon color="primary">menu</Icon>
                         </IconButton>
                         <img
@@ -35,10 +39,16 @@ class Nav extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.User
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         drawerOpen: () => { dispatch({ type: "DRAWER_OPEN", }) },
     }
 }
 
-export default connect(null, mapDispatchToProps)(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

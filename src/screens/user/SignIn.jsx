@@ -16,7 +16,7 @@ class SignIn extends React.Component {
     }
 
     verifyFields(event, user) {
-        if (event.key === 'Enter' && user.email && user.password) {
+        if ((!event || event.key === 'Enter') && user.email && user.password) {
             this.props.signIn(user)
         }
     }
@@ -59,7 +59,7 @@ class SignIn extends React.Component {
                                 <Button
                                     className="button"
                                     color="primary"
-                                    onClick={() => this.verifyFields({ email, password: password_1 })}
+                                    onClick={() => this.verifyFields(null, { email, password: password_1 })}
                                     variant="contained">
                                     Login
                                 </Button>
