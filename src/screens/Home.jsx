@@ -38,7 +38,11 @@ class Home extends React.Component {
                                     ),
                                 }}
                                 placeholder="Pesquisar"
-                                onChange={(event) => this.props.search(event.target.value)}
+                                onChange={(event) => {
+                                    this.props.search(event.target.value)
+                                    if (event.target.value === "")
+                                        this.props.setTab(0)
+                                }}
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
