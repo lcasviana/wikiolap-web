@@ -15,11 +15,13 @@ class Series extends React.Component {
         const columns = []
         datasets.forEach((dataset) => {
             dataset.columns.forEach((column, index) => {
+                const values = []
+                dataset.data.forEach(row => values.push(row[index]))
                 columns.push({
                     column,
+                    index,
                     datasetTitle: dataset.title,
-                    tableId: dataset.tableId,
-                    values: [],
+                    values,
                 })
             })
         })
@@ -55,7 +57,6 @@ class Series extends React.Component {
                             <Select
                                 onChange={(event) => {
                                     this.props.selectLabels(mainIndex, columns[event.target.value], event.target.value)
-                                    this.props.setLabels(mainIndex, 100)
                                 }}
                                 value={labelIndex}>
                                 <MenuItem
@@ -81,7 +82,7 @@ class Series extends React.Component {
                                         className="flex"
                                         container>
                                         <Grid
-                                            className="flex items-end pl2 pr2"
+                                            className="flex items-end pr2"
                                             item
                                             xs={6}>
                                             <FormControl
@@ -102,7 +103,7 @@ class Series extends React.Component {
                                             </FormControl>
                                         </Grid>
                                         <Grid
-                                            className="flex items-end pl2 pr2"
+                                            className="flex items-end pr2"
                                             item
                                             xs={6}>
                                             <TextField
@@ -156,7 +157,6 @@ function mapDispatchToProps(dispatch) {
         removeSeries: (index, serie) => dispatch({ type: "SERIES_REMOVE", index, serie, }),
         changeColor: (index, serie, value) => dispatch({ type: "SERIES_COLOR", index, serie, value, }),
         changeLabel: (index, serie, value) => dispatch({ type: "SERIES_LABEL", index, serie, value, }),
-        setLabels: (index, length) => dispatch({ type: "SERIES_LABEL_DEFAULT", index, length, }),
     }
 }
 

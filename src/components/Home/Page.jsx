@@ -87,7 +87,7 @@ class List extends React.Component {
                                         clean={true}
                                         index={i}
                                         key={i}
-                                        labels={v.seriesLabel}
+                                        labels={v.label}
                                         series={v.series}
                                         title={v.title}
                                         type={v.graphType} />

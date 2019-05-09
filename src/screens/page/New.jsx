@@ -65,8 +65,8 @@ class New extends React.Component {
                                         color="primary"
                                         onClick={() => {
                                             this.props.page.update
-                                                ? this.props.updatePage({ ...page, username })
-                                                : this.props.savePage({ ...page, username })
+                                                ? this.props.updatePage({ ...page, username, type: 'page' })
+                                                : this.props.savePage({ ...page, username, type: 'page' })
                                         }}
                                         size="large"
                                         variant="outlined">

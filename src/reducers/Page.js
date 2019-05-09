@@ -1,9 +1,5 @@
 const serie = {
     color: "",
-    datasetTitle: "",
-    tableId: "",
-    columnAlias: "",
-    columnOriginal: "",
     label: "",
     values: [],
 }
@@ -77,25 +73,6 @@ export default function reducer(state = page, action) {
                 pages: state.pages.filter((v, i) => v.id !== action.id)
             }
 
-        case "GET_DATASET_LIST":
-            return {
-                ...state,
-                visualizations: action.index !== null ? state.visualizations.map((v, i) => i === action.index ? { ...v, datasetsList: action.datasets, } : v) : state.visualizations,
-                datasets: action.index !== null ? state.datasets : action.datasets,
-            }
-
-        case "GET_SERIES_LABEL":
-            return {
-                ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { ...v, values: action.values.map(v => v[action.column.toLowerCase()]), }, } : v),
-            }
-
-        case "GET_SERIES":
-            return {
-                ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: v.label.values.length !== action.values.length ? { ...v, values: Array.apply(null, { length: action.values.length }).map(Number.call, Number), } : v.label, series: v.series.map((v, i) => i === action.serie ? { ...v, values: action.values.map(v => Number(v[action.column.toLowerCase()].toString().replace(",", "."))), } : { ...v, }), } : v),
-            }
-
         /* SYNC CASES */
 
         case "GET_PAGE_DONE":
@@ -140,7 +117,7 @@ export default function reducer(state = page, action) {
         case "PAGE_EDIT":
             return {
                 ...action.page,
-                visualizations: action.page.visualizations.map((v, i) => { return { ...v, step: 0, datasetsSearch: "", selectedSearch: "", } }),
+                visualizations: action.page.visualizations.map((v, i) => ({ ...v, step: 0, datasetsSearch: "", selectedSearch: "", })),
                 update: true,
             }
 
@@ -183,13 +160,13 @@ export default function reducer(state = page, action) {
         case "DATASET_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: [...v.datasets, action.dataset,], } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: [...v.datasets, action.dataset,], labelIndex: -1, label: serie, seriesIndex: [-1,], series: [serie,], } : v),
             }
 
         case "DATASET_REMOVE":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: v.datasets.filter((v, i) => i !== action.dataset), } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: v.datasets.filter((v, i) => i !== action.dataset), labelIndex: -1, label: serie, seriesIndex: [-1,], series: [serie,], } : v),
             }
 
         case "DATASET_SEARCH":
@@ -201,7 +178,7 @@ export default function reducer(state = page, action) {
         case "SERIES_LABEL_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: action.data, labelIndex: action.value, } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { ...action.data }, labelIndex: action.value, } : v),
             }
 
         case "SERIES_LABEL_DEFAULT":
@@ -214,7 +191,7 @@ export default function reducer(state = page, action) {
         case "SERIES_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...action.data, ...v, } : v), seriesIndex: v.seriesIndex.map((v, i) => i === action.serie ? action.value : v), } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...v, ...action.data, } : v), seriesIndex: v.seriesIndex.map((v, i) => i === action.serie ? action.value : v), } : v),
             }
 
         case "SERIES_INSERT":

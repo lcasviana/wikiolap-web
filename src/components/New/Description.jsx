@@ -10,7 +10,7 @@ class Layout extends React.Component {
 
     render() {
         const mainIndex = this.props.index
-        const { graphType, series, title } = this.props.page.visualizations[mainIndex]
+        const { graphType, series, label, title } = this.props.page.visualizations[mainIndex]
 
         return (
             <Grid
@@ -23,7 +23,7 @@ class Layout extends React.Component {
                     <Card className="h-100">
                         <Graph
                             index={mainIndex}
-                            labels={this.props.page.visualizations[mainIndex].seriesLabel}
+                            labels={label}
                             series={series}
                             title={title}
                             type={graphType} />
@@ -48,9 +48,6 @@ class Layout extends React.Component {
                             onChange={(event) => this.props.changeDescription(mainIndex, event.target.value)}
                             rowsMax="5"
                             style={{ margin: "0.5rem 0px", }} />
-                        {/* <ChipInput
-                            onChange={(tags) => this.props.changeTags(mainIndex, tags)}
-                            value={tags} /> */}
                     </Card>
                 </Grid>
             </Grid>

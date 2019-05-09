@@ -6,13 +6,11 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography } from "@mater
 
 import chartArea from "images/chart/area.png"
 import chartBar from "images/chart/bar.png"
-// import chartLine from "images/chart/line.png"
 import chartPie from "images/chart/pie.png"
 
 const graphs = [
     { image: chartArea, title: "Área", type: "area", },
     { image: chartBar, title: "Barra", type: "bar", },
-    // { image: chartLine, title: "Linha", type: "line", },
     { image: chartPie, title: "Pizza", type: "pie", },
 ]
 

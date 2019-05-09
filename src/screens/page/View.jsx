@@ -21,7 +21,7 @@ class View extends React.Component {
         if (/^\/page\/view\/[a-zA-Z0-9]+$/.test(this.props.location.pathname)) {
             this.props.getPage(this.props.location.pathname.substring(11))
         } else {
-            // Bad URL
+            throw new Error('Bad URL')
         }
     }
 
@@ -98,7 +98,7 @@ class View extends React.Component {
                                                 xs={9}>
                                                 <Graph
                                                     index={i}
-                                                    labels={v.seriesLabel}
+                                                    labels={v.label}
                                                     series={v.series}
                                                     title={v.title}
                                                     type={v.graphType} />

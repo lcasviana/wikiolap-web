@@ -12,8 +12,8 @@ import Page from "components/Home/Page"
 class Home extends React.Component {
 
     componentDidMount() {
-        this.props.search("")
         this.props.setTab(0)
+        this.props.search("")
     }
 
     render() {
