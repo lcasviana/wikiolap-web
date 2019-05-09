@@ -19,8 +19,7 @@ class Visualization extends React.Component {
         const stepActual = this.props.page.visualizations[mainIndex].step
         const graph = !this.props.page.visualizations[mainIndex].graphType
         const datasets = this.props.page.visualizations[mainIndex].datasets.length < 1
-        const series = this.props.page.visualizations[mainIndex].series.filter(s => s.values.length && s.label).length < 1
-        const summary = this.props.page.visualizations[mainIndex].title === "" || this.props.page.visualizations[mainIndex].description === ""
+        const series = this.props.page.visualizations[mainIndex].series.filter(s => s.values.length).length < 1
 
         return (
             <Card className="ma3 pa3">
@@ -55,7 +54,6 @@ class Visualization extends React.Component {
                                 (graph && stepActual === 0) ||
                                 (datasets && stepActual === 1) ||
                                 (series && stepActual === 2) ||
-                                (summary && stepActual === 3) ||
                                 stepActual === 4
                             }
                             onClick={() => this.props.nextStep(mainIndex)}

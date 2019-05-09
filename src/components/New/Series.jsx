@@ -56,7 +56,8 @@ class Series extends React.Component {
                             <InputLabel>Rótulos</InputLabel>
                             <Select
                                 onChange={(event) => {
-                                    this.props.selectLabels(mainIndex, columns[event.target.value], event.target.value)
+                                    if (event.target.value !== -1) this.props.selectLabels(mainIndex, columns[event.target.value], event.target.value)
+                                    else this.props.selectDefault(mainIndex)
                                 }}
                                 value={labelIndex}>
                                 <MenuItem
@@ -90,7 +91,11 @@ class Series extends React.Component {
                                                 style={{ margin: "0", }}>
                                                 <InputLabel>Série {index + 1}</InputLabel>
                                                 <Select
-                                                    onChange={(event) => this.props.selectSeries(mainIndex, index, columns[event.target.value], event.target.value)}
+                                                    onChange={(event) => {
+                                                        this.props.selectSeries(mainIndex, index, columns[event.target.value], event.target.value)
+                                                        if (labelIndex === -1) this.props.selectDefault(mainIndex)
+                                                        this.props.changeLabel(mainIndex, index, columns[event.target.value].column)
+                                                    }}
                                                     value={serie}>
                                                     {columns.map((column, index) =>
                                                         <MenuItem
@@ -152,6 +157,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         selectLabels: (index, data, value) => dispatch({ type: "SERIES_LABEL_SELECT", index, data, value, }),
+        selectDefault: (index) => dispatch({ type: "SERIES_LABEL_DEFAULT", index, }),
         selectSeries: (index, serie, data, value) => dispatch({ type: "SERIES_SELECT", index, serie, data, value, }),
         insertSeries: (index) => dispatch({ type: "SERIES_INSERT", index, }),
         removeSeries: (index, serie) => dispatch({ type: "SERIES_REMOVE", index, serie, }),

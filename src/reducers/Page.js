@@ -185,7 +185,7 @@ export default function reducer(state = page, action) {
             const length = Math.max.apply(Math, state.visualizations[action.index].series.map(v => v.values.length))
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { values: Array.apply(null, { length: Math.min(action.length, length), }).map(Number.call, Number), }, labelIndex: -1, } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { values: Array.apply(null, { length }).map(Number.call, Number), }, labelIndex: -1, } : v),
             }
 
         case "SERIES_SELECT":
