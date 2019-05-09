@@ -101,7 +101,7 @@ class View extends React.Component {
                                                     labels={v.seriesLabel}
                                                     series={v.series}
                                                     title={v.title}
-                                                    type={v.graphType.type} />
+                                                    type={v.graphType} />
                                             </Grid>
                                             <Grid
                                                 className="overflow-container pa3"

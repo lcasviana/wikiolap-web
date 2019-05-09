@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { CircularProgress, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TextField, AppBar, Toolbar, InputAdornment, Icon, Button, Divider, Card } from "@material-ui/core"
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TextField, AppBar, Toolbar, InputAdornment, Icon, Button, Divider, Card } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -19,7 +19,9 @@ class List extends React.Component {
     }
 
     render() {
-        const { datasets, status } = this.props.data
+        const { datasets, search, status } = this.props.data
+
+        const filtered = datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
             <div>
@@ -40,16 +42,11 @@ class List extends React.Component {
                                     ),
                                 }}
                                 placeholder="Pesquisar bases de dados"
-                                onChange={(event) => this.props.getDatasets(event.target.value)}
+                                onChange={(event) => this.props.datasetSearch(event.target.value)}
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
                     <div className="flex flex-column items-center mt5 pa3 w-100">
-                        <CircularProgress
-                            className="ma5"
-                            color="secondary"
-                            size={100}
-                            style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
                         <Card
                             className="pa2 w-100"
                             style={{ background: "#fafafa" }}>
@@ -60,8 +57,13 @@ class List extends React.Component {
                                     variant="h5">
                                     Bases de dados
                                 </Typography>
+                                {!filtered.length &&
+                                    <Typography color="error">
+                                        Nenhuma coleção de dados encontrada.
+                                    </Typography>
+                                }
                             </div>
-                            {datasets.map((dataset, index) =>
+                            {status === "DONE" && filtered.map((dataset, index) =>
                                 <ExpansionPanel
                                     className="w-100"
                                     key={index}
@@ -75,30 +77,22 @@ class List extends React.Component {
                                             </Typography>
                                             <Link
                                                 className="link"
-                                                to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
+                                                to={"/data/view/" + dataset.id}>
                                                 <Button
                                                     className="button mt5 mb1"
                                                     color="primary"
                                                     variant="outlined">
                                                     Ver dados
-                                        </Button>
+                                                </Button>
                                             </Link>
                                         </div>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails
                                         className="flex flex-column"
                                         style={{ background: "#fafafa" }}>
-                                        <Typography className="overflow-hidden"><strong>Descrição</strong>: {dataset.description}</Typography>
+                                        <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.columns.join(", ")}</Typography>
                                         <Divider style={{ margin: "0.5rem 0" }} />
-                                        <Typography className="overflow-hidden"><strong>Origem</strong>: {dataset.source}</Typography>
-                                        <Divider style={{ margin: "0.5rem 0" }} />
-                                        <Typography className="overflow-hidden"><strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}</Typography>
-                                        <Divider style={{ margin: "0.5rem 0" }} />
-                                        <Typography className="overflow-hidden"><strong>Tags</strong>: {dataset.tags.join(", ")}</Typography>
-                                        <Divider style={{ margin: "0.5rem 0" }} />
-                                        <Typography className="overflow-hidden"><strong>Hierarquias</strong>: {dataset.hierarchies.join(", ")}</Typography>
-                                        <Divider style={{ margin: "0.5rem 0" }} />
-                                        <Typography className="overflow-hidden"><strong>Email</strong>: {dataset.email}</Typography>
+                                        <Typography className="overflow-hidden"><strong>Usuário</strong>: {dataset.user}</Typography>
                                         <Divider style={{ margin: "0.5rem 0" }} />
                                         <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(dataset.created_at)}</Typography>
                                         <Divider style={{ margin: "0.5rem 0" }} />
@@ -122,8 +116,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDatasets: (text) => { dispatch(Actions.getDatasets(text)) },
-        clear: () => { dispatch({ type: "DATASET_CLEAR" }) },
+        clear: () => dispatch({ type: "DATASET_CLEAR" }),
+        getDatasets: () => dispatch(Actions.getDatasets()),
+        datasetSearch: (search) => dispatch({ type: "DATASET_SEARCH", search }),
     }
 }
 

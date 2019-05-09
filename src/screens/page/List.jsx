@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { CircularProgress, Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog, Tooltip } from "@material-ui/core"
+import { Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog, Tooltip } from "@material-ui/core"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
@@ -24,6 +24,8 @@ class List extends React.Component {
     render() {
         const { deleteDialog, pages, search, share, status } = this.props.page
         const { username } = this.props
+
+        const filtered = pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
 
         return (
             <div>
@@ -48,14 +50,6 @@ class List extends React.Component {
                                 variant="outlined" />
                         </Toolbar>
                     </AppBar>
-                    <div
-                        className="justify-center mt5"
-                        style={{ display: status !== "LOADING" ? "none" : "flex" }} >
-                        <CircularProgress
-                            className="ma5"
-                            color="secondary"
-                            size={100} />
-                    </div>
                     <Card
                         className="pa2 justify-center flex flex-row flex-wrap mt5 w-100"
                         style={{ background: "#fafafa" }}>
@@ -66,8 +60,13 @@ class List extends React.Component {
                                 variant="h5">
                                 Visualizações
                             </Typography>
+                            {!filtered.length &&
+                                <Typography color="error">
+                                    Nenhuma visualização encontrada.
+                                </Typography>
+                            }
                         </div>
-                        {status === "DONE" && pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1).map((page, index) =>
+                        {status === "DONE" && filtered.map((page, index) =>
                             <Card
                                 className="ma1 pa2"
                                 key={index}
@@ -120,7 +119,7 @@ class List extends React.Component {
                                             labels={v.seriesLabel}
                                             series={v.series}
                                             title={v.title}
-                                            type={v.graphType.type} />
+                                            type={v.graphType} />
                                     )}
                                 </div>
                                 <CardActions

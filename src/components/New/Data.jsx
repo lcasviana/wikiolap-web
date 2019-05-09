@@ -1,27 +1,24 @@
 import React from "react"
 
 import { connect } from "react-redux"
-import * as Actions from "actions/Page"
+import * as Actions from "actions/Data"
 
 import { Tooltip, Typography, Grid, TextField, IconButton, Icon, Card, Table, TableBody, TableRow, TableCell, TableHead, Divider } from "@material-ui/core"
 
 class Data extends React.Component {
 
     componentWillMount() {
-        this.props.getDatasets(this.props.index, this.props.page.visualizations[this.props.index].datasetsSearch)
-    }
-
-    handleInputSearch = (index, text) => {
-        this.props.filterDatasets(index, text)
-        this.props.getDatasets(index, text)
+        this.props.getDatasets()
     }
 
     render() {
         const mainIndex = this.props.index
-        const datasetsList = this.props.page.visualizations[mainIndex].datasetsList
-        const datasetsSelected = this.props.page.visualizations[mainIndex].datasetsSelected
-        const selectedSearch = this.props.page.visualizations[mainIndex].selectedSearch
-        const datasetsSearch = this.props.page.visualizations[mainIndex].datasetsSearch
+        const { datasets, search } = this.props.page.visualizations[mainIndex]
+        const allDatasets = this.props.data.datasets
+
+        const filteredAllDatasets = allDatasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search[0].toLowerCase().trim()) !== -1)
+            .filter(dataset => !datasets.find(d => d.id === dataset.id))
+        const filteredDatasets = datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search[1].toLowerCase().trim()) !== -1)
 
         return (
             <Grid
@@ -47,51 +44,48 @@ class Data extends React.Component {
                                             className="w-100"
                                             label="Pesquisar bases de dados..."
                                             margin="normal"
-                                            onChange={(event) => this.handleInputSearch(mainIndex, event.target.value)}
-                                            style={{ marginTop: 0, }}
-                                            value={datasetsSearch} />
+                                            onChange={(event) => this.props.filterDatasets(mainIndex, [event.target.value, search[1]])}
+                                            style={{ marginTop: 0, }} />
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {datasetsList
-                                    .filter(dataset => !datasetsSelected.find(d => d.id === dataset.id))
-                                    .map((dataset, index) =>
-                                        <TableRow key={index}>
-                                            <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
-                                                <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
-                                                <div>
-                                                    <Tooltip
-                                                        placement="left"
-                                                        title={
-                                                            <React.Fragment>
-                                                                <Typography style={{ color: "white" }}>{dataset.title}</Typography>
-                                                                <Divider style={{ background: "white" }} />
-                                                                <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
-                                                            </React.Fragment>
-                                                        }>
-                                                        <div className="dib">
-                                                            <IconButton
-                                                                className="pa0"
-                                                                disabled>
-                                                                <Icon>error_outline</Icon>
-                                                            </IconButton>
-                                                        </div>
-                                                    </Tooltip>
-                                                    <IconButton
-                                                        className="pa0"
-                                                        onClick={() => this.props.selectDataset(mainIndex, dataset)}>
-                                                        <Icon color="primary">arrow_forward</Icon>
-                                                    </IconButton>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
-                                {!datasetsList.length &&
+                                {filteredAllDatasets.length > 0 && filteredAllDatasets.map((dataset, index) =>
+                                    <TableRow key={index}>
+                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
+                                            <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
+                                            <div>
+                                                <Tooltip
+                                                    placement="left"
+                                                    title={
+                                                        <React.Fragment>
+                                                            <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                                            <Divider style={{ background: "white" }} />
+                                                            <Typography style={{ color: "white" }}><em>{dataset.columns.join(", ")}</em></Typography>
+                                                        </React.Fragment>
+                                                    }>
+                                                    <div className="dib">
+                                                        <IconButton
+                                                            className="pa0"
+                                                            disabled>
+                                                            <Icon>error_outline</Icon>
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
+                                                <IconButton
+                                                    className="pa0"
+                                                    onClick={() => this.props.selectDataset(mainIndex, dataset)}>
+                                                    <Icon color="primary">arrow_forward</Icon>
+                                                </IconButton>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                                {(filteredAllDatasets.length === 0) &&
                                     <TableRow>
                                         <TableCell>
                                             <Typography color="error">
-                                                Nenhuma base de dados encontrada.
+                                                {search[0] && "Nenhuma base de dados encontrada."}
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
@@ -120,43 +114,50 @@ class Data extends React.Component {
                                             className="w-100"
                                             label="Pesquisar selecionadas..."
                                             margin="normal"
-                                            onChange={(event) => this.props.filterSelected(mainIndex, event.target.value)}
-                                            style={{ marginTop: 0, }}
-                                            value={selectedSearch} />
+                                            onChange={(event) => this.props.filterDatasets(mainIndex, [search[0], event.target.value])}
+                                            style={{ marginTop: 0, }} />
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {datasetsSelected.filter(dataset => selectedSearch === "" ? true : dataset.title.indexOf(selectedSearch) !== -1)
-                                    .map((dataset, index) =>
-                                        <TableRow key={index}>
-                                            <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
-                                                <Typography>{dataset.title}</Typography>
-                                                <div>
-                                                    <Tooltip
-                                                        placement="left"
-                                                        title={
-                                                            <React.Fragment>
-                                                                <Typography style={{ color: "white" }}>{dataset.title}</Typography>
-                                                                <Divider style={{ background: "white" }} />
-                                                                <Typography style={{ color: "white" }}><em>{dataset.aliasColumns.join(", ")}</em></Typography>
-                                                            </React.Fragment>
-                                                        }>
-                                                        <div className="dib">
-                                                            <IconButton
-                                                                className="pa0"
-                                                                disabled>
-                                                                <Icon>error_outline</Icon>
-                                                            </IconButton>
-                                                        </div>
-                                                    </Tooltip>
-                                                    <IconButton onClick={() => this.props.removeDataset(mainIndex, index)}>
-                                                        <Icon color="error">arrow_back</Icon>
-                                                    </IconButton>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
+                                {filteredDatasets.length > 0 && filteredDatasets.map((dataset, index) =>
+                                    <TableRow key={index}>
+                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
+                                            <Typography>{dataset.title}</Typography>
+                                            <div>
+                                                <Tooltip
+                                                    placement="left"
+                                                    title={
+                                                        <React.Fragment>
+                                                            <Typography style={{ color: "white" }}>{dataset.title}</Typography>
+                                                            <Divider style={{ background: "white" }} />
+                                                            <Typography style={{ color: "white" }}><em>{dataset.columns.join(", ")}</em></Typography>
+                                                        </React.Fragment>
+                                                    }>
+                                                    <div className="dib">
+                                                        <IconButton
+                                                            className="pa0"
+                                                            disabled>
+                                                            <Icon>error_outline</Icon>
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
+                                                <IconButton onClick={() => this.props.removeDataset(mainIndex, index)}>
+                                                    <Icon color="error">arrow_back</Icon>
+                                                </IconButton>
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                                {filteredDatasets.length === 0 &&
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography color="error">
+                                                {search[1] && "Nenhuma base de dados encontrada."}
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                }
                             </TableBody>
                         </Table>
                     </Card>
@@ -168,17 +169,17 @@ class Data extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        page: state.Page,
+        data: state.Data,
+        page: state.Page
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDatasets: (index, text) => { dispatch(Actions.getDatasets(index, text)) },
-        selectDataset: (index, dataset) => { dispatch({ type: "DATASET_SELECT", index, dataset, }) },
-        removeDataset: (index, dataset) => { dispatch({ type: "DATASET_REMOVE", index, dataset, }) },
-        filterDatasets: (index, text) => { dispatch({ type: "DATASET_SEARCH", index, text, }) },
-        filterSelected: (index, text) => { dispatch({ type: "DATASET_SELECTED_SEARCH", index, text, }) },
+        getDatasets: () => dispatch(Actions.getDatasets()),
+        selectDataset: (index, dataset) => dispatch({ type: "DATASET_SELECT", index, dataset, }),
+        removeDataset: (index, dataset) => dispatch({ type: "DATASET_REMOVE", index, dataset, }),
+        filterDatasets: (index, text) => dispatch({ type: "DATASET_SEARCH", index, text, }),
     }
 }
 

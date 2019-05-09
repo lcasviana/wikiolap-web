@@ -20,19 +20,19 @@ class Type extends React.Component {
 
     render() {
         const mainIndex = this.props.index
-        const graphSelected = this.props.page.visualizations[mainIndex].graphType
+        const { graphType } = this.props.page.visualizations[mainIndex]
 
         return (
             <div className="flex justify-center h-100 items-center">
                 {graphs.map((graph, index) => {
-                    const background = graphSelected.type === graph.type ? "#009688" : "white"
-                    const color = graphSelected.type === graph.type ? "white" : "rgba(0, 0, 0, 0.87)"
+                    const background = graphType === graph.type ? "#009688" : "white"
+                    const color = graphType === graph.type ? "white" : "rgba(0, 0, 0, 0.87)"
                     return (
                         <Card
                             className="card-200 ma2"
                             key={index}
                             style={{ background, }}>
-                            <CardActionArea onClick={() => this.props.graphTypeSelect(mainIndex, graph)}>
+                            <CardActionArea onClick={() => this.props.graphTypeSelect(mainIndex, graph.type)}>
                                 <CardMedia
                                     className="card-200-image"
                                     image={graph.image} />

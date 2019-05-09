@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Card, Typography, CardActionArea, CircularProgress, Tooltip } from "@material-ui/core"
+import { Card, Typography, CardActionArea, Tooltip } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Graph from "components/Graph"
@@ -19,7 +19,7 @@ class List extends React.Component {
 
     render() {
         const { search } = this.props
-        const { pages, status } = this.props.page
+        const { pages } = this.props.page
 
         const page = pages
             ? search === ""
@@ -40,11 +40,6 @@ class List extends React.Component {
                         </Typography>
                     }
                 </div>
-                <CircularProgress
-                    className="ma5"
-                    color="secondary"
-                    size={50}
-                    style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
                 <div className="flex flex-row flex-wrap justify-center">
                     {page.map((page, index) =>
                         <Card
@@ -86,7 +81,7 @@ class List extends React.Component {
                             </CardActionArea>
                             <div
                                 className="flex mt3"
-                                style={{ overflowX: "auto" }}>
+                                style={{ overflowX: "scroll" }}>
                                 {page.visualizations && page.visualizations.map((v, i) =>
                                     <Graph
                                         clean={true}
@@ -95,7 +90,7 @@ class List extends React.Component {
                                         labels={v.seriesLabel}
                                         series={v.series}
                                         title={v.title}
-                                        type={v.graphType.type} />
+                                        type={v.graphType} />
                                 )}
                             </div>
                         </Card>

@@ -17,8 +17,8 @@ class Visualization extends React.Component {
         const mainIndex = this.props.index
         const visualizations = this.props.page.visualizations.length === 1
         const stepActual = this.props.page.visualizations[mainIndex].step
-        const graph = !this.props.page.visualizations[mainIndex].graphType.hasOwnProperty("type")
-        const datasets = this.props.page.visualizations[mainIndex].datasetsSelected.length < 1
+        const graph = !this.props.page.visualizations[mainIndex].graphType
+        const datasets = this.props.page.visualizations[mainIndex].datasets.length < 1
         const series = this.props.page.visualizations[mainIndex].series.filter(s => s.values.length && s.label).length < 1
         const summary = this.props.page.visualizations[mainIndex].title === "" || this.props.page.visualizations[mainIndex].description === ""
 

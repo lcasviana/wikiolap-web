@@ -13,6 +13,7 @@ import PageList from "screens/page/List"
 import PageNew from "screens/page/New"
 import PageView from "screens/page/View"
 import DataList from "screens/data/List"
+import DataNew from "screens/data/New"
 import DataView from "screens/data/View"
 import UserSignIn from "screens/user/SignIn"
 import UserSignUp from "screens/user/SignUp"
@@ -52,6 +53,7 @@ class App extends React.Component {
                             <PrivateRoute auth={auth} path="/page/new/" component={PageNew} />
                             <PrivateRoute auth={auth} path="/page/view/" component={PageView} />
                             <PrivateRoute auth={auth} path="/data/list/" component={DataList} />
+                            <PrivateRoute auth={auth} path="/data/new/" component={DataNew} />
                             <PrivateRoute auth={auth} path="/data/view/" component={DataView} />
                             <Route path="/user/signin/" component={UserSignIn} />
                             <Route path="/user/signup/" component={UserSignUp} />

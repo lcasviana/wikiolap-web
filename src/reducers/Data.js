@@ -1,7 +1,7 @@
 const data = {
     metadata: {},
-    dataset: [],
     datasets: [],
+    search: "",
     status: "",
 }
 
@@ -9,22 +9,23 @@ export default function reducer(state = data, action) {
 
     switch (action.type) {
 
-        case "GET_DATASET":
-            return {
-                ...state,
-                dataset: action.dataset,
-            }
-
-        case "GET_METADATA":
+        case "LOADING_METADATA":
             return {
                 ...state,
                 metadata: action.metadata,
             }
 
-        case "GET_DATASETS":
+        case "GET_METADATA":
             return {
                 ...state,
-                datasets: action.datasets,
+                metadata: Object.assign({}, action.page, JSON.parse(action.page.title)),
+            }
+
+        case "GET_DATASETS":
+            const allPages = action.pages.map((v, i) => Object.assign({}, v, JSON.parse(v.title)))
+            return {
+                ...state,
+                datasets: allPages.filter(page => page.type === 'dataset'),
             }
 
         case "GET_DATASET_DONE":
@@ -43,6 +44,12 @@ export default function reducer(state = data, action) {
             return {
                 ...state,
                 status: "ERROR",
+            }
+
+        case "DATASET_SEARCH":
+            return {
+                ...state,
+                search: action.search,
             }
 
         case "DATASET_CLEAR":

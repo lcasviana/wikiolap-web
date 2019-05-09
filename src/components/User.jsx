@@ -46,16 +46,16 @@ class User extends React.Component {
                                 <Typography style={{ color: "white" }}>Carregar coleções de dados</Typography>
                             </React.Fragment>
                         }>
-                        <a
+                        <Link
                             className="link"
-                            href="http://localhost:8000/base/upload_file/">
+                            to="/data/new/">
                             <IconButton>
                                 <img
                                     alt="Coleções de dados"
                                     src={iconData}
                                     style={{ height: 32 }} />
                             </IconButton>
-                        </a>
+                        </Link>
                     </Tooltip>
                     <div
                         className="flex items-center"

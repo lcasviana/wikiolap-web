@@ -15,7 +15,7 @@ function pageShrink(page) {
                 title: d.title,
             })),
             description: v.description,
-            graphType: { type: v.graphType.type, },
+            graphType: v.graphType,
             series: v.series.map(s => ({
                 color: s.color,
                 columnAlias: s.columnAlias,
@@ -94,42 +94,6 @@ export function deletePage(id) {
             })
             .catch((error) => {
                 dispatch({ type: "DELETE_PAGE_ERR", error, })
-            })
-    }
-}
-
-export function getDatasets(index, text) {
-    return function (dispatch) {
-        axios.get(baseUrl + "/visualizations/metadata-list/?page=1&text=" + text)
-            .then((response) => {
-                dispatch({ type: "GET_DATASET_LIST", index, datasets: response.data.results, })
-            })
-            .catch((error) => {
-                dispatch({ type: "GET_DATASET_LIST_ERR", error, })
-            })
-    }
-}
-
-export function getSeries(index, serie, table, column, length) {
-    return function (dispatch) {
-        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column.toLowerCase() + "/" + length + "/")
-            .then((response) => {
-                dispatch({ type: "GET_SERIES", index, serie, column, values: response.data, })
-            })
-            .catch((error) => {
-                dispatch({ type: "GET_SERIES_ERR", error, })
-            })
-    }
-}
-
-export function getLabels(index, table, column, length) {
-    return function (dispatch) {
-        axios.get(baseUrl + "/base/api/getdata/" + table + "/" + column.toLowerCase() + "/" + length + "/")
-            .then((response) => {
-                dispatch({ type: "GET_SERIES_LABEL", index, column, values: response.data, })
-            })
-            .catch((error) => {
-                dispatch({ type: "GET_SERIES_LABEL_ERR", error, })
             })
     }
 }

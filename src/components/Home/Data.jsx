@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { CircularProgress, Typography, Card, CardActionArea, Tooltip } from "@material-ui/core"
+import { Typography, Card, CardActionArea, Tooltip } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import * as Calendar from "services/Calendar"
@@ -12,16 +12,18 @@ class List extends React.Component {
 
     componentWillMount() {
         this.props.clear()
-        this.props.getDatasets("")
+        this.props.getDatasets()
     }
 
     render() {
         const { search } = this.props
-        const { datasets, status } = this.props.data
+        const { datasets } = this.props.data
 
-        const data = search === ""
-            ? datasets.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
-            : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+        const data = datasets
+            ? search === ""
+                ? datasets.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+                : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+            : []
 
         return (
             <div
@@ -36,11 +38,6 @@ class List extends React.Component {
                         </Typography>
                     }
                 </div>
-                <CircularProgress
-                    className="ma5"
-                    color="secondary"
-                    size={50}
-                    style={{ display: status !== "LOADING" ? "none" : "inline-block" }} />
                 <div className="flex flex-row flex-wrap justify-center">
                     {data.map((dataset, index) =>
                         <Card
@@ -57,7 +54,7 @@ class List extends React.Component {
                                     }>
                                     <Link
                                         className="link"
-                                        to={"/data/view/" + dataset.id + "@" + dataset.tableId}>
+                                        to={"/data/view/" + dataset.id}>
                                         <Typography
                                             className="pb2"
                                             color="primary"
@@ -68,7 +65,12 @@ class List extends React.Component {
                                         <Typography
                                             style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                                             variant="body2">
-                                            <strong>Colunas</strong>: {dataset.aliasColumns.join(", ")}
+                                            <strong>Colunas</strong>: {dataset.columns.join(", ")}
+                                        </Typography>
+                                        <Typography
+                                            style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                            variant="body2">
+                                            <strong>Usuário</strong>: {dataset.user}
                                         </Typography>
                                         <Typography
                                             variant="body2">
@@ -97,7 +99,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDatasets: (text) => { dispatch(Actions.getDatasets(text)) },
+        getDatasets: () => { dispatch(Actions.getDatasets()) },
         clear: () => { dispatch({ type: "DATASET_CLEAR" }) },
     }
 }

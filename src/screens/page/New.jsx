@@ -22,11 +22,12 @@ class New extends React.Component {
     }
 
     render() {
-        const page = this.props.page
-        const title = this.props.page.title
-        const visualizations = this.props.page.visualizations
-        const done = this.props.page.visualizations.every(v => v.step === 4)
+        const { page } = this.props
+        const { title, visualizations } = page
+        const done = visualizations.every(v => v.step === 4)
         const { username } = this.props.user
+
+        console.log(visualizations[0])
 
         return (
             <div>
@@ -44,7 +45,6 @@ class New extends React.Component {
                                 placeholder="Título da página"
                                 onChange={(event) => this.props.changeTitle(event.target.value)}
                                 style={{ flexGrow: 1, maxWidth: 500, }}
-                                value={title}
                                 variant="outlined" />
                             <div>
                                 <Button
@@ -72,7 +72,7 @@ class New extends React.Component {
                                         variant="outlined">
                                         <Icon>done</Icon>
                                         Finalizar
-                                </Button>
+                                    </Button>
                                 </Link>
                             </div>
                         </Toolbar>
@@ -101,12 +101,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        clear: () => { dispatch({ type: "PAGE_CLEAR" }) },
-        editPage: (page) => { dispatch({ type: "PAGE_EDIT", page, }) },
-        changeTitle: (text) => { dispatch({ type: "PAGE_TITLE", text, }) },
-        insertVisualization: () => { dispatch({ type: "VISUALIZATION_INSERT", }) },
-        savePage: (page) => { dispatch(Actions.savePage(page)) },
-        updatePage: (page) => { dispatch(Actions.updatePage(page)) },
+        clear: () => dispatch({ type: "PAGE_CLEAR" }),
+        editPage: (page) => dispatch({ type: "PAGE_EDIT", page, }),
+        changeTitle: (text) => dispatch({ type: "PAGE_TITLE", text, }),
+        insertVisualization: () => dispatch({ type: "VISUALIZATION_INSERT", }),
+        savePage: (page) => dispatch(Actions.savePage(page)),
+        updatePage: (page) => dispatch(Actions.updatePage(page)),
     }
 }
 
