@@ -25,8 +25,6 @@ class List extends React.Component {
         const { deleteDialog, pages, search, share, status } = this.props.page
         const { username } = this.props
 
-        const filtered = pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
-
         return (
             <div>
                 <Nav
@@ -45,119 +43,114 @@ class List extends React.Component {
                                 variant="h5">
                                 Visualizações
                             </Typography>
-                            {!filtered.length &&
+                            {!pages.map((page) => page.visualizations
+                                .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&
                                 <Typography color="error">
                                     Nenhuma visualização encontrada.
                                 </Typography>
                             }
                         </div>
-                        {status === "DONE" && filtered.map((page, index) =>
-                            <Card
-                                className="ma1 pa2"
-                                key={index}
-                                style={{ width: 420, }}>
-                                <DeleteDialog
-                                    id={page.id}
-                                    open={deleteDialog}
-                                    redirect={false} />
-                                <CardActionArea>
-                                    <Tooltip
-                                        placement="top"
-                                        title={
-                                            <React.Fragment>
-                                                <Typography style={{ color: "white" }}>{page.title}</Typography>
-                                            </React.Fragment>
-                                        }>
-                                        <Link
-                                            className="link"
-                                            to={"/page/view/" + page.id}>
-                                            <Typography
-                                                className="pb2"
-                                                color="primary"
-                                                style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                                                variant="h6">
-                                                {page.title}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2">
-                                                <strong>Usuário</strong>: {page.username}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2">
-                                                <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2">
-                                                <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
-                                            </Typography>
-                                        </Link>
-                                    </Tooltip>
-                                </CardActionArea>
-                                <div
-                                    className="flex mt3"
-                                    style={{ overflowX: "auto" }}>
-                                    {page.visualizations && page.visualizations.map((v, i) =>
-                                        <Graph
-                                            clean={true}
-                                            index={i}
-                                            key={i}
-                                            labels={v.label}
-                                            series={v.series}
-                                            title={v.title}
-                                            type={v.graphType} />
-                                    )}
-                                </div>
-                                <CardActions
-                                    className="justify-end flex"
-                                    disableActionSpacing>
-                                    <IconButton onClick={() => this.props.sharePage("http://localhost:3000/page/view/" + page.id)}>
-                                        <Icon color="primary">share</Icon>
-                                    </IconButton>
-                                    {page.username === username &&
-                                        <div>
+                        {status === "DONE" && pages.map((page) => page.visualizations
+                            .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+                            .map((v, i) =>
+                                <Card
+                                    className="ma1 pa2"
+                                    key={page.id + i}
+                                    style={{ width: 420, }}>
+                                    <DeleteDialog
+                                        id={page.id}
+                                        open={deleteDialog}
+                                        redirect={false} />
+                                    <CardActionArea>
+                                        <Tooltip
+                                            placement="top"
+                                            title={
+                                                <React.Fragment>
+                                                    <Typography style={{ color: "white" }}>{page.title} - {v.title ? v.title : "Visualização " + (i + 1)}</Typography>
+                                                </React.Fragment>
+                                            }>
                                             <Link
                                                 className="link"
-                                                to={{ pathname: "/page/edit/", state: page, }}>
-                                                <IconButton>
-                                                    <Icon color="primary">edit</Icon>
-                                                </IconButton>
+                                                to={"/page/view/" + page.id}>
+                                                <Typography
+                                                    className="pb2"
+                                                    color="primary"
+                                                    style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                                    variant="h6">
+                                                    {v.title ? v.title : "Visualização " + (i + 1)}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2">
+                                                    <strong>Página</strong>: {page.title}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2">
+                                                    <strong>Usuário</strong>: {page.username}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2">
+                                                    <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2">
+                                                    <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
+                                                </Typography>
+                                                <div className="mt3">
+                                                    <Graph
+                                                        clean={true}
+                                                        index={i}
+                                                        key={i}
+                                                        labels={v.label}
+                                                        series={v.series}
+                                                        title={v.title}
+                                                        type={v.graphType} />
+                                                </div>
                                             </Link>
-                                            <IconButton onClick={() => this.props.deleteDialogOpen()}>
-                                                <Icon>delete</Icon>
-                                            </IconButton>
-                                        </div>
-                                    }
-                                </CardActions>
-                            </Card>
-                        )}
+                                        </Tooltip>
+                                    </CardActionArea>
+                                    <CardActions
+                                        className="justify-end flex"
+                                        disableActionSpacing>
+                                        <IconButton onClick={() => this.props.sharePage("http://localhost:3000/page/view/" + page.id)}>
+                                            <Icon color="primary">share</Icon>
+                                        </IconButton>
+                                        {page.username === username &&
+                                            <div>
+                                                <Link
+                                                    className="link"
+                                                    to={{ pathname: "/page/edit/", state: page, }}>
+                                                    <IconButton>
+                                                        <Icon color="primary">edit</Icon>
+                                                    </IconButton>
+                                                </Link>
+                                                <IconButton onClick={() => this.props.deleteDialogOpen()}>
+                                                    <Icon>delete</Icon>
+                                                </IconButton>
+                                            </div>
+                                        }
+                                    </CardActions>
+                                </Card>
+                            ))}
                     </Card>
                     <Dialog
                         onClose={() => this.props.sharePageClose()}
                         open={share ? share.open : false}>
-                        <div
-                            className="flex ma4"
-                            style={{ width: 500 }}>
+                        <div className="flex items-center ma1">
                             <Typography
-                                className="overflow-auto"
-                                style={{ marginRight: "1rem" }}
-                                variant="h6">{share ? share.link : ""}
+                                style={{ margin: "0 1rem" }}
+                                variant="subheading">
+                                {share ? share.link : ""}
                             </Typography>
                             <CopyToClipboard
                                 className="button"
                                 text={share ? share.link : ""}>
                                 <Button
                                     color="primary"
+                                    size="small"
                                     variant="outlined">
                                     Copiar
                                 </Button>
                             </CopyToClipboard>
-                            <Button
-                                className="button"
-                                color="default"
-                                onClick={() => this.props.sharePageClose()}
-                                variant="outlined">
-                                Fechar
-                            </Button>
                         </div>
                     </Dialog>
                 </div>

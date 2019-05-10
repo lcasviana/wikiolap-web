@@ -21,12 +21,6 @@ class List extends React.Component {
         const { search } = this.props
         const { pages } = this.props.page
 
-        const page = pages
-            ? search === ""
-                ? pages.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
-                : pages.filter(page => page.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
-            : []
-
         return (
             <div
                 className="flex flex-column items-center pa2"
@@ -34,67 +28,70 @@ class List extends React.Component {
                 <div className="pb2 w-100">
                     {search === "" && <Typography color="primary" variant="h5">Últimas 5 visualizações criadas</Typography>}
                     {search !== "" && <Typography color="primary" variant="h5">Visualizações</Typography>}
-                    {!page.length &&
+                    {!pages.map((page) => page.visualizations
+                        .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&
                         <Typography color="error">
                             Nenhuma visualização encontrada.
                         </Typography>
                     }
                 </div>
                 <div className="flex flex-row flex-wrap justify-center">
-                    {page.map((page, index) =>
-                        <Card
-                            className="ma1 pa2"
-                            key={index}
-                            style={{ height: "fit-content", width: 420, }}>
-                            <CardActionArea>
-                                <Tooltip
-                                    placement="top"
-                                    title={
-                                        <React.Fragment>
-                                            <Typography style={{ color: "white" }}>{page.title}</Typography>
-                                        </React.Fragment>
-                                    }>
-                                    <Link
-                                        className="link"
-                                        to={"/page/view/" + page.id}>
-                                        <Typography
-                                            className="pb2"
-                                            color="primary"
-                                            style={{ whiteSpace: "nowrap", overflow: "hidden" }}
-                                            variant="h6">
-                                            {page.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Usuário</strong>: {page.username}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2">
-                                            <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
-                                        </Typography>
-                                    </Link>
-                                </Tooltip>
-                            </CardActionArea>
-                            <div
-                                className="flex mt3"
-                                style={{ overflowX: "scroll" }}>
-                                {page.visualizations && page.visualizations.map((v, i) =>
-                                    <Graph
-                                        clean={true}
-                                        index={i}
-                                        key={i}
-                                        labels={v.label}
-                                        series={v.series}
-                                        title={v.title}
-                                        type={v.graphType} />
-                                )}
-                            </div>
-                        </Card>
-                    )}
+                    {pages.map((page) => page.visualizations
+                        .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+                        .map((v, i) =>
+                            <Card
+                                className="ma1 pa2"
+                                key={page.id + i}
+                                style={{ height: "fit-content", width: 420, }}>
+                                <CardActionArea>
+                                    <Tooltip
+                                        placement="top"
+                                        title={
+                                            <React.Fragment>
+                                                <Typography style={{ color: "white" }}>{page.title} - {v.title ? v.title : "Visualização " + (i + 1)}</Typography>
+                                            </React.Fragment>
+                                        }>
+                                        <Link
+                                            className="link"
+                                            to={"/page/view/" + page.id}>
+                                            <Typography
+                                                className="pb2"
+                                                color="primary"
+                                                style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                                                variant="h6">
+                                                {v.title ? v.title : "Visualização " + (i + 1)}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Página</strong>: {page.title}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Usuário</strong>: {page.username}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Data de criação</strong>: {Calendar.TimestampToString(page.created_at)}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2">
+                                                <strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}
+                                            </Typography>
+                                            <div className="mt3">
+                                                <Graph
+                                                    clean={true}
+                                                    index={i}
+                                                    key={i}
+                                                    labels={v.label}
+                                                    series={v.series}
+                                                    title={v.title}
+                                                    type={v.graphType} />
+                                            </div>
+                                        </Link>
+                                    </Tooltip>
+                                </CardActionArea>
+                            </Card>
+                        ))}
                 </div>
             </div>
         )

@@ -79,16 +79,13 @@ class Series extends React.Component {
                                 key={index}>
                                 <Divider style={{ marginTop: "1rem", }} />
                                 <div className="mb3 mt3 flex items-end w-100">
-                                    <Grid
-                                        className="flex"
-                                        container>
-                                        <Grid
-                                            className="flex items-end pr2"
-                                            item
-                                            xs={6}>
+                                    <div
+                                        className="flex items-end"
+                                        style={{ width: "calc(100% - 60px)" }}>
+                                        <div className="pr1 w-50">
                                             <FormControl
-                                                fullWidth
-                                                style={{ margin: "0", }}>
+                                                className="w-100"
+                                                style={{ margin: "1px 0 0 0", }}>
                                                 <InputLabel>Série {index + 1}</InputLabel>
                                                 <Select
                                                     onChange={(event) => {
@@ -106,25 +103,22 @@ class Series extends React.Component {
                                                     )}
                                                 </Select>
                                             </FormControl>
-                                        </Grid>
-                                        <Grid
-                                            className="flex items-end pr2"
-                                            item
-                                            xs={6}>
+                                        </div>
+                                        <div className="pl1 pr1 w-50">
                                             <TextField
-                                                fullWidth
+                                                className="w-100"
                                                 onChange={(event) => this.props.changeLabel(mainIndex, index, event.target.value)}
                                                 placeholder={"Nome da série " + (index + 1)}
                                                 style={{ flexGrow: 1, }}
                                                 value={series[index].label} />
-                                        </Grid>
-                                    </Grid>
-                                    <input
+                                        </div>
+                                    </div>
+                                    {graphType !== "pie" && <input
                                         className="ma2"
                                         onChange={(event) => this.props.changeColor(mainIndex, index, event.target.value)}
                                         style={{ width: 26, }}
                                         type="color"
-                                        value={series[index].color} />
+                                        value={series[index].color} />}
                                     <IconButton
                                         disabled={series.length === 1}
                                         onClick={() => this.props.removeSeries(mainIndex, index)}>

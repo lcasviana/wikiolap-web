@@ -27,8 +27,6 @@ class New extends React.Component {
         const done = visualizations.every(v => v.step === 4)
         const { username } = this.props.user
 
-        console.log(visualizations[0])
-
         return (
             <div>
                 <Nav />

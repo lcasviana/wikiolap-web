@@ -8,5 +8,5 @@ export function hexToRgbA(hex) {
         c = "0x" + c.join("")
         return "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + ",0.5)"
     }
-    return "rgba(0, 0, 0, 0.1)"
+    return "rgba(0, 0, 0, 0.5)"
 }

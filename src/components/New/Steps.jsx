@@ -25,7 +25,7 @@ export default class Steps extends React.Component {
                     {step === 1 && "Selecione as coleções de dados"}
                     {step === 2 && "Selecione as séries para criar a visualização"}
                     {step === 3 && "Dê um título e uma descrição"}
-                    {step === 4 && "Visualização finalizada :)"}
+                    {step === 4 && "Visualização ok, não esqueça de finalizar no botão na barra inferior :)"}
                 </Typography>
                 <Stepper
                     activeStep={step}

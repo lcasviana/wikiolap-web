@@ -19,13 +19,19 @@ export default class Draw extends React.Component {
                 text: title ? title : "Visualização " + (index + 1),
             },
         }
+        const dynamicColors = () => {
+            var r = Math.floor(Math.random() * 255)
+            var g = Math.floor(Math.random() * 255)
+            var b = Math.floor(Math.random() * 255)
+            return "rgb(" + r + "," + g + "," + b + ",0.5)"
+        }
 
         if (series.length) {
             data.labels = labels ? clean ? labels.values.slice(0, 10) : labels.values : []
             data.datasets = series.map((serie, index) => ({
                 label: serie.label ? serie.label : "Série " + (index + 1),
                 data: clean ? serie.values.slice(0, 10) : serie.values,
-                backgroundColor: Color.hexToRgbA(serie.color),
+                backgroundColor: type === "pie" ? clean ? serie.values.slice(0, 10).map(v => dynamicColors()) : serie.values.map(v => dynamicColors()) : Color.hexToRgbA(serie.color),
             }))
         }
 
@@ -38,11 +44,6 @@ export default class Draw extends React.Component {
                 }
                 {type === "bar"
                     && <Bar
-                        data={data}
-                        options={options} />
-                }
-                {type === "line"
-                    && <Line
                         data={data}
                         options={options} />
                 }
