@@ -22,7 +22,7 @@ export default class Steps extends React.Component {
                     style={{ marginBottom: "1rem" }}
                     variant="h5">
                     {step === 0 && "Selecione um tipo de gráfico"}
-                    {step === 1 && "Selecione as bases de dados"}
+                    {step === 1 && "Selecione as coleções de dados"}
                     {step === 2 && "Selecione as séries para criar a visualização"}
                     {step === 3 && "Dê um título e uma descrição"}
                     {step === 4 && "Visualização finalizada :)"}

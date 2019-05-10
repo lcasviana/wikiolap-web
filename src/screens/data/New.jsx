@@ -33,7 +33,7 @@ class New extends React.Component {
             }
         }
     }
-    
+
     mountTable(metadata) {
         const head = [], body = []
 
@@ -72,34 +72,10 @@ class New extends React.Component {
                 <div className="flex flex-column items-center mt5 pa3 w-100">
                     <AppBar
                         color="default"
-                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
+                        style={{ bottom: "0", height: "4rem", top: "auto", }}>
                         <Toolbar
                             className="flex justify-between"
                             style={{ height: "4rem", }}>
-                            <TextField
-                                className="flex"
-                                placeholder="Título da coleção de dados"
-                                onChange={(event) => this.props.loadingDataset({ ...metadata, title: event.target.value })}
-                                style={{ flexGrow: 1, maxWidth: 500, }}
-                                variant="outlined" />
-                            <Link
-                                className="link pl2"
-                                onClick={(event) => { if (!metadata.title || !metadata.data || !metadata.data.length) { event.preventDefault() } }}
-                                to="/">
-                                <Button
-                                    disabled={!metadata.title || !metadata.data || !metadata.data.length}
-                                    color="primary"
-                                    onClick={() => this.props.uploadDataset({ ...metadata, user: username })}
-                                    size="large"
-                                    variant="outlined">
-                                    <Icon>done</Icon>
-                                    Finalizar
-                                </Button>
-                            </Link>
-                        </Toolbar>
-                    </AppBar>
-                    <Card className="mt5 pa2 w-100">
-                        <div className="flex items-center">
                             <div>
                                 <input
                                     accept="*"
@@ -111,11 +87,38 @@ class New extends React.Component {
                                     <Button
                                         color="primary"
                                         component="span"
+                                        size="large"
                                         variant="contained">
-                                        Carregar arquivo
+                                        <Icon className="mr2">cloud_upload</Icon>
+                                        Carregar
                                     </Button>
                                 </label>
                             </div>
+                            <TextField
+                                className="flex"
+                                label="Título da coleção de dados"
+                                onChange={(event) => this.props.loadingDataset({ ...metadata, title: event.target.value })}
+                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500, }}
+                                value={metadata.title}
+                                variant="filled" />
+                            <Link
+                                className="link pl2"
+                                onClick={(event) => { if (!metadata.title || !metadata.data || !metadata.data.length) { event.preventDefault() } }}
+                                to="/">
+                                <Button
+                                    disabled={!metadata.title || !metadata.data || !metadata.data.length}
+                                    color="primary"
+                                    onClick={() => this.props.uploadDataset({ ...metadata, user: username })}
+                                    size="large"
+                                    variant="raised">
+                                    <Icon className="mr2">done</Icon>
+                                    Finalizar
+                                </Button>
+                            </Link>
+                        </Toolbar>
+                    </AppBar>
+                    <Card className="pa2 mb5 w-100">
+                        <div className="flex items-center">
                             <Typography
                                 className="tc"
                                 color="primary"

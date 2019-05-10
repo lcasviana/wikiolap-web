@@ -32,7 +32,7 @@ class View extends React.Component {
             <div>
                 <Nav />
                 <Draw />
-                <div className="flex mb5 mt5">
+                <div className="flex mt5">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
@@ -48,9 +48,9 @@ class View extends React.Component {
                             </Link>
                         </Toolbar>
                     </AppBar>
-                    <div className="flex mb5 mt5 w-100">
+                    <div className="flex mt5 w-100">
                         {page &&
-                            <Card className="ma3 pa3 w-100">
+                            <Card className="ma3 pa2 w-100">
                                 <DeleteDialog
                                     id={page.id}
                                     open={deleteDialog}
@@ -86,7 +86,7 @@ class View extends React.Component {
                                 <Typography><strong>Última modificação</strong>: {Calendar.TimestampToString(page.updated_at)}</Typography>
                                 {page.visualizations && page.visualizations.map((v, i) =>
                                     <Card
-                                        className="flex mb4 mt4"
+                                        className="flex mt3"
                                         key={i}
                                         style={{ height: 420, }}>
                                         <Grid

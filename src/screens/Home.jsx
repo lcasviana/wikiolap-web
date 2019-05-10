@@ -2,7 +2,7 @@ import React from "react"
 
 import { connect } from "react-redux"
 
-import { AppBar, Toolbar, Card, TextField, InputAdornment, Icon, Paper, Tabs, Tab } from "@material-ui/core"
+import { Card, Paper, Tabs, Tab } from "@material-ui/core"
 
 import Data from "components/Home/Data"
 import Draw from "components/Draw"
@@ -16,38 +16,23 @@ class Home extends React.Component {
         this.props.search("")
     }
 
+    handleSearch(value) {
+        this.props.search(value)
+        if (value === "")
+            this.props.setTab(0)
+    }
+
     render() {
         const { search, tab } = this.props.home
 
         return (
             <div className="h-100 w-100">
-                <Nav />
+                <Nav
+                    show={true}
+                    onChangeFunction={this.handleSearch}
+                    searchLabel={"Pesquisar..."} />
                 <Draw />
                 <div className="flex flex-column justify-center h-100 mb5 mt5 w-100">
-                    <AppBar
-                        color="default"
-                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
-                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
-                            <TextField
-                                fullWidth
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment>
-                                            <Icon className="mr2">search</Icon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                                placeholder="Pesquisar"
-                                onChange={(event) => {
-                                    this.props.search(event.target.value)
-                                    if (event.target.value === "")
-                                        this.props.setTab(0)
-                                }}
-                                variant="outlined" />
-                        </Toolbar>
-                    </AppBar>
-                    <div className="mt5 w-100"></div>
-
                     <div className="justify-center flex flex-row flex-wrap pa3 h-100 w-100">
                         <Card className="h-100 w-100">
                             <Paper

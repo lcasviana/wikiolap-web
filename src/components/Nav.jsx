@@ -2,7 +2,7 @@ import React from "react"
 
 import { connect } from "react-redux"
 
-import { AppBar, Icon, IconButton, Toolbar, Hidden } from "@material-ui/core"
+import { AppBar, Icon, IconButton, Toolbar, TextField, InputAdornment } from "@material-ui/core"
 
 import User from "components/User"
 import Logo from "images/wikiolap.png"
@@ -27,13 +27,30 @@ class Nav extends React.Component {
                             style={{ display: username ? "inline-flex" : "none" }}>
                             <Icon color="primary">menu</Icon>
                         </IconButton>
-                        <Hidden xsDown>
-                            <img
-                                alt="Wikiolap"
-                                className="nav-logo pl3 pr3"
-                                src={Logo} />
-                        </Hidden>
+                        <img
+                            alt="Wikiolap"
+                            className="nav-logo pl3 pr3"
+                            src={Logo} />
                     </div>
+                    {this.props.show &&
+                        <TextField
+                            className="ml3 mr3 w-50"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment>
+                                        <Icon
+                                            color="primary"
+                                            className="mr2">
+                                            search
+                                        </Icon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                            label={this.props.searchLabel}
+                            onChange={(event) => this.props.onChangeFunction(event.target.value)}
+                            style={{ background: "rgba(38,166,154,0.05)", minWidth: 500 }}
+                            variant="filled" />
+                    }
                     <User />
                 </Toolbar>
             </AppBar>

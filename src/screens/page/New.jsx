@@ -36,48 +36,47 @@ class New extends React.Component {
                 <div className="flex flex-column mb5 mt5">
                     <AppBar
                         color="default"
-                        style={{ bottom: "auto", height: "4rem", top: "4rem", }}>
+                        style={{ bottom: "0", height: "4rem", top: "auto", }}>
                         <Toolbar
                             className="flex justify-between"
                             style={{ height: "4rem", }}>
+                            <Button
+                                color="primary"
+                                className="pr2"
+                                onClick={() => this.props.insertVisualization()}
+                                size="large"
+                                variant="raised">
+                                <Icon className="mr2">add</Icon>
+                                Adicionar
+                                </Button>
                             <TextField
                                 className="flex"
-                                placeholder="Título da página"
+                                label="Título da página"
                                 onChange={(event) => this.props.changeTitle(event.target.value)}
-                                style={{ flexGrow: 1, maxWidth: 500, }}
-                                variant="outlined" />
-                            <div>
+                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500, }}
+                                value={title}
+                                variant="filled" />
+                            <Link
+                                className="link pl2"
+                                onClick={(event) => { if (!done || title === "") { event.preventDefault() } }}
+                                to="/">
                                 <Button
+                                    disabled={!done || title === ""}
                                     color="primary"
-                                    className="pr2"
-                                    onClick={() => this.props.insertVisualization()}
+                                    onClick={() => {
+                                        this.props.page.update
+                                            ? this.props.updatePage({ ...page, username, type: 'page' })
+                                            : this.props.savePage({ ...page, username, type: 'page' })
+                                    }}
                                     size="large"
-                                    variant="outlined">
-                                    <Icon>add</Icon>
-                                    Adicionar visualização
-                                </Button>
-                                <Link
-                                    className="link pl2"
-                                    onClick={(event) => { if (!done || title === "") { event.preventDefault() } }}
-                                    to="/">
-                                    <Button
-                                        disabled={!done || title === ""}
-                                        color="primary"
-                                        onClick={() => {
-                                            this.props.page.update
-                                                ? this.props.updatePage({ ...page, username, type: 'page' })
-                                                : this.props.savePage({ ...page, username, type: 'page' })
-                                        }}
-                                        size="large"
-                                        variant="outlined">
-                                        <Icon>done</Icon>
-                                        Finalizar
+                                    variant="raised">
+                                    <Icon className="mr2">done</Icon>
+                                    Finalizar
                                     </Button>
-                                </Link>
-                            </div>
+                            </Link>
                         </Toolbar>
                     </AppBar>
-                    <div className="mt5">
+                    <div>
                         {visualizations.map((visualization, index) => {
                             return (
                                 <Visualization

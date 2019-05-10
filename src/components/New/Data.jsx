@@ -38,14 +38,15 @@ class Data extends React.Component {
                                         <Typography
                                             style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
                                             variant="h5">
-                                            Bases de dados cadastradas
+                                            Coleções de dados cadastradas
                                         </Typography>
                                         <TextField
                                             className="w-100"
-                                            label="Pesquisar bases de dados..."
+                                            label="Pesquisar coleções de dados..."
                                             margin="normal"
                                             onChange={(event) => this.props.filterDatasets(mainIndex, [event.target.value, search[1]])}
-                                            style={{ marginTop: 0, }} />
+                                            style={{ marginTop: 0, }}
+                                            value={search[0]} />
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -108,14 +109,15 @@ class Data extends React.Component {
                                         <Typography
                                             style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
                                             variant="h5">
-                                            Bases de dados selecionadas
+                                            Coleções de dados selecionadas
                                         </Typography>
                                         <TextField
                                             className="w-100"
                                             label="Pesquisar selecionadas..."
                                             margin="normal"
                                             onChange={(event) => this.props.filterDatasets(mainIndex, [search[0], event.target.value])}
-                                            style={{ marginTop: 0, }} />
+                                            style={{ marginTop: 0, }}
+                                            value={search[1]} />
                                     </TableCell>
                                 </TableRow>
                             </TableHead>

@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, TextField, AppBar, Toolbar, InputAdornment, Dialog, Tooltip } from "@material-ui/core"
+import { Card, CardActions, Icon, IconButton, Button, Typography, CardActionArea, Dialog, Tooltip } from "@material-ui/core"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { Link } from "react-router-dom"
 
@@ -29,29 +29,14 @@ class List extends React.Component {
 
         return (
             <div>
-                <Nav />
+                <Nav
+                    show={true}
+                    onChangeFunction={this.props.searchPage}
+                    searchLabel={"Pesquisar visualizações..."} />
                 <Draw />
                 <div className="flex flex-column mb5 mt5 pa3">
-                    <AppBar
-                        color="default"
-                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
-                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
-                            <TextField
-                                fullWidth
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment>
-                                            <Icon className="mr2">search</Icon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                                placeholder="Pesquisar visualizações"
-                                onChange={(event) => this.props.searchPage(event.target.value)}
-                                variant="outlined" />
-                        </Toolbar>
-                    </AppBar>
                     <Card
-                        className="pa2 justify-center flex flex-row flex-wrap mt5 w-100"
+                        className="pa2 justify-center flex flex-row flex-wrap w-100"
                         style={{ background: "#fafafa" }}>
                         <div className="w-100">
                             <Typography

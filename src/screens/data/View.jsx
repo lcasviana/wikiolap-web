@@ -56,7 +56,7 @@ class View extends React.Component {
             <div>
                 <Nav />
                 <Draw />
-                <div className="flex mb5 mt5">
+                <div className="flex mt5">
                     <AppBar
                         color="default"
                         style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
@@ -72,10 +72,10 @@ class View extends React.Component {
                             </Link>
                         </Toolbar>
                     </AppBar>
-                    <div className="flex justify-center mb5 mt5 w-100">
-                        <div className="flex w-100">
-                            <Card
-                                className="ma3 pa2 w-30"
+                    <div className="flex justify-center mt5 w-100">
+                        <Card className="flex ma3 w-100">
+                            <div
+                                className="pa2 w-30"
                                 style={{ overflowY: "auto" }}>
                                 <Typography
                                     className="pb2"
@@ -87,13 +87,13 @@ class View extends React.Component {
                                 <Typography className="overflow-hidden"><strong>Usuário</strong>: {metadata.user}</Typography>
                                 <Typography className="overflow-hidden"><strong>Data de criação</strong>: {Calendar.TimestampToString(metadata.created_at)}</Typography>
                                 <Typography className="overflow-hidden"><strong>Última atualização</strong>: {Calendar.TimestampToString(metadata.updated_at)}</Typography>
-                            </Card>
-                            <Card
-                                className="ma3 pa2 w-70"
-                                style={{ overflowX: "scroll" }}>
+                            </div>
+                            <Card square
+                                className="ma2 w-70"
+                                style={{ overflowX: "auto" }}>
                                 {metadata.data && metadata.data.length && this.mountTable(metadata)}
                             </Card>
-                        </div>
+                        </Card>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Data"
 
-import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, TextField, AppBar, Toolbar, InputAdornment, Icon, Button, Divider, Card } from "@material-ui/core"
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Divider, Card } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -25,28 +25,13 @@ class List extends React.Component {
 
         return (
             <div>
-                <Nav />
+                <Nav
+                    show={true}
+                    onChangeFunction={this.props.datasetSearch}
+                    searchLabel={"Pesquisar coleções de dados..."} />
                 <Draw />
-                <div className="flex mb5 mt5 w-100">
-                    <AppBar
-                        color="default"
-                        style={{ bottom: "auto", height: "4rem", margin: 0, padding: 0, top: "4rem" }}>
-                        <Toolbar style={{ height: "4rem", margin: 0, padding: "0 1rem" }}>
-                            <TextField
-                                fullWidth
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment>
-                                            <Icon className="mr2">search</Icon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                                placeholder="Pesquisar bases de dados"
-                                onChange={(event) => this.props.datasetSearch(event.target.value)}
-                                variant="outlined" />
-                        </Toolbar>
-                    </AppBar>
-                    <div className="flex flex-column items-center mt5 pa3 w-100">
+                <div className="flex mt5 w-100">
+                    <div className="flex flex-column items-center pa3 w-100">
                         <Card
                             className="pa2 w-100"
                             style={{ background: "#fafafa" }}>
@@ -55,7 +40,7 @@ class List extends React.Component {
                                     className="pb2"
                                     color="primary"
                                     variant="h5">
-                                    Bases de dados
+                                    Coleções de dados
                                 </Typography>
                                 {!filtered.length &&
                                     <Typography color="error">
@@ -81,7 +66,7 @@ class List extends React.Component {
                                                 <Button
                                                     className="button mt5 mb1"
                                                     color="primary"
-                                                    variant="outlined">
+                                                    variant="raised">
                                                     Ver dados
                                                 </Button>
                                             </Link>
