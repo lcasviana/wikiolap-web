@@ -32,7 +32,7 @@ class List extends React.Component {
                     onChangeFunction={this.props.searchPage}
                     searchLabel={"Pesquisar visualizações..."} />
                 <Draw />
-                <div className="flex flex-column mb5 mt5 pa3">
+                <div className="flex flex-column mt5 pa3">
                     <Card
                         className="pa2 justify-center flex flex-row flex-wrap w-100"
                         style={{ background: "#fafafa" }}>

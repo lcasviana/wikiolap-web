@@ -26,7 +26,7 @@ class Home extends React.Component {
                     onChangeFunction={this.props.search}
                     searchLabel={"Pesquisar..."} />
                 <Draw />
-                <div className="flex flex-column justify-center h-100 mb5 mt5 w-100">
+                <div className="flex flex-column justify-center h-100 mt5 w-100">
                     <div className="justify-center flex flex-row flex-wrap pa3 h-100 w-100">
                         <Card className="h-100 w-100">
                             <Paper
