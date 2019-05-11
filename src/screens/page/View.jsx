@@ -103,6 +103,14 @@ class View extends React.Component {
                                             container
                                             style={{ height: 420, }}>
                                             <Grid
+                                                className="pa3"
+                                                item
+                                                style={{ height: 420, overflowY: "auto" }}
+                                                xs={3}>
+                                                <Typography variant="h6">{v.title}</Typography>
+                                                <Typography>{v.description}</Typography>
+                                            </Grid>
+                                            <Grid
                                                 item
                                                 style={{ height: 420, }}
                                                 xs={9}>
@@ -112,14 +120,6 @@ class View extends React.Component {
                                                     series={v.series}
                                                     title={v.title}
                                                     type={v.graphType} />
-                                            </Grid>
-                                            <Grid
-                                                className="overflow-container pa3"
-                                                item
-                                                style={{ height: 420, }}
-                                                xs={3}>
-                                                <Typography variant="h6">{v.title}</Typography>
-                                                <Typography>{v.description}</Typography>
                                             </Grid>
                                         </Grid>
                                     </Card>

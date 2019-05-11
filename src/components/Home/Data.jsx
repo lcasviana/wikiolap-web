@@ -21,7 +21,12 @@ class List extends React.Component {
 
         const data = datasets
             ? search === ""
-                ? datasets.sort((a, b) => b.created_at - a.created_at).slice(0, 5)
+                ? datasets.sort((a, b) => {
+                    const da = new Date(a.updated_at), db = new Date(b.updated_at)
+                    if (da < db) return 1
+                    if (da > db) return -1
+                    return 0
+                }).slice(0, 5)
                 : datasets.filter(dataset => dataset.title.toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
             : []
 
@@ -43,7 +48,7 @@ class List extends React.Component {
                         <Card
                             className="ma1 pa2"
                             key={index}
-                            style={{ height: "fit-content", width: 420, }}>
+                            style={{ height: "fit-content", width: 300, }}>
                             <CardActionArea>
                                 <Tooltip
                                     placement="top"

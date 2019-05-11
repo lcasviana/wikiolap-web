@@ -120,9 +120,8 @@ class New extends React.Component {
                     <Card className="pa2 mb5 w-100">
                         <div className="flex items-center">
                             <Typography
-                                className="tc"
+                                className="tc w-100"
                                 color="primary"
-                                style={{ flexGrow: 1, marginBottom: "1rem" }}
                                 variant="h5">
                                 {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione um dataset e dê um título na barra abaixo"}
                                 {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione um dataset"}
@@ -132,7 +131,7 @@ class New extends React.Component {
                         </div>
                         {metadata.data && metadata.data.length &&
                             <Card
-                                className="mt2"
+                                className="mt3"
                                 square>
                                 {this.mountTable(metadata)}
                             </Card>

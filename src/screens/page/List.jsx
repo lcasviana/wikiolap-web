@@ -43,20 +43,20 @@ class List extends React.Component {
                                 variant="h5">
                                 Visualizações
                             </Typography>
-                            {!pages.map((page) => page.visualizations
-                                .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&
+                            {!pages.map((page) => page.visualizations.map((v, i) => ({ ...v, title: v.title ? v.title : "Visualização " + (i + 1) }))
+                                .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&
                                 <Typography color="error">
                                     Nenhuma visualização encontrada.
                                 </Typography>
                             }
                         </div>
-                        {status === "DONE" && pages.map((page) => page.visualizations
-                            .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
+                        {status === "DONE" && pages.map((page) => page.visualizations.map((v, i) => ({ ...v, title: v.title ? v.title : "Visualização " + (i + 1) }))
+                            .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)
                             .map((v, i) =>
                                 <Card
                                     className="ma1 pa2"
                                     key={page.id + i}
-                                    style={{ width: 420, }}>
+                                    style={{ width: 300, }}>
                                     <DeleteDialog
                                         id={page.id}
                                         open={deleteDialog}
@@ -66,7 +66,7 @@ class List extends React.Component {
                                             placement="top"
                                             title={
                                                 <React.Fragment>
-                                                    <Typography style={{ color: "white" }}>{page.title} - {v.title ? v.title : "Visualização " + (i + 1)}</Typography>
+                                                    <Typography style={{ color: "white" }}>{page.title} - {v.title}</Typography>
                                                 </React.Fragment>
                                             }>
                                             <Link
@@ -77,9 +77,10 @@ class List extends React.Component {
                                                     color="primary"
                                                     style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                                                     variant="h6">
-                                                    {v.title ? v.title : "Visualização " + (i + 1)}
+                                                    {v.title}
                                                 </Typography>
                                                 <Typography
+                                                    style={{ whiteSpace: "nowrap", overflow: "hidden" }}
                                                     variant="body2">
                                                     <strong>Página</strong>: {page.title}
                                                 </Typography>

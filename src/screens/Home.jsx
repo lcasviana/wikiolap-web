@@ -16,12 +16,6 @@ class Home extends React.Component {
         this.props.search("")
     }
 
-    handleSearch(value) {
-        this.props.search(value)
-        if (value === "")
-            this.props.setTab(0)
-    }
-
     render() {
         const { search, tab } = this.props.home
 
@@ -29,7 +23,7 @@ class Home extends React.Component {
             <div className="h-100 w-100">
                 <Nav
                     show={true}
-                    onChangeFunction={this.handleSearch}
+                    onChangeFunction={this.props.search}
                     searchLabel={"Pesquisar..."} />
                 <Draw />
                 <div className="flex flex-column justify-center h-100 mb5 mt5 w-100">
@@ -68,8 +62,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        search: (text) => { dispatch({ type: "HOME_SEARCH", text }) },
-        setTab: (tab) => { dispatch({ type: "HOME_TAB", tab }) }
+        search: (text) => dispatch({ type: "HOME_SEARCH", text }),
+        setTab: (tab) => dispatch({ type: "HOME_TAB", tab })
     }
 }
 

@@ -10,7 +10,8 @@ export default function reducer(state = home, action) {
         case "HOME_SEARCH":
             return {
                 ...state,
-                search: action.text
+                search: action.text,
+                tab: action.text === "" ? 0 : state.tab
             }
 
         case "HOME_TAB":
