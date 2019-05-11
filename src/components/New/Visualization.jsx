@@ -20,7 +20,7 @@ class Visualization extends React.Component {
         const graph = !this.props.page.visualizations[mainIndex].graphType
         const datasets = this.props.page.visualizations[mainIndex].datasets.length < 1
         const series = this.props.page.visualizations[mainIndex].seriesIndex.filter(s => s === -1).length !== 0
-
+        console.log(this.props.page.visualizations[mainIndex])
         return (
             <Card className="ma3 pa3">
                 <Steps step={stepActual} />

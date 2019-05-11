@@ -261,19 +261,29 @@ export default function reducer(state = page, action) {
             }
 
         case "SERIES_SELECT":
+            const dynamicColors = () => {
+                const r = Math.floor(Math.random() * 255)
+                const g = Math.floor(Math.random() * 255)
+                const b = Math.floor(Math.random() * 255)
+                return "rgb(" + r + "," + g + "," + b + ",0.5)"
+            }
+
             return {
                 ...state,
                 visualizations: state.visualizations.map((v, i) =>
                     i === action.index
                         ? {
                             ...v,
-                            series: v.series.map((v, i) =>
+                            series: v.series.map((s, i) =>
                                 i === action.serie
                                     ? {
-                                        ...v,
-                                        ...action.data
+                                        ...s,
+                                        ...action.data,
+                                        color: v.graphType === "pie"
+                                            ? action.data.values.map(v => dynamicColors())
+                                            : s.color
                                     }
-                                    : v
+                                    : s
                             ),
                             seriesIndex: v.seriesIndex.map((v, i) =>
                                 i === action.serie
