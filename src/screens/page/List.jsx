@@ -136,9 +136,7 @@ class List extends React.Component {
                         onClose={() => this.props.sharePageClose()}
                         open={share ? share.open : false}>
                         <div className="flex items-center ma1">
-                            <Typography
-                                style={{ margin: "0 1rem" }}
-                                variant="subheading">
+                            <Typography style={{ margin: "0 1rem" }}>
                                 {share ? share.link : ""}
                             </Typography>
                             <CopyToClipboard
@@ -168,12 +166,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        clear: () => { dispatch({ type: "PAGE_CLEAR" }) },
-        getPageList: () => { dispatch(Actions.getPageList()) },
-        searchPage: (text) => { dispatch({ type: "PAGE_SEARCH", text, }) },
-        deleteDialogOpen: () => { dispatch({ type: "DELETE_DIALOG_OPEN" }) },
-        sharePage: (link) => { dispatch({ type: "PAGE_SHARE", link, }) },
-        sharePageClose: () => { dispatch({ type: "PAGE_SHARE_CLOSE", }) },
+        clear: () => dispatch({ type: "PAGE_CLEAR" }),
+        getPageList: () => dispatch(Actions.getPageList()),
+        searchPage: (text) => dispatch({ type: "PAGE_SEARCH", text, }),
+        deleteDialogOpen: () => dispatch({ type: "DELETE_DIALOG_OPEN" }),
+        sharePage: (link) => dispatch({ type: "PAGE_SHARE", link, }),
+        sharePageClose: () => dispatch({ type: "PAGE_SHARE_CLOSE", }),
     }
 }
 

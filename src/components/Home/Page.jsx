@@ -26,7 +26,7 @@ class List extends React.Component {
                 className="flex flex-column items-center pa2"
                 style={{ background: "#fafafa" }}>
                 <div className="pb2 w-100">
-                    {search === "" && <Typography color="primary" variant="h5">Últimas 5 visualizações criadas</Typography>}
+                    {search === "" && <Typography color="primary" variant="h5">Últimas 5 páginas criadas</Typography>}
                     {search !== "" && <Typography color="primary" variant="h5">Visualizações</Typography>}
                     {!pages.map((page) => page.visualizations
                         .filter((v, i) => (page.title + " " + (v.title ? v.title : "Visualização " + (i + 1))).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&

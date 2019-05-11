@@ -110,7 +110,7 @@ class New extends React.Component {
                                     color="primary"
                                     onClick={() => this.props.uploadDataset({ ...metadata, user: username })}
                                     size="large"
-                                    variant="raised">
+                                    variant="contained">
                                     <Icon className="mr2">done</Icon>
                                     Finalizar
                                 </Button>
@@ -124,7 +124,7 @@ class New extends React.Component {
                                 color="primary"
                                 style={{ flexGrow: 1, marginBottom: "1rem" }}
                                 variant="h5">
-                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione um dataset e dê um título"}
+                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione um dataset e dê um título na barra abaixo"}
                                 {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione um dataset"}
                                 {(metadata.data && metadata.data.length) && !metadata.title && "Dê um título"}
                                 {(metadata.data && metadata.data.length) && metadata.title && "Pronto para finalizar :)"}

@@ -66,7 +66,7 @@ class List extends React.Component {
                                                 <Button
                                                     className="button mt5 mb1"
                                                     color="primary"
-                                                    variant="raised">
+                                                    variant="contained">
                                                     Ver dados
                                                 </Button>
                                             </Link>

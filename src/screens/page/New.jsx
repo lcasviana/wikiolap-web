@@ -43,7 +43,7 @@ class New extends React.Component {
                                 className="pr2"
                                 onClick={() => this.props.insertVisualization()}
                                 size="large"
-                                variant="raised">
+                                variant="contained">
                                 <Icon className="mr2">add</Icon>
                                 Adicionar
                                 </Button>
@@ -67,7 +67,7 @@ class New extends React.Component {
                                             : this.props.savePage({ ...page, username, type: 'page' })
                                     }}
                                     size="large"
-                                    variant="raised">
+                                    variant="contained">
                                     <Icon className="mr2">done</Icon>
                                     Finalizar
                                     </Button>
