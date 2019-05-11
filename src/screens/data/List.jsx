@@ -53,7 +53,7 @@ class List extends React.Component {
                                     className="w-100"
                                     key={index}
                                     style={{ margin: 0 }}>
-                                    <ExpansionPanelSummary style={{ paddingRight: 0, }}>
+                                    <ExpansionPanelSummary style={{ paddingRight: 0 }}>
                                         <div className="flex justify-between w-100 items-center">
                                             <Typography
                                                 color="primary"

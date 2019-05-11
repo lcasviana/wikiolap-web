@@ -21,7 +21,7 @@ export function getDatasets() {
         dispatch({ type: "GET_DATASET_LOADING" })
         axios.get(baseUrl + "/visualizations/page-list/")
             .then((response) => {
-                dispatch({ type: "GET_DATASETS", pages: response.data, })
+                dispatch({ type: "GET_DATASETS", pages: response.data })
                 dispatch({ type: "GET_DATASET_DONE", response })
             })
             .catch((error) => {

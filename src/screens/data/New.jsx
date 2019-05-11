@@ -72,10 +72,10 @@ class New extends React.Component {
                 <div className="flex flex-column items-center mt5 pa3 w-100">
                     <AppBar
                         color="default"
-                        style={{ bottom: "0", height: "4rem", top: "auto", }}>
+                        style={{ bottom: "0", height: "4rem", top: "auto" }}>
                         <Toolbar
                             className="flex justify-between"
-                            style={{ height: "4rem", }}>
+                            style={{ height: "4rem" }}>
                             <div>
                                 <input
                                     accept="*"
@@ -98,8 +98,7 @@ class New extends React.Component {
                                 className="flex"
                                 label="Título da coleção de dados"
                                 onChange={(event) => this.props.loadingDataset({ ...metadata, title: event.target.value })}
-                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500, }}
-                                value={metadata.title}
+                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500 }}
                                 variant="filled" />
                             <Link
                                 className="link pl2"
@@ -123,8 +122,8 @@ class New extends React.Component {
                                 className="tc w-100"
                                 color="primary"
                                 variant="h5">
-                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione um dataset e dê um título na barra abaixo"}
-                                {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione um dataset"}
+                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione uma coleção de dados e dê um título na barra abaixo"}
+                                {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione uma coleção de dados"}
                                 {(metadata.data && metadata.data.length) && !metadata.title && "Dê um título"}
                                 {(metadata.data && metadata.data.length) && metadata.title && "Pronto para finalizar :)"}
                             </Typography>

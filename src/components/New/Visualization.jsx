@@ -24,7 +24,7 @@ class Visualization extends React.Component {
         return (
             <Card className="ma3 pa3">
                 <Steps step={stepActual} />
-                <div style={{ height: 420, }}>
+                <div style={{ height: 420 }}>
                     {stepActual === 0 && <Types index={mainIndex} />}
                     {stepActual === 1 && <Data index={mainIndex} />}
                     {stepActual === 2 && <Series index={mainIndex} />}
@@ -75,9 +75,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        deleteVisualization: (index) => { dispatch({ type: "VISUALIZATION_DELETE", index, }) },
-        nextStep: (index) => { dispatch({ type: "STEP_NEXT", index, }) },
-        prevStep: (index) => { dispatch({ type: "STEP_PREV", index, }) },
+        deleteVisualization: (index) => { dispatch({ type: "VISUALIZATION_DELETE", index }) },
+        nextStep: (index) => { dispatch({ type: "STEP_NEXT", index }) },
+        prevStep: (index) => { dispatch({ type: "STEP_PREV", index }) },
     }
 }
 

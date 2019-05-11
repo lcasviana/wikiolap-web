@@ -2,7 +2,7 @@ import React from "react"
 
 import { connect } from "react-redux"
 
-import { Grid, Card, TextField, } from "@material-ui/core"
+import { Grid, Card, TextField } from "@material-ui/core"
 
 import Graph from "components/Graph"
 
@@ -35,19 +35,19 @@ class Layout extends React.Component {
                     xs={6}>
                     <Card
                         className="h-100 pa3"
-                        style={{ overflowY: "auto", }}>
+                        style={{ overflowY: "auto" }}>
                         <TextField
                             fullWidth
                             label="Título"
                             onChange={(event) => this.props.changeTitle(mainIndex, event.target.value)}
-                            style={{ margin: "0.5rem 0px", }} />
+                            style={{ margin: "0.5rem 0px" }} />
                         <TextField
                             fullWidth
                             label="Descrição"
                             multiline
                             onChange={(event) => this.props.changeDescription(mainIndex, event.target.value)}
                             rowsMax="5"
-                            style={{ margin: "0.5rem 0px", }} />
+                            style={{ margin: "0.5rem 0px" }} />
                     </Card>
                 </Grid>
             </Grid>
@@ -63,8 +63,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        changeTitle: (index, text) => { dispatch({ type: "TITLE_CHANGE", index, text, }) },
-        changeDescription: (index, text) => { dispatch({ type: "DESCRIPTION_CHANGE", index, text, }) },
+        changeTitle: (index, text) => { dispatch({ type: "TITLE_CHANGE", index, text }) },
+        changeDescription: (index, text) => { dispatch({ type: "DESCRIPTION_CHANGE", index, text }) },
     }
 }
 

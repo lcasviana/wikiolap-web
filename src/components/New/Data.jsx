@@ -30,13 +30,13 @@ class Data extends React.Component {
                     xs={6}>
                     <Card
                         className="h-100"
-                        style={{ overflowY: "auto", }}>
+                        style={{ overflowY: "auto" }}>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell style={{ background: "white", position: "sticky", top: 0, zIndex: 100, }}>
+                                    <TableCell style={{ background: "white", position: "sticky", top: 0, zIndex: 100 }}>
                                         <Typography
-                                            style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
+                                            style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
                                             variant="h5">
                                             Coleções de dados cadastradas
                                         </Typography>
@@ -45,7 +45,7 @@ class Data extends React.Component {
                                             label="Pesquisar coleções de dados..."
                                             margin="normal"
                                             onChange={(event) => this.props.filterDatasets(mainIndex, [event.target.value, search[1]])}
-                                            style={{ marginTop: 0, }}
+                                            style={{ marginTop: 0 }}
                                             value={search[0]} />
                                     </TableCell>
                                 </TableRow>
@@ -53,8 +53,8 @@ class Data extends React.Component {
                             <TableBody>
                                 {filteredAllDatasets.length > 0 && filteredAllDatasets.map((dataset, index) =>
                                     <TableRow key={index}>
-                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
-                                            <Typography style={{ display: "inline-block", }}>{dataset.title}</Typography>
+                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                            <Typography style={{ display: "inline-block" }}>{dataset.title}</Typography>
                                             <div>
                                                 <Tooltip
                                                     placement="left"
@@ -101,13 +101,13 @@ class Data extends React.Component {
                     xs={6}>
                     <Card
                         className="h-100"
-                        style={{ overflowY: "auto", }}>
+                        style={{ overflowY: "auto" }}>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell style={{ background: "white", position: "sticky", top: 0, zIndex: 100, }}>
+                                    <TableCell style={{ background: "white", position: "sticky", top: 0, zIndex: 100 }}>
                                         <Typography
-                                            style={{ marginTop: "0.5rem", marginBottom: "0.5rem", }}
+                                            style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
                                             variant="h5">
                                             Coleções de dados selecionadas
                                         </Typography>
@@ -116,7 +116,7 @@ class Data extends React.Component {
                                             label="Pesquisar selecionadas..."
                                             margin="normal"
                                             onChange={(event) => this.props.filterDatasets(mainIndex, [search[0], event.target.value])}
-                                            style={{ marginTop: 0, }}
+                                            style={{ marginTop: 0 }}
                                             value={search[1]} />
                                     </TableCell>
                                 </TableRow>
@@ -124,7 +124,7 @@ class Data extends React.Component {
                             <TableBody>
                                 {filteredDatasets.length > 0 && filteredDatasets.map((dataset, index) =>
                                     <TableRow key={index}>
-                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between", }}>
+                                        <TableCell style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                                             <Typography>{dataset.title}</Typography>
                                             <div>
                                                 <Tooltip
@@ -179,9 +179,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getDatasets: () => dispatch(Actions.getDatasets()),
-        selectDataset: (index, dataset) => dispatch({ type: "DATASET_SELECT", index, dataset, }),
-        removeDataset: (index, dataset) => dispatch({ type: "DATASET_REMOVE", index, dataset, }),
-        filterDatasets: (index, text) => dispatch({ type: "DATASET_SEARCH", index, text, }),
+        selectDataset: (index, dataset) => dispatch({ type: "DATASET_SELECT", index, dataset }),
+        removeDataset: (index, dataset) => dispatch({ type: "DATASET_REMOVE", index, dataset }),
+        filterDatasets: (index, text) => dispatch({ type: "DATASET_SEARCH", index, text }),
     }
 }
 

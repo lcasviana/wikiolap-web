@@ -30,7 +30,7 @@ export default class Steps extends React.Component {
                 <Stepper
                     activeStep={step}
                     alternativeLabel
-                    style={{ padding: ".25rem", }}>
+                    style={{ padding: ".25rem" }}>
                     {titles.map((title, index) =>
                         <Step key={index}>
                             <StepLabel>{title}</StepLabel>

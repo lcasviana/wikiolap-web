@@ -56,7 +56,7 @@ class List extends React.Component {
                                 <Card
                                     className="ma1 pa2"
                                     key={page.id + i}
-                                    style={{ width: 300, }}>
+                                    style={{ width: 300 }}>
                                     <DeleteDialog
                                         id={page.id}
                                         open={deleteDialog}
@@ -119,7 +119,7 @@ class List extends React.Component {
                                             <div>
                                                 <Link
                                                     className="link"
-                                                    to={{ pathname: "/page/edit/", state: page, }}>
+                                                    to={{ pathname: "/page/edit/", state: page }}>
                                                     <IconButton>
                                                         <Icon color="primary">edit</Icon>
                                                     </IconButton>
@@ -169,10 +169,10 @@ function mapDispatchToProps(dispatch) {
     return {
         clear: () => dispatch({ type: "PAGE_CLEAR" }),
         getPageList: () => dispatch(Actions.getPageList()),
-        searchPage: (text) => dispatch({ type: "PAGE_SEARCH", text, }),
+        searchPage: (text) => dispatch({ type: "PAGE_SEARCH", text }),
         deleteDialogOpen: () => dispatch({ type: "DELETE_DIALOG_OPEN" }),
-        sharePage: (link) => dispatch({ type: "PAGE_SHARE", link, }),
-        sharePageClose: () => dispatch({ type: "PAGE_SHARE_CLOSE", }),
+        sharePage: (link) => dispatch({ type: "PAGE_SHARE", link }),
+        sharePageClose: () => dispatch({ type: "PAGE_SHARE_CLOSE" }),
     }
 }
 

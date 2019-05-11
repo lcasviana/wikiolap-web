@@ -49,10 +49,10 @@ class Series extends React.Component {
                     xs={6}>
                     <Card
                         className="pa3 h-100"
-                        style={{ overflowY: "auto", }}>
+                        style={{ overflowY: "auto" }}>
                         <FormControl
                             fullWidth
-                            style={{ flexGrow: 1, margin: "0.5rem 0", }}>
+                            style={{ flexGrow: 1, margin: "0.5rem 0" }}>
                             <InputLabel>Rótulos</InputLabel>
                             <Select
                                 onChange={(event) => {
@@ -77,15 +77,15 @@ class Series extends React.Component {
                             <div
                                 className="flex flex-column"
                                 key={index}>
-                                <Divider style={{ marginTop: "1rem", }} />
+                                <Divider style={{ marginTop: "1rem" }} />
                                 <div className="mb3 mt3 flex items-end w-100">
                                     <div
                                         className="flex items-end"
-                                        style={{ width: "calc(100% - 60px)" }}>
+                                        style={{ width: "calc(100% - 100px)" }}>
                                         <div className="pr1 w-50">
                                             <FormControl
                                                 className="w-100"
-                                                style={{ margin: "1px 0 0 0", }}>
+                                                style={{ margin: "1px 0 0 0" }}>
                                                 <InputLabel>Série {index + 1}</InputLabel>
                                                 <Select
                                                     onChange={(event) => {
@@ -109,14 +109,14 @@ class Series extends React.Component {
                                                 className="w-100"
                                                 onChange={(event) => this.props.changeLabel(mainIndex, index, event.target.value)}
                                                 placeholder={"Nome da série " + (index + 1)}
-                                                style={{ flexGrow: 1, }}
+                                                style={{ flexGrow: 1 }}
                                                 value={series[index].label} />
                                         </div>
                                     </div>
                                     {graphType !== "pie" && <input
                                         className="ma2"
                                         onChange={(event) => this.props.changeColor(mainIndex, index, event.target.value)}
-                                        style={{ width: 26, }}
+                                        style={{ width: 26 }}
                                         type="color"
                                         value={series[index].color} />}
                                     <IconButton
@@ -150,13 +150,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        selectLabels: (index, data, value) => dispatch({ type: "SERIES_LABEL_SELECT", index, data, value, }),
-        selectDefault: (index) => dispatch({ type: "SERIES_LABEL_DEFAULT", index, }),
-        selectSeries: (index, serie, data, value) => dispatch({ type: "SERIES_SELECT", index, serie, data, value, }),
-        insertSeries: (index) => dispatch({ type: "SERIES_INSERT", index, }),
-        removeSeries: (index, serie) => dispatch({ type: "SERIES_REMOVE", index, serie, }),
-        changeColor: (index, serie, value) => dispatch({ type: "SERIES_COLOR", index, serie, value, }),
-        changeLabel: (index, serie, value) => dispatch({ type: "SERIES_LABEL", index, serie, value, }),
+        selectLabels: (index, data, value) => dispatch({ type: "SERIES_LABEL_SELECT", index, data, value }),
+        selectDefault: (index) => dispatch({ type: "SERIES_LABEL_DEFAULT", index }),
+        selectSeries: (index, serie, data, value) => dispatch({ type: "SERIES_SELECT", index, serie, data, value }),
+        insertSeries: (index) => dispatch({ type: "SERIES_INSERT", index }),
+        removeSeries: (index, serie) => dispatch({ type: "SERIES_REMOVE", index, serie }),
+        changeColor: (index, serie, value) => dispatch({ type: "SERIES_COLOR", index, serie, value }),
+        changeLabel: (index, serie, value) => dispatch({ type: "SERIES_LABEL", index, serie, value }),
     }
 }
 

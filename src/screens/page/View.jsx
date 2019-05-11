@@ -74,7 +74,7 @@ class View extends React.Component {
                                             <span>
                                                 <Link
                                                     className="link"
-                                                    to={{ pathname: "/page/edit/", state: page, }}>
+                                                    to={{ pathname: "/page/edit/", state: page }}>
                                                     <Button
                                                         className="button"
                                                         variant="outlined">
@@ -98,10 +98,10 @@ class View extends React.Component {
                                     <Card
                                         className="flex mt3"
                                         key={i}
-                                        style={{ height: 420, }}>
+                                        style={{ height: 420 }}>
                                         <Grid
                                             container
-                                            style={{ height: 420, }}>
+                                            style={{ height: 420 }}>
                                             <Grid
                                                 className="pa3"
                                                 item
@@ -112,7 +112,7 @@ class View extends React.Component {
                                             </Grid>
                                             <Grid
                                                 item
-                                                style={{ height: 420, }}
+                                                style={{ height: 420 }}
                                                 xs={9}>
                                                 <Graph
                                                     index={i}
@@ -165,8 +165,8 @@ function mapDispatchToProps(dispatch) {
         clear: () => dispatch({ type: "PAGE_CLEAR" }),
         getPage: (id) => dispatch(Actions.getPage(id)),
         deleteDialogOpen: () => dispatch({ type: "DELETE_DIALOG_OPEN" }),
-        sharePage: (link) => dispatch({ type: "PAGE_SHARE", link, }),
-        sharePageClose: () => dispatch({ type: "PAGE_SHARE_CLOSE", }),
+        sharePage: (link) => dispatch({ type: "PAGE_SHARE", link }),
+        sharePageClose: () => dispatch({ type: "PAGE_SHARE_CLOSE" }),
     }
 }
 

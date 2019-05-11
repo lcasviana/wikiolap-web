@@ -29,7 +29,7 @@ const theme = createMuiTheme({
     }
 })
 
-const PrivateRoute = ({ component: Componet, ...rest, }) => (
+const PrivateRoute = ({ component: Componet, ...rest }) => (
     <Route {...rest} render={(props) => (
         rest.auth
             ? <Componet {...props} />

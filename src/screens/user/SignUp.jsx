@@ -39,7 +39,7 @@ class SignUp extends React.Component {
                     {/* <Card className="flex flex-column ma5 pa3">
                         <Typography
                             className="tc"
-                            style={{ marginBottom: "1rem", }}
+                            style={{ marginBottom: "1rem" }}
                             variant="h6">
                             Cadastro
                         </Typography>
@@ -47,26 +47,26 @@ class SignUp extends React.Component {
                             <TextField
                                 label="Nome"
                                 onChange={(event) => this.props.changeUsername(event.target.value)}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 value={username}
                                 variant="outlined" />
                             <TextField
                                 label="Email"
                                 onChange={(event) => this.props.changeEmail(event.target.value)}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 value={email}
                                 variant="outlined" />
                             <TextField
                                 label="Senha"
                                 onChange={(event) => this.props.changePassword1(event.target.value)}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 type="password"
                                 value={password_1}
                                 variant="outlined" />
                             <TextField
                                 label="Confirmar senha"
                                 onChange={(event) => this.props.changePassword2(event.target.value)}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 type="password"
                                 value={password_2}
                                 variant="outlined" />
@@ -80,7 +80,7 @@ class SignUp extends React.Component {
                                 </Button>
                             </div>
                         </div>
-                        <Divider style={{ margin: "1rem 0 1rem 0", }} />
+                        <Divider style={{ margin: "1rem 0 1rem 0" }} />
                         <Link
                             className="link"
                             to="/user/signin/">
@@ -107,10 +107,10 @@ function mapDispatchToProps(dispatch) {
     return {
         clear: () => { dispatch({ type: "USER_CLEAR" }) },
         signUp: (user) => { dispatch(Actions.signUp(user)) },
-        changeUsername: (text) => { dispatch({ type: "USER_NAME", text, }) },
-        changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text, }) },
-        changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text, }) },
-        changePassword2: (text) => { dispatch({ type: "USER_PASSWORD_2", text, }) },
+        changeUsername: (text) => { dispatch({ type: "USER_NAME", text }) },
+        changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text }) },
+        changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text }) },
+        changePassword2: (text) => { dispatch({ type: "USER_PASSWORD_2", text }) },
     }
 }
 

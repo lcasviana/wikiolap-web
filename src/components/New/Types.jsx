@@ -9,9 +9,9 @@ import chartBar from "images/chart/bar.png"
 import chartPie from "images/chart/pie.png"
 
 const graphs = [
-    { image: chartArea, title: "Área", type: "area", },
-    { image: chartBar, title: "Barra", type: "bar", },
-    { image: chartPie, title: "Pizza", type: "pie", },
+    { image: chartArea, title: "Área", type: "area" },
+    { image: chartBar, title: "Barra", type: "bar" },
+    { image: chartPie, title: "Pizza", type: "pie" },
 ]
 
 class Type extends React.Component {
@@ -29,14 +29,14 @@ class Type extends React.Component {
                         <Card
                             className="card-200 ma2"
                             key={index}
-                            style={{ background, }}>
+                            style={{ background }}>
                             <CardActionArea onClick={() => this.props.graphTypeSelect(mainIndex, graph.type)}>
                                 <CardMedia
                                     className="card-200-image"
                                     image={graph.image} />
                                 <CardContent>
                                     <Typography
-                                        style={{ color, }}
+                                        style={{ color }}
                                         variant="button">
                                         {graph.title}
                                     </Typography>
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        graphTypeSelect: (index, graph) => { dispatch({ type: "GRAPH_TYPE_SELECT", index, graph, }) },
+        graphTypeSelect: (index, graph) => { dispatch({ type: "GRAPH_TYPE_SELECT", index, graph }) },
     }
 }
 

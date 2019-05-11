@@ -35,7 +35,7 @@ class SignIn extends React.Component {
                     <Card className="flex flex-column ma5 pa3">
                         <Typography
                             className="tc"
-                            style={{ marginBottom: "1rem", }}
+                            style={{ marginBottom: "1rem" }}
                             variant="h6">
                             Login
                         </Typography>
@@ -44,14 +44,14 @@ class SignIn extends React.Component {
                                 label="Email"
                                 onChange={(event) => this.props.changeEmail(event.target.value)}
                                 onKeyDown={(event) => this.verifyFields(event, { email, password: password_1 })}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 value={email}
                                 variant="outlined" />
                             <TextField
                                 label="Senha"
                                 onChange={(event) => this.props.changePassword1(event.target.value)}
                                 onKeyDown={(event) => this.verifyFields(event, { email, password: password_1 })}
-                                style={{ margin: "0.5rem", }}
+                                style={{ margin: "0.5rem" }}
                                 type="password"
                                 value={password_1}
                                 variant="outlined" />
@@ -65,7 +65,7 @@ class SignIn extends React.Component {
                                 </Button>
                             </div>
                         </div>
-                        <Divider style={{ margin: "1rem 0 1rem 0", }} />
+                        <Divider style={{ margin: "1rem 0 1rem 0" }} />
                         <Link
                             className="link"
                             to="/user/signup/">
@@ -111,8 +111,8 @@ function mapDispatchToProps(dispatch) {
     return {
         clear: () => { dispatch({ type: "USER_CLEAR" }) },
         signIn: (user) => { dispatch(Actions.signIn(user)) },
-        changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text, }) },
-        changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text, }) },
+        changeEmail: (text) => { dispatch({ type: "USER_EMAIL", text }) },
+        changePassword1: (text) => { dispatch({ type: "USER_PASSWORD_1", text }) },
         closeDialog: () => { dispatch({ type: "USER_POPUP_CLOSE" }) }
     }
 }

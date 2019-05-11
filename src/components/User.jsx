@@ -20,7 +20,7 @@ class User extends React.Component {
 
         return (
             username
-                ? <div className="flex items-center">
+                ? <div className="flex items-center pr3">
                     <Tooltip
                         placement="bottom"
                         title={

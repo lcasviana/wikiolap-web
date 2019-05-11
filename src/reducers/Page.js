@@ -26,7 +26,7 @@ const page = {
     title: "",
     deleteDialog: false,
     status: "",
-    share: { link: "", open: false, },
+    share: { link: "", open: false },
     visualizations: [visualization,],
 }
 
@@ -51,20 +51,20 @@ export default function reducer(state = page, action) {
 
         case "SAVE_PAGE":
             return {
-                ...state,
+                ...state
             }
 
         case "GET_PAGE":
             return {
                 ...state,
-                page: pageExpand(action.page),
+                page: pageExpand(action.page)
             }
 
         case "GET_PAGE_LIST":
             const allPages = action.pages.map((v, i) => Object.assign({}, v, JSON.parse(v.title)))
             return {
                 ...state,
-                pages: allPages.filter(page => page.type === 'page'),
+                pages: allPages.filter(page => page.type === 'page')
             }
 
         case "DELETE_PAGE":
@@ -78,19 +78,19 @@ export default function reducer(state = page, action) {
         case "GET_PAGE_DONE":
             return {
                 ...state,
-                status: "DONE",
+                status: "DONE"
             }
 
         case "GET_PAGE_LOADING":
             return {
                 ...state,
-                status: "LOADING",
+                status: "LOADING"
             }
 
         case "GET_PAGE_ERROR":
             return {
                 ...state,
-                status: "ERROR",
+                status: "ERROR"
             }
 
         case "PAGE_CLEAR":
@@ -99,25 +99,36 @@ export default function reducer(state = page, action) {
         case "PAGE_SEARCH":
             return {
                 ...state,
-                search: action.text,
+                search: action.text
             }
 
         case "PAGE_SHARE":
             return {
                 ...state,
-                share: { link: action.link, open: true, },
+                share: {
+                    link: action.link,
+                    open: true,
+                }
             }
 
         case "PAGE_SHARE_CLOSE":
             return {
                 ...state,
-                share: { link: "", open: false, },
+                share: {
+                    link: "",
+                    open: false
+                }
             }
 
         case "PAGE_EDIT":
             return {
                 ...action.page,
-                visualizations: action.page.visualizations.map((v, i) => ({ ...v, step: 0, datasetsSearch: "", selectedSearch: "", })),
+                visualizations: action.page.visualizations.map(v => ({
+                    ...v,
+                    step: 0,
+                    datasetsSearch: "",
+                    selectedSearch: "",
+                })),
                 update: true,
             }
 
@@ -130,121 +141,264 @@ export default function reducer(state = page, action) {
         case "VISUALIZATION_INSERT":
             return {
                 ...state,
-                visualizations: [...state.visualizations, visualization,],
+                visualizations: [
+                    ...state.visualizations,
+                    visualization
+                ]
             }
 
         case "VISUALIZATION_DELETE":
             return {
                 ...state,
-                visualizations: state.visualizations.filter((v, i) => i !== action.index),
+                visualizations: state.visualizations.filter((v, i) => i !== action.index)
             }
 
         case "STEP_NEXT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, step: v.step + 1, } : v)
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            step: v.step + 1
+                        }
+                        : v
+                )
             }
 
         case "STEP_PREV":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, step: v.step - 1, } : v)
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            step: v.step - 1
+                        }
+                        : v
+                )
             }
 
         case "GRAPH_TYPE_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, graphType: action.graph, } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            graphType: action.graph
+                        }
+                        : v
+                )
             }
 
         case "DATASET_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: [...v.datasets, action.dataset,], labelIndex: -1, label: serie, seriesIndex: [-1,], series: [serie,], } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            datasets: [...v.datasets, action.dataset],
+                            labelIndex: -1,
+                            label: serie,
+                            seriesIndex: [-1],
+                            series: [serie,]
+                        }
+                        : v
+                )
             }
 
         case "DATASET_REMOVE":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, datasets: v.datasets.filter((v, i) => i !== action.dataset), labelIndex: -1, label: serie, seriesIndex: [-1,], series: [serie,], } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            datasets: v.datasets.filter((v, i) => i !== action.dataset),
+                            labelIndex: -1,
+                            label: serie,
+                            seriesIndex: [-1],
+                            series: [serie]
+                        }
+                        : v
+                )
             }
 
         case "DATASET_SEARCH":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, search: [...action.text], } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            search: [...action.text]
+                        }
+                        : v
+                )
             }
 
         case "SERIES_LABEL_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { ...action.data }, labelIndex: action.value, } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            label: { ...action.data },
+                            labelIndex: action.value
+                        }
+                        : v
+                )
             }
 
         case "SERIES_LABEL_DEFAULT":
             const length = Math.max.apply(Math, state.visualizations[action.index].series.map(v => v.values.length))
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { values: Array.apply(null, { length }).map(Number.call, Number), }, labelIndex: -1, } : v),
+                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, label: { values: Array.apply(null, { length }).map(Number.call, Number) }, labelIndex: -1 } : v),
             }
 
         case "SERIES_SELECT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...v, ...action.data, } : v), seriesIndex: v.seriesIndex.map((v, i) => i === action.serie ? action.value : v), } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            series: v.series.map((v, i) =>
+                                i === action.serie
+                                    ? {
+                                        ...v,
+                                        ...action.data
+                                    }
+                                    : v
+                            ),
+                            seriesIndex: v.seriesIndex.map((v, i) =>
+                                i === action.serie
+                                    ? action.value
+                                    : v
+                            )
+                        } :
+                        v
+                )
             }
 
         case "SERIES_INSERT":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: [...v.series, serie,], seriesIndex: [...v.seriesIndex, -1,], } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            series: [
+                                ...v.series,
+                                serie
+                            ],
+                            seriesIndex: [
+                                ...v.seriesIndex,
+                                -1
+                            ]
+                        }
+                        : v
+                )
             }
 
         case "SERIES_REMOVE":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.filter((v, i) => i !== action.serie), seriesIndex: v.seriesIndex.filter((v, i) => i !== action.serie), } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            series: v.series.filter((v, i) => i !== action.serie),
+                            seriesIndex: v.seriesIndex.filter((v, i) => i !== action.serie)
+                        }
+                        : v
+                )
             }
 
         case "SERIES_COLOR":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...v, color: action.value } : v), } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            series: v.series.map((v, i) =>
+                                i === action.serie
+                                    ? {
+                                        ...v,
+                                        color: action.value
+                                    }
+                                    : v
+                            )
+                        }
+                        : v
+                )
             }
 
         case "SERIES_LABEL":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, series: v.series.map((v, i) => i === action.serie ? { ...v, label: action.value } : v), } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            series: v.series.map((v, i) =>
+                                i === action.serie
+                                    ? {
+                                        ...v,
+                                        label: action.value
+                                    }
+                                    : v)
+                        }
+                        : v
+                )
             }
 
         case "TITLE_CHANGE":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, title: action.text, } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            title: action.text
+                        }
+                        : v
+                )
             }
 
         case "DESCRIPTION_CHANGE":
             return {
                 ...state,
-                visualizations: state.visualizations.map((v, i) => i === action.index ? { ...v, description: action.text, } : v),
+                visualizations: state.visualizations.map((v, i) =>
+                    i === action.index
+                        ? {
+                            ...v,
+                            description: action.text
+                        }
+                        : v
+                )
             }
 
         case "DELETE_DIALOG_OPEN":
             return {
                 ...state,
-                deleteDialog: true,
+                deleteDialog: true
             }
 
         case "DELETE_DIALOG_CLOSE":
             return {
                 ...state,
-                deleteDialog: false,
+                deleteDialog: false
             }
 
         default:
             return {
-                ...state,
+                ...state
             }
     }
 }

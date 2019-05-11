@@ -48,7 +48,7 @@ class List extends React.Component {
                         <Card
                             className="ma1 pa2"
                             key={index}
-                            style={{ height: "fit-content", width: 300, }}>
+                            style={{ height: "fit-content", width: 300 }}>
                             <CardActionArea>
                                 <Tooltip
                                     placement="top"

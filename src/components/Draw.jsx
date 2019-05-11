@@ -66,7 +66,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        drawerClose: () => { dispatch({ type: "DRAWER_CLOSE", }) },
+        drawerClose: () => { dispatch({ type: "DRAWER_CLOSE" }) },
     }
 }
 

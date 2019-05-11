@@ -34,10 +34,10 @@ class New extends React.Component {
                 <div className="flex flex-column mb5 mt5">
                     <AppBar
                         color="default"
-                        style={{ bottom: "0", height: "4rem", top: "auto", }}>
+                        style={{ bottom: "0", height: "4rem", top: "auto" }}>
                         <Toolbar
                             className="flex justify-between"
-                            style={{ height: "4rem", }}>
+                            style={{ height: "4rem" }}>
                             <Button
                                 color="primary"
                                 className="pr2"
@@ -51,7 +51,7 @@ class New extends React.Component {
                                 className="flex"
                                 label="Título da página"
                                 onChange={(event) => this.props.changeTitle(event.target.value)}
-                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500, }}
+                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500 }}
                                 value={title}
                                 variant="filled" />
                             <Link
@@ -99,9 +99,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         clear: () => dispatch({ type: "PAGE_CLEAR" }),
-        editPage: (page) => dispatch({ type: "PAGE_EDIT", page, }),
-        changeTitle: (text) => dispatch({ type: "PAGE_TITLE", text, }),
-        insertVisualization: () => dispatch({ type: "VISUALIZATION_INSERT", }),
+        editPage: (page) => dispatch({ type: "PAGE_EDIT", page }),
+        changeTitle: (text) => dispatch({ type: "PAGE_TITLE", text }),
+        insertVisualization: () => dispatch({ type: "VISUALIZATION_INSERT" }),
         savePage: (page) => dispatch(Actions.savePage(page)),
         updatePage: (page) => dispatch(Actions.updatePage(page)),
     }
