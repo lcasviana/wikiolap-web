@@ -88,9 +88,10 @@ class New extends React.Component {
                                         color="primary"
                                         component="span"
                                         size="large"
+                                        style={{ width: 300 }}
                                         variant="contained">
                                         <Icon className="mr2">cloud_upload</Icon>
-                                        Carregar
+                                        Carregar dados
                                     </Button>
                                 </label>
                             </div>
@@ -98,7 +99,7 @@ class New extends React.Component {
                                 className="flex"
                                 label="Título da coleção de dados"
                                 onChange={(event) => this.props.loadingDataset({ ...metadata, title: event.target.value })}
-                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500 }}
+                                style={{ flexGrow: 1, background: "#e0f2f1", maxWidth: 500, borderRadius: "5px 5px 0 0" }}
                                 variant="filled" />
                             <Link
                                 className="link pl2"
@@ -112,9 +113,10 @@ class New extends React.Component {
                                         this.props.refreshPage(true)
                                     }}
                                     size="large"
+                                    style={{ width: 300 }}
                                     variant="contained">
                                     <Icon className="mr2">done</Icon>
-                                    Finalizar
+                                    Finalizar carregamento
                                 </Button>
                             </Link>
                         </Toolbar>
@@ -126,7 +128,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    ● Selecione uma coleção de dados no botão 'Carregar' abaixo
+                                    ● Selecione uma coleção de dados no botão 'Carregar dados' abaixo
                                 </Typography>
                             }
                             {!metadata.title &&
@@ -142,7 +144,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    Tudo pronto! Clique no botão 'Finalizar' abaixo :)
+                                    Tudo pronto! Clique no botão 'Finalizar carregamento' abaixo :)
                                 </Typography>
                             }
                         </div>

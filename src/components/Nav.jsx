@@ -48,7 +48,7 @@ class Nav extends React.Component {
                             }}
                             label={this.props.searchLabel}
                             onChange={(event) => this.props.onChangeFunction(event.target.value)}
-                            style={{ background: "rgba(38,166,154,0.05)", minWidth: 500 }}
+                            style={{ background: "#e0f2f1", minWidth: 500, borderRadius: "5px 5px 0 0" }}
                             variant="filled" />
                     }
                     <User />

@@ -43,15 +43,16 @@ class New extends React.Component {
                                 className="pr2"
                                 onClick={() => this.props.insertVisualization()}
                                 size="large"
+                                style={{ width: 300 }}
                                 variant="contained">
                                 <Icon className="mr2">add</Icon>
-                                Adicionar
+                                Adicionar visualização
                                 </Button>
                             <TextField
                                 className="flex"
                                 label="Título da página"
                                 onChange={(event) => this.props.changeTitle(event.target.value)}
-                                style={{ flexGrow: 1, background: "rgba(38,166,154,0.05)", maxWidth: 500 }}
+                                style={{ flexGrow: 1, background: "#e0f2f1", maxWidth: 500, borderRadius: "5px 5px 0 0" }}
                                 value={title}
                                 variant="filled" />
                             <Link
@@ -68,9 +69,10 @@ class New extends React.Component {
                                         this.props.refreshPage(true)
                                     }}
                                     size="large"
+                                    style={{ width: 300 }}
                                     variant="contained">
                                     <Icon className="mr2">done</Icon>
-                                    Finalizar
+                                    Finalizar criação
                                     </Button>
                             </Link>
                         </Toolbar>
