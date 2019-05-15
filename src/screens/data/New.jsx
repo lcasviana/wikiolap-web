@@ -107,7 +107,10 @@ class New extends React.Component {
                                 <Button
                                     disabled={!metadata.title || !metadata.data || !metadata.data.length}
                                     color="primary"
-                                    onClick={() => this.props.uploadDataset({ ...metadata, user: username })}
+                                    onClick={() => {
+                                        this.props.uploadDataset({ ...metadata, user: username })
+                                        this.props.refreshPage(true)
+                                    }}
                                     size="large"
                                     variant="contained">
                                     <Icon className="mr2">done</Icon>
@@ -122,8 +125,8 @@ class New extends React.Component {
                                 className="tc w-100"
                                 color="primary"
                                 variant="h5">
-                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione uma coleção de dados e dê um título na barra abaixo"}
-                                {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione uma coleção de dados"}
+                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione uma coleção de dados no botão 'Carregar' abaixo\nDê um nome para a coleção carregada no campo 'Título da coleção de dados'"}
+                                {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione uma coleção de dados no botão 'Carregar'"}
                                 {(metadata.data && metadata.data.length) && !metadata.title && "Dê um título"}
                                 {(metadata.data && metadata.data.length) && metadata.title && "Pronto para finalizar :)"}
                             </Typography>
@@ -153,7 +156,8 @@ function mapDispatchToProps(dispatch) {
     return {
         clear: () => dispatch({ type: "PAGE_CLEAR" }),
         loadingDataset: (metadata) => dispatch({ type: "LOADING_METADATA", metadata }),
-        uploadDataset: (metadata) => dispatch(Actions.uploadDataset(metadata))
+        uploadDataset: (metadata) => dispatch(Actions.uploadDataset(metadata)),
+        refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh })
     }
 }
 

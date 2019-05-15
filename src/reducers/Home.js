@@ -1,4 +1,5 @@
 const home = {
+    refresh: false,
     search: "",
     tab: 0
 }
@@ -18,6 +19,12 @@ export default function reducer(state = home, action) {
             return {
                 ...state,
                 tab: action.tab
+            }
+
+        case "HOME_REFRESH":
+            return {
+                ...state,
+                refresh: action.refresh
             }
 
         default:

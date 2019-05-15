@@ -14,6 +14,10 @@ class Home extends React.Component {
     componentDidMount() {
         this.props.setTab(0)
         this.props.search("")
+        if (this.props.home.refresh) {
+            this.props.refreshPage(false)
+            this.forceUpdate()
+        }
     }
 
     render() {
@@ -63,7 +67,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         search: (text) => dispatch({ type: "HOME_SEARCH", text }),
-        setTab: (tab) => dispatch({ type: "HOME_TAB", tab })
+        setTab: (tab) => dispatch({ type: "HOME_TAB", tab }),
+        refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh })
     }
 }
 

@@ -65,6 +65,7 @@ class New extends React.Component {
                                         this.props.page.update
                                             ? this.props.updatePage({ ...page, username, type: 'page' })
                                             : this.props.savePage({ ...page, username, type: 'page' })
+                                        this.props.refreshPage(true)
                                     }}
                                     size="large"
                                     variant="contained">
@@ -104,6 +105,7 @@ function mapDispatchToProps(dispatch) {
         insertVisualization: () => dispatch({ type: "VISUALIZATION_INSERT" }),
         savePage: (page) => dispatch(Actions.savePage(page)),
         updatePage: (page) => dispatch(Actions.updatePage(page)),
+        refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh })
     }
 }
 
