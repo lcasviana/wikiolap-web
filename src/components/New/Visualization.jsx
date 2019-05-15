@@ -58,7 +58,7 @@ class Visualization extends React.Component {
                             }
                             onClick={() => this.props.nextStep(mainIndex)}
                             variant="contained">
-                            {stepActual >= 3 ? "Finalizar" : "Avançar"}
+                            {stepActual >= 3 ? "Pronto" : "Avançar"}
                         </Button>
                     </div>
                 </div>

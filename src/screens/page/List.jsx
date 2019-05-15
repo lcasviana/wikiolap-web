@@ -44,7 +44,8 @@ class List extends React.Component {
                                 Visualizações
                             </Typography>
                             {!pages.map((page) => page.visualizations.map((v, i) => ({ ...v, title: v.title ? v.title : "Visualização " + (i + 1) }))
-                                .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1)).length &&
+                                .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1))
+                                .filter(v => v.length).length &&
                                 <Typography color="error">
                                     Nenhuma visualização encontrada.
                                 </Typography>

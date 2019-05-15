@@ -87,6 +87,7 @@ class Data extends React.Component {
                                         <TableCell>
                                             <Typography color="error">
                                                 {search[0] && "Nenhuma base de dados encontrada."}
+                                                {search[0] === "" && "Nenhuma base de dados cadastrada."}
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
@@ -156,6 +157,7 @@ class Data extends React.Component {
                                         <TableCell>
                                             <Typography color="error">
                                                 {search[1] && "Nenhuma base de dados encontrada."}
+                                                {search[1] === "" && "Nenhuma base de dados selecionada."}
                                             </Typography>
                                         </TableCell>
                                     </TableRow>

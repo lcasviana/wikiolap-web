@@ -21,11 +21,11 @@ export default class Steps extends React.Component {
                     color="primary"
                     style={{ marginBottom: "1rem" }}
                     variant="h5">
-                    {step === 0 && "Selecione um tipo de gráfico"}
-                    {step === 1 && "Selecione as coleções de dados"}
-                    {step === 2 && "Selecione as séries para criar a visualização"}
-                    {step === 3 && "Dê um título e uma descrição"}
-                    {step === 4 && "Visualização ok, não esqueça de finalizar no botão na barra inferior :)"}
+                    {step === 0 && "Primeiro selecione qual tipo de gráfico será criado"}
+                    {step === 1 && "Selecione uma ou mais coleções de dados dentre as cadastradas"}
+                    {step === 2 && "Agora é necessário escolher as séries que irão aparecer no gráfico"}
+                    {step === 3 && "Você pode dar um título e uma descrição para a visualização"}
+                    {step === 4 && "Visualização pronta! Ainda é necessário apertar 'Finalizar' na barra inferior :)"}
                 </Typography>
                 <Stepper
                     activeStep={step}

@@ -120,16 +120,31 @@ class New extends React.Component {
                         </Toolbar>
                     </AppBar>
                     <Card className="pa2 mb5 w-100">
-                        <div className="flex items-center">
-                            <Typography
-                                className="tc w-100"
-                                color="primary"
-                                variant="h5">
-                                {(!metadata.data || !metadata.data.length) && !metadata.title && "Selecione uma coleção de dados no botão 'Carregar' abaixo\nDê um nome para a coleção carregada no campo 'Título da coleção de dados'"}
-                                {(!metadata.data || !metadata.data.length) && metadata.title && "Selecione uma coleção de dados no botão 'Carregar'"}
-                                {(metadata.data && metadata.data.length) && !metadata.title && "Dê um título"}
-                                {(metadata.data && metadata.data.length) && metadata.title && "Pronto para finalizar :)"}
-                            </Typography>
+                        <div className="flex flex-column">
+                            {(!metadata.data || !metadata.data.length) &&
+                                <Typography
+                                    className="tc w-100"
+                                    color="primary"
+                                    variant="h5">
+                                    ● Selecione uma coleção de dados no botão 'Carregar' abaixo
+                                </Typography>
+                            }
+                            {!metadata.title &&
+                                <Typography
+                                    className="tc w-100"
+                                    color="primary"
+                                    variant="h5">
+                                    ● Dê um nome para a coleção carregada no campo 'Título da coleção de dados'
+                                </Typography>
+                            }
+                            {(metadata.data && metadata.data.length) && metadata.title &&
+                                <Typography
+                                    className="tc w-100"
+                                    color="primary"
+                                    variant="h5">
+                                    Tudo pronto! Clique no botão 'Finalizar' abaixo :)
+                                </Typography>
+                            }
                         </div>
                         {metadata.data && metadata.data.length &&
                             <Card
