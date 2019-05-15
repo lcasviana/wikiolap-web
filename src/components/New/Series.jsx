@@ -26,6 +26,8 @@ class Series extends React.Component {
             })
         })
 
+        const space = graphType === "pie" ? "calc(100% - 50px)" : "calc(100% - 100px)"
+
         return (
             <Grid
                 className="h-100"
@@ -81,7 +83,7 @@ class Series extends React.Component {
                                 <div className="mb3 mt3 flex items-end w-100">
                                     <div
                                         className="flex items-end"
-                                        style={{ width: "calc(100% - 100px)" }}>
+                                        style={{ width: space }}>
                                         <div className="pr1 w-50">
                                             <FormControl
                                                 className="w-100"
