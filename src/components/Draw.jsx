@@ -5,6 +5,10 @@ import { connect } from "react-redux"
 import { Drawer, List, ListItem, ListItemIcon, Icon, ListItemText, ListSubheader } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
+import iconHome from "images/wikiolap.ico"
+import iconData from "images/data.png"
+import iconPage from "images/page.png"
+
 class DrawItem extends React.Component {
 
     render() {
@@ -30,24 +34,51 @@ class Draw extends React.Component {
                 onClick={() => this.props.drawerClose()}
                 onClose={() => this.props.drawerClose()}>
                 <List>
-                    <DrawItem
-                        icon="home"
-                        path="/"
-                        text="Página inicial" />
+                    <Link
+                        className="link"
+                        to="/">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <img
+                                    alt="Visualizações"
+                                    src={iconHome}
+                                    style={{ height: 24 }} />
+                            </ListItemIcon>
+                            <ListItemText>Página inicial</ListItemText>
+                        </ListItem>
+                    </Link>
                     <ListSubheader>Visualizações</ListSubheader>
-                    <DrawItem
-                        icon="add"
-                        path="/page/new/"
-                        text="Criar visualização" />
+                    <Link
+                        className="link"
+                        to="/page/new/">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <img
+                                    alt="Visualizações"
+                                    src={iconPage}
+                                    style={{ height: 24 }} />
+                            </ListItemIcon>
+                            <ListItemText>Criar visualização</ListItemText>
+                        </ListItem>
+                    </Link>
                     <DrawItem
                         icon="view_module"
                         path="/page/list/"
                         text="Listar visualizações" />
                     <ListSubheader>Coleções de dados</ListSubheader>
-                    <DrawItem
-                        icon="cloud_upload"
-                        path="/data/new/"
-                        text="Carregar coleções de dados" />
+                    <Link
+                        className="link"
+                        to="/data/new/">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <img
+                                    alt="Coleções de dados"
+                                    src={iconData}
+                                    style={{ height: 24 }} />
+                            </ListItemIcon>
+                            <ListItemText>Carregar coleções de dados</ListItemText>
+                        </ListItem>
+                    </Link>
                     <DrawItem
                         icon="view_headline"
                         path="/data/list/"
