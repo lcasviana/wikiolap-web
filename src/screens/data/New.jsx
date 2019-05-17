@@ -136,7 +136,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    ● Dê um nome para a coleção carregada no campo 'Título da coleção de dados'
+                                    ● Dê um nome para a coleção carregada no campo 'Título da coleção de dados' abaixo
                                 </Typography>
                             }
                             {(metadata.data && metadata.data.length) && metadata.title &&
