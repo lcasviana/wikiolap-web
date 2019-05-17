@@ -171,7 +171,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        clear: () => dispatch({ type: "PAGE_CLEAR" }),
+        clear: () => dispatch({ type: "DATASET_CLEAR" }),
         loadingDataset: (metadata) => dispatch({ type: "LOADING_METADATA", metadata }),
         uploadDataset: (metadata) => dispatch(Actions.uploadDataset(metadata)),
         refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh })
