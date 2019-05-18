@@ -128,7 +128,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    ● Selecione uma coleção de dados no botão 'Carregar dados' abaixo
+                                    ● Selecione uma coleção de dados no botão 'Carregar dados' na barra inferior
                                 </Typography>
                             }
                             {!metadata.title &&
@@ -136,7 +136,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    ● Dê um nome para a coleção carregada no campo 'Título da coleção de dados' abaixo
+                                    ● Dê um nome para a coleção carregada no campo 'Título da coleção de dados' na barra inferior
                                 </Typography>
                             }
                             {(metadata.data && metadata.data.length) && metadata.title &&
@@ -144,7 +144,7 @@ class New extends React.Component {
                                     className="tc w-100"
                                     color="primary"
                                     variant="h5">
-                                    Tudo pronto! Clique no botão 'Finalizar carregamento' abaixo :)
+                                    Tudo pronto! Clique no botão 'Finalizar carregamento' na barra inferior :)
                                 </Typography>
                             }
                         </div>

@@ -56,7 +56,7 @@ class List extends React.Component {
                 style={{ background: "#fafafa" }}>
                 <div className="pb2 w-100">
                     {search === "" && <Typography color="primary" variant="h5">Últimas 5 visualizações criadas</Typography>}
-                    {search !== "" && <Typography color="primary" variant="h5">Visualizações</Typography>}
+                    {search !== "" && <Typography color="primary" variant="h5">Visualizações pesquisadas</Typography>}
                     {!page.map((page) => page.visualizations.map((v, i) => ({ ...v, title: v.title ? v.title : "Visualização " + (i + 1) }))
                         .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1))
                         .filter(v => v.length).length &&

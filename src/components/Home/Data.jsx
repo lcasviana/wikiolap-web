@@ -36,7 +36,7 @@ class List extends React.Component {
                 style={{ background: "#fafafa" }}>
                 <div className="pb2 w-100">
                     {search === "" && <Typography color="primary" variant="h5">Últimas 5 coleções de dados criadas</Typography>}
-                    {search !== "" && <Typography color="primary" variant="h5">Coleções de dados</Typography>}
+                    {search !== "" && <Typography color="primary" variant="h5">Coleções de dados pesquisadas</Typography>}
                     {!data.length &&
                         <Typography color="error">
                             Nenhuma base de dados encontrada.

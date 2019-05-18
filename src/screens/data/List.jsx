@@ -40,7 +40,8 @@ class List extends React.Component {
                                     className="pb2"
                                     color="primary"
                                     variant="h5">
-                                    Coleções de dados
+                                    {search === "" && "Todas as coleções de dados"}
+                                    {search !== "" && "Coleções de dados pesquisadas"}
                                 </Typography>
                                 {!filtered.length &&
                                     <Typography color="error">

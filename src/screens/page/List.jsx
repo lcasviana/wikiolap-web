@@ -41,7 +41,8 @@ class List extends React.Component {
                                 className="pb2"
                                 color="primary"
                                 variant="h5">
-                                Visualizações
+                                {search === "" && "Todas as visualizações"}
+                                {search !== "" && "Visualizações pesquisadas"}
                             </Typography>
                             {!pages.map((page) => page.visualizations.map((v, i) => ({ ...v, title: v.title ? v.title : "Visualização " + (i + 1) }))
                                 .filter((v, i) => (page.title + " " + v.title).toLowerCase().trim().indexOf(search.toLowerCase().trim()) !== -1))

@@ -58,13 +58,13 @@ class Draw extends React.Component {
                                     src={iconPage}
                                     style={{ height: 24 }} />
                             </ListItemIcon>
-                            <ListItemText>Criar visualização</ListItemText>
+                            <ListItemText>Criar uma visualização</ListItemText>
                         </ListItem>
                     </Link>
                     <DrawItem
                         icon="view_module"
                         path="/page/list/"
-                        text="Listar visualizações" />
+                        text="Listar todas as visualizações" />
                     <ListSubheader>Coleções de dados</ListSubheader>
                     <Link
                         className="link"
@@ -76,13 +76,13 @@ class Draw extends React.Component {
                                     src={iconData}
                                     style={{ height: 24 }} />
                             </ListItemIcon>
-                            <ListItemText>Carregar coleções de dados</ListItemText>
+                            <ListItemText>Carregar uma coleção de dados</ListItemText>
                         </ListItem>
                     </Link>
                     <DrawItem
                         icon="view_headline"
                         path="/data/list/"
-                        text="Listar coleções de dados" />
+                        text="Listar todas as coleções de dados" />
                 </List>
             </Drawer>
         )
