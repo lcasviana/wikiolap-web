@@ -97,7 +97,7 @@ class New extends React.Component {
                         <div className="ma1">
                             <Typography
                                 className="w-100"
-                                color="primary"
+                                color="error"
                                 variant="h5">
                                 O que falta :(
                             </Typography>
