@@ -3,7 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 import * as Actions from "actions/Page"
 
-import { Icon, Toolbar, Button, AppBar, TextField } from "@material-ui/core"
+import { Icon, Toolbar, Button, AppBar, TextField, Dialog, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 import Draw from "components/Draw"
@@ -23,7 +23,7 @@ class New extends React.Component {
 
     render() {
         const { page } = this.props
-        const { title, visualizations } = page
+        const { title, visualizations, alert } = page
         const done = visualizations.every(v => v.step === 4)
         const { username } = this.props.user
 
@@ -57,7 +57,12 @@ class New extends React.Component {
                                 variant="filled" />
                             <Link
                                 className="link pl2"
-                                onClick={(event) => { if (!done || title === "") { event.preventDefault() } }}
+                                onClick={(event) => {
+                                    if (!done || title === "") {
+                                        this.props.alertUser(true)
+                                        event.preventDefault()
+                                    }
+                                }}
                                 to="/">
                                 <Button
                                     disabled={!done || title === ""}
@@ -86,6 +91,32 @@ class New extends React.Component {
                             )
                         })}
                     </div>
+                    <Dialog
+                        onClose={() => this.props.alertUser(false)}
+                        open={alert}>
+                        <div className="ma1">
+                            <Typography
+                                className="w-100"
+                                color="primary"
+                                variant="h5">
+                                O que falta :(
+                            </Typography>
+                            {title === "" &&
+                                <Typography
+                                    className="w-100"
+                                    variant="h6">
+                                    ● Dê um título no campo 'Título da página' na barra inferior
+                                </Typography>
+                            }
+                            {!done &&
+                                <Typography
+                                    className="w-100"
+                                    variant="h6">
+                                    ● Existem visualizações que não estão prontas
+                                </Typography>
+                            }
+                        </div>
+                    </Dialog>
                 </div>
             </div>
         )
@@ -107,7 +138,8 @@ function mapDispatchToProps(dispatch) {
         insertVisualization: () => dispatch({ type: "VISUALIZATION_INSERT" }),
         savePage: (page) => dispatch(Actions.savePage(page)),
         updatePage: (page) => dispatch(Actions.updatePage(page)),
-        refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh })
+        refreshPage: (refresh) => dispatch({ type: "HOME_REFRESH", refresh }),
+        alertUser: (alert) => dispatch({ type: "PAGE_ALERT", alert })
     }
 }
 

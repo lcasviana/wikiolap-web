@@ -24,6 +24,7 @@ const page = {
     datasets: [],
     dataset: [],
     title: "",
+    alert: false,
     deleteDialog: false,
     status: "",
     share: { link: "", open: false },
@@ -404,6 +405,12 @@ export default function reducer(state = page, action) {
             return {
                 ...state,
                 deleteDialog: false
+            }
+
+        case "PAGE_ALERT":
+            return {
+                ...state,
+                alert: action.alert
             }
 
         default:
