@@ -1,6 +1,6 @@
 /* Main elements */
 html, head, body, #root { height: 100%; width: 100%; }
-body { background: #009688; min-width: 1200px; }
+body { background: #009688; }
 
 /* Sizes */
 .card-200 { height: 200px; width: 200px; }
