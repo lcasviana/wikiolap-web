@@ -40,10 +40,9 @@ class New extends React.Component {
                             style={{ height: "4rem" }}>
                             <Button
                                 color="primary"
-                                className="pr2"
                                 onClick={() => this.props.insertVisualization()}
                                 size="large"
-                                style={{ width: 300 }}
+                                style={{ marginRight: ".5rem", width: 300 }}
                                 variant="contained">
                                 <Icon className="mr2">add</Icon>
                                 Adicionar visualização

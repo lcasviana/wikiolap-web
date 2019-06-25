@@ -88,7 +88,7 @@ class New extends React.Component {
                                         color="primary"
                                         component="span"
                                         size="large"
-                                        style={{ width: 300 }}
+                                        style={{ marginRight: ".5rem", width: 300 }}
                                         variant="contained">
                                         <Icon className="mr2">cloud_upload</Icon>
                                         Carregar dados
